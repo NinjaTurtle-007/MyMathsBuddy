@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Fun Zone - CBSE Practice Worksheets</title>
+    <meta name="description" content="Fun and interactive CBSE Math practice worksheets for classes 1-8">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #fbbf24 100%);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(15deg);
+            }
+        }
+        
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        
+        @keyframes bounce-in {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes confetti {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .float-symbol {
+            position: absolute;
+            font-size: 36px;
+            opacity: 0.15;
+            pointer-events: none;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(60px);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+        
+        .header-card {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%);
+            border: 4px solid white;
+            animation: bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .header-card:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s;
+        }
+        
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .subtitle {
+            color: #fef08a;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+        
+        .icon-bounce {
+            background: #fbbf24;
+            padding: 12px;
+            border-radius: 50%;
+            animation: wiggle 2s ease-in-out infinite;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .score-badge {
+            background: white;
+            border-radius: 50px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .score-badge:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            color: #7c3aed;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 3px solid #d8b4fe;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            background: linear-gradient(135deg, #faf5ff 0%, #fce7f3 100%);
+            transition: all 0.3s;
+        }
+        
+        .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #a855f7;
+            box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.2);
+        }
+        
+        .form-textarea {
+            resize: none;
+            font-family: inherit;
+        }
+        
+        .btn {
+            padding: 16px 24px;
+            border: none;
+            border-radius: 16px;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn:hover:not(:disabled) {
+            transform: scale(1.05);
+        }
+        
+        .btn:active:not(:disabled) {
+            transform: scale(0.95);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+            color: white;
+            width: 100%;
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+            color: white;
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #3b82f6 0%, #7c3aed 100%);
+            color: white;
+        }
+        
+        .btn-disabled {
+            background: #9ca3af;
+            color: white;
+        }
+        
+        .alert {
+            padding: 16px;
+            border-radius: 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 16px;
+            animation: bounce-in 0.6s;
+        }
+        
+        .alert-error {
+            background: #fee2e2;
+            border: 3px solid #fca5a5;
+            color: #991b1b;
+        }
+        
+        .question-card {
+            border-left: 4px solid #6366f1;
+            padding: 16px;
+            background: linear-gradient(135deg, #eef2ff 0%, #f3e8ff 100%);
+            border-radius: 0 16px 16px 0;
+            margin-bottom: 24px;
+            transition: all 0.3s;
+        }
+        
+        .question-card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .question-number {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            color: #1f2937;
+            font-size: 18px;
+        }
+        
+        .number-badge {
+            background: #6366f1;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
+        .marks-badge {
+            background: #fbbf24;
+            color: #78350f;
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 12px;
+            border: 2px solid #f59e0b;
+        }
+        
+        .question-text {
+            color: #374151;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        
+        .answer-box {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 3px solid #6ee7b7;
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: 12px;
+            animation: bounce-in 0.6s;
+        }
+        
+        .answer-label {
+            font-weight: bold;
+            color: #065f46;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 18px;
+        }
+        
+        .answer-text {
+            color: #374151;
+            line-height: 1.6;
+        }
+        
+        .info-badge {
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 14px;
+            margin-right: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .badge-yellow {
+            background: #fef3c7;
+            color: #92400e;
+            border: 2px solid #fcd34d;
+        }
+        
+        .badge-green {
+            background: #d1fae5;
+            color: #065f46;
+            border: 2px solid #6ee7b7;
+        }
+        
+        .badge-blue {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 2px solid #93c5fd;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+        
+        .info-list {
+            list-style-position: inside;
+            list-style-type: decimal;
+        }
+        
+        .info-list li {
+            padding: 8px 0;
+            padding-left: 8px;
+            color: #374151;
+            font-weight: 500;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #e9d5ff 100%);
+            border: 3px solid #93c5fd;
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        
+        .tip-text {
+            color: #1e3a8a;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+        
+        .worksheet-header {
+            border-bottom: 4px solid #bfdbfe;
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #eff6ff 0%, #f3e8ff 100%);
+            padding: 16px;
+            border-radius: 16px;
+        }
+        
+        .worksheet-title {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            animation: confetti 3s linear forwards;
+            z-index: 9999;
+        }
+        
+        .spinner {
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: 24px;
+            }
+            
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- React and ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // CBSE Topics
+        const CBSE_TOPICS = {
+            1: ['Numbers 1-100', 'Addition and Subtraction', 'Shapes and Patterns', 'Measurement (Length, Weight)', 'Time', 'Money'],
+            2: ['Numbers up to 1000', 'Addition and Subtraction', 'Multiplication Tables (2-5)', 'Division Basics', 'Shapes and Symmetry', 'Measurement', 'Time and Calendar', 'Money'],
+            3: ['Numbers up to 10000', 'Addition and Subtraction', 'Multiplication (up to 10)', 'Division', 'Fractions', 'Measurement', 'Time', 'Money', 'Data Handling', 'Geometry'],
+            4: ['Large Numbers', 'Four Operations', 'Multiples and Factors', 'Fractions', 'Decimals', 'Measurement', 'Geometry (Lines, Angles)', 'Symmetry', 'Perimeter and Area'],
+            5: ['Large Numbers and Roman Numerals', 'Four Operations', 'Multiples and Factors', 'Fractions and Decimals', 'Percentage', 'Ratio and Proportion', 'Geometry', 'Perimeter and Area', 'Volume', 'Data Handling'],
+            6: ['Number System', 'Whole Numbers', 'Playing with Numbers', 'Integers', 'Fractions and Decimals', 'Ratio and Proportion', 'Basic Geometry', 'Perimeter and Area', 'Data Handling', 'Algebra Basics'],
+            7: ['Integers', 'Fractions and Decimals', 'Rational Numbers', 'Simple Equations', 'Lines and Angles', 'Triangles', 'Perimeter and Area', 'Exponents and Powers', 'Symmetry', 'Data Handling'],
+            8: ['Rational Numbers', 'Exponents and Powers', 'Squares and Square Roots', 'Cubes and Cube Roots', 'Linear Equations', 'Percentage and Profit/Loss', 'Compound Interest', 'Geometry', 'Mensuration', 'Data Handling', 'Probability']
+        };
+
+        const mathSymbols = ['➕', '➖', '✖️', '➗', '🔢', '📐', '📏', '🎯', '⭐', '💯', '🧮', '🎨', '🚀', '🌟', '💡', '🎪', '🎭', '🎬'];
+
+        // Problem generator
+        const random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+        const generateProblem = (classNum, topic, difficulty, questionNum) => {
+            const easyRange = classNum <= 3 ? 20 : 50;
+            const mediumRange = classNum <= 3 ? 50 : 100;
+            const hardRange = classNum <= 3 ? 100 : 500;
+            const range = difficulty === 'easy' ? easyRange : difficulty === 'medium' ? mediumRange : hardRange;
+            
+            // TIME (Classes 1-4)
+            if (topic.includes('Time') || topic.includes('Calendar')) {
+                if (difficulty === 'easy') {
+                    const problems = [
+                        () => {
+                            const hour = random(1, 12);
+                            return {
+                                question: `What time is it when the hour hand points to ${hour} and minute hand points to 12?`,
+                                answer: `The time is ${hour}:00 (${hour} o'clock)`
+                            };
+                        },
+                        () => {
+                            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                            const dayIndex = random(0, 6);
+                            const nextIndex = (dayIndex + 1) % 7;
+                            return {
+                                question: `If today is ${days[dayIndex]}, what day will it be tomorrow?`,
+                                answer: `Tomorrow will be ${days[nextIndex]}`
+                            };
+                        },
+                        () => {
+                            const hour = random(1, 5);
+                            return {
+                                question: `How many hours are there from ${hour}:00 to ${hour + 1}:00?`,
+                                answer: `There is 1 hour from ${hour}:00 to ${hour + 1}:00`
+                            };
+                        }
+                    ];
+                    return problems[questionNum % problems.length]();
+                } else if (difficulty === 'medium') {
+                    const problems = [
+                        () => {
+                            const hour = random(1, 12);
+                            const minute = [15, 30, 45][random(0, 2)];
+                            return {
+                                question: `What time is shown when the hour hand is between ${hour} and ${hour + 1}, and minute hand points to ${minute === 15 ? '3' : minute === 30 ? '6' : '9'}?`,
+                                answer: `The time is ${hour}:${minute}`
+                            };
+                        },
+                        () => {
+                            const hour1 = random(1, 8);
+                            const hour2 = hour1 + random(2, 4);
+                            return {
+                                question: `Ravi started studying at ${hour1}:00 and finished at ${hour2}:00. How many hours did he study?`,
+                                answer: `Time studied = ${hour2}:00 - ${hour1}:00 = ${hour2 - hour1} hours`
+                            };
+                        },
+                        () => {
+                            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                            const monthIndex = random(0, 10);
+                            return {
+                                question: `Which month comes 2 months after ${months[monthIndex]}?`,
+                                answer: `2 months after ${months[monthIndex]} is ${months[monthIndex + 2]}`
+                            };
+                        }
+                    ];
+                    return problems[questionNum % problems.length]();
+                } else { // hard
+                    const problems = [
+                        () => {
+                            const hour = random(1, 11);
+                            const minute1 = random(1, 45);
+                            const minute2 = minute1 + random(15, 45);
+                            const totalMinutes = minute2 - minute1;
+                            return {
+                                question: `A movie started at ${hour}:${minute1.toString().padStart(2, '0')} and ended at ${hour}:${minute2.toString().padStart(2, '0')}. How many minutes did the movie run?`,
+                                answer: `Duration = ${minute2} - ${minute1} = ${totalMinutes} minutes`
+                            };
+                        },
+                        () => {
+                            const hour1 = random(8, 11);
+                            const min1 = random(0, 45);
+                            const hours = random(2, 4);
+                            const mins = random(15, 45);
+                            const hour2 = hour1 + hours;
+                            const min2 = min1 + mins;
+                            const finalHour = hour2 + Math.floor(min2 / 60);
+                            const finalMin = min2 % 60;
+                            return {
+                                question: `A train departed at ${hour1}:${min1.toString().padStart(2, '0')}. It took ${hours} hours and ${mins} minutes to reach. At what time did it arrive?`,
+                                answer: `Arrival time = ${hour1}:${min1.toString().padStart(2, '0')} + ${hours}h ${mins}min = ${finalHour}:${finalMin.toString().padStart(2, '0')}`
+                            };
+                        },
+                        () => {
+                            const days = random(3, 7);
+                            const hours = days * 24;
+                            return {
+                                question: `How many hours are there in ${days} days?`,
+                                answer: `Hours in ${days} days = ${days} × 24 = ${hours} hours`
+                            };
+                        }
+                    ];
+                    return problems[questionNum % problems.length]();
+                }
+            }
+            
+            // MONEY (Classes 1-4)
+            if (topic.includes('Money')) {
+                if (difficulty === 'easy') {
+                    const problems = [
+                        () => {
+                            const rupees = random(1, 10);
+                            return {
+                                question: `How many ₹1 coins make ₹${rupees}?`,
+                                answer: `${rupees} coins of ₹1 make ₹${rupees}`
+                            };
+                        },
+                        () => {
+                            const cost = random(5, 15);
+                            return {
+                                question: `A pencil costs ₹${cost}. How much will 2 pencils cost?`,
+                                answer: `Cost of 2 pencils = ₹${cost} × 2 = ₹${cost * 2}`
+                            };
+                        },
+                        () => {
+                            const cost1 = random(5, 10);
+                            const cost2 = random(5, 10);
+                            return {
+                                question: `A pen costs ₹${cost1} and an eraser costs ₹${cost2}. What is the total cost?`,
+                                answer: `Total cost = ₹${cost1} + ₹${cost2} = ₹${cost1 + cost2}`
+                            };
+                        }
+                    ];
+                    return problems[questionNum % problems.length]();
+                } else if (difficulty === 'medium') {
+                    const problems = [
+                        () => {
+                            const total = random(30, 100);
+                            const spent = random(10, total - 10);
+                            return {
+                                question: `Sita has ₹${total}. She buys a toy for ₹${spent}. How much money does she have left?`,
+                                answer: `Money left = ₹${total} - ₹${spent} = ₹${total - spent}`
+                            };
+                        },
+                        () => {
+                            const cost = random(15, 40);
+                            const items = random(3, 5);
+                            return {
+                                question: `A notebook costs ₹${cost}. How much will ${items} notebooks cost?`,
+                                answer: `Cost of ${items} notebooks = ₹${cost} × ${items} = ₹${cost * items}`
+                            };
+                        },
+                        () => {
+                            const fives = random(3, 8);
+                            const ones = random(2, 5);
+                            return {
+                                question: `Ram has ${fives} coins of ₹5 and ${ones} coins of ₹1. How much money does he have in total?`,
+                                answer: `Total = (${fives} × ₹5) + (${ones} × ₹1) = ₹${fives * 5} + ₹${ones} = ₹${fives * 5 + ones}`
+                            };
+                        }
+                    ];
+                    return problems[questionNum % problems.length]();
+                } else { // hard
+                    const problems = [
+                        () => {
+                            const totalMoney = random(100, 500);
+                            const item1Cost = random(30, 100);
+                            const item2Cost = random(30, 100);
+                            const spent = item1Cost + item2Cost;
+                            const left = totalMoney - spent;
+                            return {
+                                question: `Maya has ₹${totalMoney}. She buys a book for ₹${item1Cost} and a pen for ₹${item2Cost}. How much money is left with her?`,
+                                answer: `Total spent = ₹${item1Cost} + ₹${item2Cost} = ₹${spent}\nMoney left = ₹${totalMoney} - ₹${spent} = ₹${left}`
+                            };
+                        },
+                        () => {
+                            const costPer = random(25, 75);
+                            const items = random(4, 8);
+                            const paid = random(costPer * items + 50, costPer * items + 200);
+                            const totalCost = costPer * items;
+                            const change = paid - totalCost;
+                            return {
+                                question: `Each chocolate costs ₹${costPer}. If you buy ${items} chocolates and pay ₹${paid}, how much change will you get?`,
+                                answer: `Total cost = ₹${costPer} × ${items} = ₹${totalCost}\nChange = ₹${paid} - ₹${totalCost} = ₹${change}`
+                            };
+                        },
+                        () => {
+                            const tens = random(5, 15);
+                            const fives = random(4, 12);
+                            const ones = random(3, 10);
+                            const total = tens * 10 + fives * 5 + ones;
+                            return {
+                                question: `A boy has ${tens} notes of ₹10, ${fives} coins of ₹5, and ${ones} coins of ₹1. How much money does he have in total?`,
+                                answer: `Total = (${tens} × ₹10) + (${fives} × ₹5) + (${ones} × ₹1) = ₹${tens * 10} + ₹${fives * 5} + ₹${ones} = ₹${total}`
+                            };
+                        }
+                    ];
+                    return problems[questionNum % problems.length]();
+                }
+            }
+            
+            // SHAPES AND PATTERNS (Classes 1-4)
+            if (topic.includes('Shape') || topic.includes('Pattern') || topic.includes('Symmetry')) {
+                if (difficulty === 'easy') {
+                    const problems = [
+                        () => {
+                            const sides = [3, 4][questionNum % 2];
+                            const shapes = {3: 'triangle', 4: 'square'};
+                            return {
+                                question: `How many sides does a ${shapes[sides]} have?`,
+                                answer: `A ${shapes[sides]} has ${sides} sides`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `Which shape has no corners and is round?`,
+                                answer: `A circle has no corners and is round`
+                            };
+                        },
+                        () => {
+                            const num = random(5, 10);
+                            return {
+                                question: `Complete the pattern: 1, 2, 3, __, 5. What number comes in the blank?`,
+                                answer: `The pattern increases by 1, so the blank is 4`
+                            };
+                        }
+                    ];
+                    return problems[questionNum % problems.length]();
+                } else if (difficulty === 'medium') {
+                    const problems = [
+                        () => {
+                            const shapes = {3: 'triangle', 4: 'rectangle', 5: 'pentagon', 6: 'hexagon'};
+                            const sides = [3, 4, 5, 6][questionNum % 4];
+                            return {
+                                question: `A ${shapes[sides]} has how many corners (vertices)?`,
+                                answer: `A ${shapes[sides]} has ${sides} corners`
+                            };
+                        },
+                        () => {
+                            const start = random(2, 5);
+                            const pattern = `${start}, ${start + 2}, ${start + 4}, __, ${start + 8}`;
+                            return {
+                                question: `Complete the pattern: ${pattern}. What number fills the blank?`,
+                                answer: `The pattern increases by 2 each time, so the blank is ${start + 6}`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `Which shape has 4 sides where all sides are equal?`,
+                                answer: `A square has 4 equal sides`
+                            };
+                        },
+                        () => {
+                            const triangles = random(3, 6);
+                            const totalSides = triangles * 3;
+                            return {
+                                question: `If there are ${triangles} triangles, how many sides are there in total?`,
+                                answer: `Total sides = ${triangles} × 3 = ${totalSides} sides`
+                            };
+                        }
+                    ];
+                    return problems[questionNum % problems.length]();
+                } else { // hard
+                    const problems = [
+                        () => {
+                            const squares = random(3, 8);
+                            const triangles = random(2, 6);
+                            const totalSides = squares * 4 + triangles * 3;
+                            return {
+                                question: `There are ${squares} squares and ${triangles} triangles. How many sides are there in total?`,
+                                answer: `Sides in squares = ${squares} × 4 = ${squares * 4}\nSides in triangles = ${triangles} × 3 = ${triangles * 3}\nTotal sides = ${squares * 4} + ${triangles * 3} = ${totalSides}`
+                            };
+                        },
+                        () => {
+                            const start = random(3, 7);
+                            const skip = random(3, 5);
+                            return {
+                                question: `Complete the pattern: ${start}, ${start + skip}, ${start + 2*skip}, __, ${start + 4*skip}. What is the blank and what is the rule?`,
+                                answer: `The pattern increases by ${skip} each time\nThe blank is ${start + 3*skip}`
+                            };
+                        },
+                        () => {
+                            const perimeter = random(16, 40);
+                            const side = perimeter / 4;
+                            return {
+                                question: `A square has a perimeter of ${perimeter} cm. What is the length of each side?`,
+                                answer: `Each side = Perimeter ÷ 4 = ${perimeter} ÷ 4 = ${side} cm`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `How many lines of symmetry does a square have?`,
+                                answer: `A square has 4 lines of symmetry (2 diagonals and 2 through midpoints)`
+                            };
+                        }
+                    ];
+                    return problems[questionNum % problems.length]();
+                }
+            }
+            
+            // MEASUREMENT - Length, Weight, Volume (Classes 1-4)
+            if (topic.includes('Measurement') || topic.includes('Length') || topic.includes('Weight') || topic.includes('Volume')) {
+                const problems = [
+                    () => {
+                        const length1 = random(5, 20);
+                        const length2 = random(5, 20);
+                        const longer = Math.max(length1, length2);
+                        const shorter = Math.min(length1, length2);
+                        return {
+                            question: `A pencil is ${length1} cm long and a pen is ${length2} cm long. Which is longer and by how much?`,
+                            answer: `The ${length1 > length2 ? 'pencil' : 'pen'} is longer by ${longer - shorter} cm`
+                        };
+                    },
+                    () => {
+                        const weight1 = random(10, 50);
+                        const weight2 = random(10, 50);
+                        return {
+                            question: `A bag weighs ${weight1} kg and a box weighs ${weight2} kg. What is their total weight?`,
+                            answer: `Total weight = ${weight1} kg + ${weight2} kg = ${weight1 + weight2} kg`
+                        };
+                    },
+                    () => {
+                        const cm = random(50, 200);
+                        const m = Math.floor(cm / 100);
+                        const remainingCm = cm % 100;
+                        return {
+                            question: `Convert ${cm} cm to meters and centimeters.`,
+                            answer: `${cm} cm = ${m} meter${m !== 1 ? 's' : ''} and ${remainingCm} cm`
+                        };
+                    },
+                    () => {
+                        const items = random(2, 10);
+                        const weightEach = random(2, 10);
+                        return {
+                            question: `If one apple weighs ${weightEach} grams, how much do ${items} apples weigh?`,
+                            answer: `Total weight = ${items} × ${weightEach}g = ${items * weightEach} grams`
+                        };
+                    },
+                    () => {
+                        const length = random(10, 50);
+                        return {
+                            question: `A rope is ${length} cm long. If we cut it into 2 equal pieces, how long is each piece?`,
+                            answer: `Each piece = ${length} ÷ 2 = ${length / 2} cm`
+                        };
+                    }
+                ];
+                return problems[questionNum % problems.length]();
+            }
+            
+            // NUMBERS 1-100 or 1-1000 (Classes 1-3)
+            if (topic.includes('Numbers') && !topic.includes('Roman') && !topic.includes('Large')) {
+                const maxNum = topic.includes('100') ? 100 : topic.includes('1000') ? 1000 : topic.includes('10000') ? 10000 : 100;
+                const problems = [
+                    () => {
+                        const num = random(1, maxNum);
+                        return {
+                            question: `Write the number that comes just after ${num}`,
+                            answer: `The number after ${num} is ${num + 1}`
+                        };
+                    },
+                    () => {
+                        const num = random(2, maxNum);
+                        return {
+                            question: `Write the number that comes just before ${num}`,
+                            answer: `The number before ${num} is ${num - 1}`
+                        };
+                    },
+                    () => {
+                        const num1 = random(1, maxNum);
+                        const num2 = random(1, maxNum);
+                        const larger = Math.max(num1, num2);
+                        const smaller = Math.min(num1, num2);
+                        return {
+                            question: `Which is greater: ${num1} or ${num2}?`,
+                            answer: `${larger} is greater than ${smaller}`
+                        };
+                    },
+                    () => {
+                        const num = random(10, maxNum);
+                        const tens = Math.floor(num / 10);
+                        const ones = num % 10;
+                        return {
+                            question: `In the number ${num}, what is in the tens place?`,
+                            answer: `In ${num}, the tens place has ${tens}`
+                        };
+                    },
+                    () => {
+                        const start = random(1, 20);
+                        const skip = 2;
+                        return {
+                            question: `Count by 2s: ${start}, ${start + skip}, ${start + 2*skip}, __, ${start + 4*skip}. What number fills the blank?`,
+                            answer: `Counting by 2s: ${start + 3*skip}`
+                        };
+                    }
+                ];
+                return problems[questionNum % problems.length]();
+            }
+            
+            // DATA HANDLING (Classes 3-8)
+            if (topic.includes('Data')) {
+                const problems = [
+                    () => {
+                        const fruits = ['apples', 'bananas', 'oranges', 'mangoes'];
+                        const counts = [random(5, 20), random(5, 20), random(5, 20), random(5, 20)];
+                        const maxCount = Math.max(...counts);
+                        const maxIndex = counts.indexOf(maxCount);
+                        return {
+                            question: `A fruit seller has ${counts[0]} ${fruits[0]}, ${counts[1]} ${fruits[1]}, ${counts[2]} ${fruits[2]}, and ${counts[3]} ${fruits[3]}. Which fruit does he have the most of?`,
+                            answer: `He has the most ${fruits[maxIndex]} (${maxCount} pieces)`
+                        };
+                    },
+                    () => {
+                        const students = [random(10, 30), random(10, 30), random(10, 30)];
+                        const total = students.reduce((a, b) => a + b, 0);
+                        return {
+                            question: `Class A has ${students[0]} students, Class B has ${students[1]} students, and Class C has ${students[2]} students. How many students are there in total?`,
+                            answer: `Total students = ${students[0]} + ${students[1]} + ${students[2]} = ${total}`
+                        };
+                    }
+                ];
+                return problems[questionNum % problems.length]();
+            }
+            
+            // GEOMETRY - Lines and Angles (Classes 4-8)
+            if (topic.includes('Geometry') && (topic.includes('Lines') || topic.includes('Angles'))) {
+                const problems = [
+                    () => {
+                        return {
+                            question: `How many degrees are in a right angle?`,
+                            answer: `A right angle = 90 degrees`
+                        };
+                    },
+                    () => {
+                        const angle = random(30, 150);
+                        return {
+                            question: `If an angle measures ${angle}°, is it acute, right, or obtuse?`,
+                            answer: angle < 90 ? `${angle}° is an acute angle (less than 90°)` : angle === 90 ? `${angle}° is a right angle` : `${angle}° is an obtuse angle (more than 90°)`
+                        };
+                    },
+                    () => {
+                        const angle1 = random(30, 60);
+                        const angle2 = 90 - angle1;
+                        return {
+                            question: `Two angles are complementary. If one angle is ${angle1}°, what is the other angle?`,
+                            answer: `Complementary angles add up to 90°\nOther angle = 90° - ${angle1}° = ${angle2}°`
+                        };
+                    }
+                ];
+                return problems[questionNum % problems.length]();
+            }
+            
+            // MULTIPLES AND FACTORS (Classes 4-6)
+            if (topic.includes('Multiples') || topic.includes('Factors')) {
+                const problems = [
+                    () => {
+                        const num = random(2, 12);
+                        const multiple = num * random(2, 5);
+                        return {
+                            question: `Is ${multiple} a multiple of ${num}?`,
+                            answer: `Yes, ${multiple} = ${num} × ${multiple/num}, so ${multiple} is a multiple of ${num}`
+                        };
+                    },
+                    () => {
+                        const num = random(6, 20);
+                        const factors = [];
+                        for(let i = 1; i <= num; i++) {
+                            if(num % i === 0) factors.push(i);
+                        }
+                        return {
+                            question: `List all factors of ${num}`,
+                            answer: `Factors of ${num} are: ${factors.join(', ')}`
+                        };
+                    },
+                    () => {
+                        const num = random(2, 12);
+                        return {
+                            question: `Write the first 3 multiples of ${num}`,
+                            answer: `First 3 multiples of ${num} are: ${num}, ${num*2}, ${num*3}`
+                        };
+                    }
+                ];
+                return problems[questionNum % problems.length]();
+            }
+            
+            // RATIO AND PROPORTION (Classes 5-8)
+            if (topic.includes('Ratio') || topic.includes('Proportion')) {
+                if (difficulty === 'easy') {
+                    const problems = [
+                        () => {
+                            const a = random(2, 10);
+                            const b = random(2, 10);
+                            const gcd = (x, y) => y === 0 ? x : gcd(y, x % y);
+                            const g = gcd(a, b);
+                            return {
+                                question: `Simplify the ratio ${a}:${b}`,
+                                answer: `${a}:${b} = ${a/g}:${b/g} (dividing by GCD ${g})`
+                            };
+                        },
+                        () => {
+                            const boys = random(5, 15);
+                            const girls = random(5, 15);
+                            const gcd = (x, y) => y === 0 ? x : gcd(y, x % y);
+                            const g = gcd(boys, girls);
+                            return {
+                                question: `In a class, there are ${boys} boys and ${girls} girls. Find the ratio of boys to girls.`,
+                                answer: `Ratio of boys to girls = ${boys}:${girls} = ${boys/g}:${girls/g}`
+                            };
+                        }
+                    ];
+                    return problems[questionNum % problems.length]();
+                } else if (difficulty === 'medium') {
+                    const problems = [
+                        () => {
+                            const ratio1 = random(2, 8);
+                            const ratio2 = random(2, 8);
+                            const total = random(30, 100);
+                            const part1 = Math.floor((total * ratio1) / (ratio1 + ratio2));
+                            const part2 = total - part1;
+                            return {
+                                question: `Divide ${total} in the ratio ${ratio1}:${ratio2}`,
+                                answer: `Total parts = ${ratio1} + ${ratio2} = ${ratio1 + ratio2}\nFirst part = (${ratio1}/${ratio1 + ratio2}) × ${total} = ${part1}\nSecond part = (${ratio2}/${ratio1 + ratio2}) × ${total} = ${part2}`
+                            };
+                        },
+                        () => {
+                            const a = random(2, 10);
+                            const b = random(2, 10);
+                            const c = random(2, 10);
+                            return {
+                                question: `If A:B = ${a}:${b} and B:C = ${b}:${c}, find A:B:C`,
+                                answer: `A:B:C = ${a}:${b}:${c}`
+                            };
+                        }
+                    ];
+                    return problems[questionNum % problems.length]();
+                } else { // hard
+                    const problems = [
+                        () => {
+                            const ratio1 = random(3, 12);
+                            const ratio2 = random(3, 12);
+                            const ratio3 = random(3, 12);
+                            const total = random(100, 500);
+                            const sum = ratio1 + ratio2 + ratio3;
+                            const part1 = Math.floor((total * ratio1) / sum);
+                            const part2 = Math.floor((total * ratio2) / sum);
+                            const part3 = total - part1 - part2;
+                            return {
+                                question: `Divide ${total} among three people in the ratio ${ratio1}:${ratio2}:${ratio3}`,
+                                answer: `Total parts = ${ratio1} + ${ratio2} + ${ratio3} = ${sum}\nFirst person = (${ratio1}/${sum}) × ${total} = ${part1}\nSecond person = (${ratio2}/${sum}) × ${total} = ${part2}\nThird person = ${part3}`
+                            };
+                        },
+                        () => {
+                            const speed1 = random(40, 80);
+                            const speed2 = random(40, 80);
+                            const gcd = (x, y) => y === 0 ? x : gcd(y, x % y);
+                            const g = gcd(speed1, speed2);
+                            return {
+                                question: `Two cars travel at ${speed1} km/h and ${speed2} km/h. Find the ratio of their speeds in simplest form.`,
+                                answer: `Ratio = ${speed1}:${speed2} = ${speed1/g}:${speed2/g}`
+                            };
+                        },
+                        () => {
+                            const ratio1 = random(3, 8);
+                            const ratio2 = random(3, 8);
+                            const increase = random(10, 50);
+                            const newRatio1 = ratio1 + increase;
+                            const gcd = (x, y) => y === 0 ? x : gcd(y, x % y);
+                            const g = gcd(newRatio1, ratio2);
+                            return {
+                                question: `The ratio of two numbers is ${ratio1}:${ratio2}. If the first number is increased by ${increase}, what is the new ratio?`,
+                                answer: `New ratio = ${newRatio1}:${ratio2} = ${newRatio1/g}:${ratio2/g}`
+                            };
+                        }
+                    ];
+                    return problems[questionNum % problems.length]();
+                }
+            }
+            
+            // INTEGERS (Classes 6-8)
+            if (topic.includes('Integer')) {
+                const problems = [
+                    () => {
+                        const a = random(-50, 50);
+                        const b = random(-50, 50);
+                        return {
+                            question: `Calculate: (${a}) + (${b})`,
+                            answer: `(${a}) + (${b}) = ${a + b}`
+                        };
+                    },
+                    () => {
+                        const a = random(-50, 50);
+                        const b = random(-50, 50);
+                        return {
+                            question: `Calculate: (${a}) - (${b})`,
+                            answer: `(${a}) - (${b}) = ${a - b}`
+                        };
+                    },
+                    () => {
+                        const a = random(-12, 12);
+                        const b = random(-12, 12);
+                        return {
+                            question: `Calculate: (${a}) × (${b})`,
+                            answer: `(${a}) × (${b}) = ${a * b}`
+                        };
+                    }
+                ];
+                return problems[questionNum % problems.length]();
+            }
+            
+            // ALGEBRA (Classes 6-8)
+            if (topic.includes('Algebra') || topic.includes('Equation')) {
+                const problems = [
+                    () => {
+                        const a = random(2, 15);
+                        const b = random(1, 20);
+                        const x = random(1, 10);
+                        const result = a * x + b;
+                        return {
+                            question: `Solve for x: ${a}x + ${b} = ${result}`,
+                            answer: `${a}x + ${b} = ${result}\n${a}x = ${result} - ${b}\n${a}x = ${result - b}\nx = ${(result - b) / a}`
+                        };
+                    },
+                    () => {
+                        const a = random(2, 10);
+                        const b = random(1, 15);
+                        return {
+                            question: `Simplify: ${a}x + ${b}x`,
+                            answer: `${a}x + ${b}x = ${a + b}x`
+                        };
+                    }
+                ];
+                return problems[questionNum % problems.length]();
+            }
+            
+            // EXPONENTS AND POWERS (Classes 7-8)
+            if (topic.includes('Exponent') || topic.includes('Power')) {
+                const problems = [
+                    () => {
+                        const base = random(2, 10);
+                        const exp1 = random(2, 5);
+                        const exp2 = random(2, 5);
+                        return {
+                            question: `Simplify: ${base}^${exp1} × ${base}^${exp2}`,
+                            answer: `${base}^${exp1} × ${base}^${exp2} = ${base}^${exp1 + exp2} = ${Math.pow(base, exp1 + exp2)}`
+                        };
+                    },
+                    () => {
+                        const base = random(2, 10);
+                        const exp = random(2, 4);
+                        return {
+                            question: `Calculate: ${base}^${exp}`,
+                            answer: `${base}^${exp} = ${Math.pow(base, exp)}`
+                        };
+                    }
+                ];
+                return problems[questionNum % problems.length]();
+            }
+            
+            // SQUARES AND SQUARE ROOTS (Class 8)
+            if (topic.includes('Square')) {
+                const problems = [
+                    () => {
+                        const n = random(1, 20);
+                        return {
+                            question: `Find the square of ${n}`,
+                            answer: `${n}² = ${n * n}`
+                        };
+                    },
+                    () => {
+                        const n = random(1, 12);
+                        const square = n * n;
+                        return {
+                            question: `Find the square root of ${square}`,
+                            answer: `√${square} = ${n}`
+                        };
+                    }
+                ];
+                return problems[questionNum % problems.length]();
+            }
+            
+            // ADDITION AND SUBTRACTION
+            if (topic.includes('Addition') || topic.includes('Subtraction')) {
+                const easyMax = classNum <= 2 ? 20 : classNum <= 4 ? 50 : 100;
+                const mediumMax = classNum <= 2 ? 50 : classNum <= 4 ? 200 : 1000;
+                const hardMax = classNum <= 2 ? 100 : classNum <= 4 ? 500 : 5000;
+                
+                const maxNum = difficulty === 'easy' ? easyMax : difficulty === 'medium' ? mediumMax : hardMax;
+                
+                const a = random(1, maxNum);
+                const b = random(1, maxNum);
+                
+                if (questionNum % 2 === 0) {
+                    // Addition
+                    if (difficulty === 'easy') {
+                        return {
+                            question: `Calculate: ${a} + ${b}`,
+                            answer: `${a} + ${b} = ${a + b}`
+                        };
+                    } else if (difficulty === 'medium') {
+                        const c = random(1, maxNum);
+                        return {
+                            question: `Calculate: ${a} + ${b} + ${c}`,
+                            answer: `${a} + ${b} + ${c} = ${a + b + c}`
+                        };
+                    } else {
+                        const c = random(1, maxNum);
+                        const d = random(1, maxNum);
+                        return {
+                            question: `Calculate: ${a} + ${b} + ${c} + ${d}`,
+                            answer: `${a} + ${b} + ${c} + ${d} = ${a + b + c + d}`
+                        };
+                    }
+                } else {
+                    // Subtraction
+                    const larger = Math.max(a, b);
+                    const smaller = Math.min(a, b);
+                    
+                    if (difficulty === 'easy') {
+                        return {
+                            question: `Calculate: ${larger} - ${smaller}`,
+                            answer: `${larger} - ${smaller} = ${larger - smaller}`
+                        };
+                    } else if (difficulty === 'medium') {
+                        const c = random(1, larger - smaller);
+                        return {
+                            question: `Calculate: ${larger} - ${smaller} - ${c}`,
+                            answer: `${larger} - ${smaller} - ${c} = ${larger - smaller - c}`
+                        };
+                    } else {
+                        const total = larger + smaller;
+                        return {
+                            question: `What number should be added to ${smaller} to get ${total}?`,
+                            answer: `Number to add = ${total} - ${smaller} = ${larger}`
+                        };
+                    }
+                }
+            }
+            
+            // MULTIPLICATION
+            if (topic.includes('Multiplication')) {
+                if (difficulty === 'easy') {
+                    const a = random(2, 5);
+                    const b = random(2, 5);
+                    if (questionNum % 2 === 0) {
+                        return {
+                            question: `${a} × ${b} = ?`,
+                            answer: `${a} × ${b} = ${a * b}`
+                        };
+                    } else {
+                        return {
+                            question: `A box has ${a} pencils. How many pencils are in ${b} boxes?`,
+                            answer: `Total pencils = ${a} × ${b} = ${a * b} pencils`
+                        };
+                    }
+                } else if (difficulty === 'medium') {
+                    const a = random(6, 12);
+                    const b = random(6, 12);
+                    if (questionNum % 2 === 0) {
+                        return {
+                            question: `${a} × ${b} = ?`,
+                            answer: `${a} × ${b} = ${a * b}`
+                        };
+                    } else {
+                        return {
+                            question: `Ravi bought ${a} packets of biscuits. Each packet has ${b} biscuits. How many biscuits in total?`,
+                            answer: `Total biscuits = ${a} × ${b} = ${a * b} biscuits`
+                        };
+                    }
+                } else { // hard
+                    const a = random(12, 25);
+                    const b = random(12, 25);
+                    if (questionNum % 3 === 0) {
+                        return {
+                            question: `${a} × ${b} = ?`,
+                            answer: `${a} × ${b} = ${a * b}`
+                        };
+                    } else if (questionNum % 3 === 1) {
+                        const c = random(2, 5);
+                        return {
+                            question: `Calculate: ${a} × ${b} × ${c}`,
+                            answer: `${a} × ${b} × ${c} = ${a * b * c}`
+                        };
+                    } else {
+                        return {
+                            question: `A factory produces ${a} toys per hour. How many toys will it produce in ${b} hours?`,
+                            answer: `Total toys = ${a} × ${b} = ${a * b} toys`
+                        };
+                    }
+                }
+            }
+            
+            // DIVISION
+            if (topic.includes('Division')) {
+                if (difficulty === 'easy') {
+                    const divisor = random(2, 5);
+                    const quotient = random(2, 10);
+                    const dividend = divisor * quotient;
+                    if (questionNum % 2 === 0) {
+                        return {
+                            question: `${dividend} ÷ ${divisor} = ?`,
+                            answer: `${dividend} ÷ ${divisor} = ${quotient}`
+                        };
+                    } else {
+                        return {
+                            question: `${dividend} sweets are divided equally among ${divisor} children. How many sweets does each child get?`,
+                            answer: `Each child gets = ${dividend} ÷ ${divisor} = ${quotient} sweets`
+                        };
+                    }
+                } else if (difficulty === 'medium') {
+                    const divisor = random(6, 12);
+                    const quotient = random(5, 15);
+                    const dividend = divisor * quotient;
+                    if (questionNum % 2 === 0) {
+                        return {
+                            question: `${dividend} ÷ ${divisor} = ?`,
+                            answer: `${dividend} ÷ ${divisor} = ${quotient}`
+                        };
+                    } else {
+                        return {
+                            question: `A gardener has ${dividend} plants. He plants them in ${divisor} rows equally. How many plants in each row?`,
+                            answer: `Plants per row = ${dividend} ÷ ${divisor} = ${quotient} plants`
+                        };
+                    }
+                } else { // hard
+                    const divisor = random(12, 25);
+                    const quotient = random(10, 40);
+                    const dividend = divisor * quotient;
+                    if (questionNum % 3 === 0) {
+                        return {
+                            question: `${dividend} ÷ ${divisor} = ?`,
+                            answer: `${dividend} ÷ ${divisor} = ${quotient}`
+                        };
+                    } else if (questionNum % 3 === 1) {
+                        const remainder = random(1, divisor - 1);
+                        const dividendWithRem = dividend + remainder;
+                        return {
+                            question: `Divide ${dividendWithRem} by ${divisor}. What is the quotient and remainder?`,
+                            answer: `${dividendWithRem} ÷ ${divisor} = ${quotient} remainder ${remainder}`
+                        };
+                    } else {
+                        return {
+                            question: `${dividend} books are to be packed in boxes. Each box holds ${divisor} books. How many boxes are needed?`,
+                            answer: `Number of boxes = ${dividend} ÷ ${divisor} = ${quotient} boxes`
+                        };
+                    }
+                }
+            }
+            
+            // FRACTIONS
+            if (topic.includes('Fraction')) {
+                const num1 = random(1, 10);
+                const num2 = random(1, 10);
+                const den = random(2, 12);
+                const problems = [
+                    () => ({
+                        question: `Add: ${num1}/${den} + ${num2}/${den}`,
+                        answer: `${num1}/${den} + ${num2}/${den} = ${num1 + num2}/${den}`
+                    }),
+                    () => {
+                        const larger = Math.max(num1, num2);
+                        const smaller = Math.min(num1, num2);
+                        return {
+                            question: `Subtract: ${larger}/${den} - ${smaller}/${den}`,
+                            answer: `${larger}/${den} - ${smaller}/${den} = ${larger - smaller}/${den}`
+                        };
+                    }
+                ];
+                return problems[questionNum % problems.length]();
+            }
+            
+            // DECIMALS
+            if (topic.includes('Decimal')) {
+                const a = (random(10, 100) / 10).toFixed(1);
+                const b = (random(10, 100) / 10).toFixed(1);
+                if (questionNum % 2 === 0) {
+                    return {
+                        question: `Calculate: ${a} + ${b}`,
+                        answer: `${a} + ${b} = ${(parseFloat(a) + parseFloat(b)).toFixed(1)}`
+                    };
+                } else {
+                    return {
+                        question: `Calculate: ${a} × ${b}`,
+                        answer: `${a} × ${b} = ${(parseFloat(a) * parseFloat(b)).toFixed(2)}`
+                    };
+                }
+            }
+            
+            // PERCENTAGE
+            if (topic.includes('Percentage') || topic.includes('Profit')) {
+                if (difficulty === 'easy') {
+                    const problems = [
+                        () => {
+                            const percent = random(10, 50) * 2; // 10, 20, 30, 40, 50
+                            const total = random(20, 100);
+                            const value = Math.floor((total * percent) / 100);
+                            return {
+                                question: `What is ${percent}% of ${total}?`,
+                                answer: `${percent}% of ${total} = (${percent}/100) × ${total} = ${value}`
+                            };
+                        },
+                        () => {
+                            const percent = 50;
+                            const total = random(20, 100);
+                            return {
+                                question: `Find ${percent}% of ${total}`,
+                                answer: `${percent}% of ${total} = ${total / 2}`
+                            };
+                        }
+                    ];
+                    return problems[questionNum % problems.length]();
+                } else if (difficulty === 'medium') {
+                    const problems = [
+                        () => {
+                            const total = random(100, 500);
+                            const percent = random(15, 85);
+                            const value = Math.floor((total * percent) / 100);
+                            return {
+                                question: `What is ${percent}% of ${total}?`,
+                                answer: `${percent}% of ${total} = (${percent}/100) × ${total} = ${value}`
+                            };
+                        },
+                        () => {
+                            const cp = random(200, 1000);
+                            const profit = random(50, 200);
+                            const sp = cp + profit;
+                            const profitPercent = Math.floor((profit / cp) * 100);
+                            return {
+                                question: `An item is bought for ₹${cp} and sold for ₹${sp}. Find the profit percentage.`,
+                                answer: `Profit = ₹${sp} - ₹${cp} = ₹${profit}\nProfit% = (${profit}/${cp}) × 100 = ${profitPercent}%`
+                            };
+                        }
+                    ];
+                    return problems[questionNum % problems.length]();
+                } else { // hard
+                    const problems = [
+                        () => {
+                            const cp = random(1000, 5000);
+                            const lossPercent = random(10, 30);
+                            const loss = Math.floor((cp * lossPercent) / 100);
+                            const sp = cp - loss;
+                            return {
+                                question: `A shopkeeper bought an item for ₹${cp}. He sold it at a loss of ${lossPercent}%. Find the selling price.`,
+                                answer: `Loss = ${lossPercent}% of ₹${cp} = (${lossPercent}/100) × ${cp} = ₹${loss}\nSelling Price = ₹${cp} - ₹${loss} = ₹${sp}`
+                            };
+                        },
+                        () => {
+                            const price = random(500, 3000);
+                            const discount = random(10, 40);
+                            const discountAmount = Math.floor((price * discount) / 100);
+                            const finalPrice = price - discountAmount;
+                            return {
+                                question: `A jacket marked ₹${price} is sold at ${discount}% discount. What is the sale price?`,
+                                answer: `Discount = ${discount}% of ₹${price} = ₹${discountAmount}\nSale Price = ₹${price} - ₹${discountAmount} = ₹${finalPrice}`
+                            };
+                        },
+                        () => {
+                            const totalStudents = random(200, 500);
+                            const passedPercent = random(60, 95);
+                            const passed = Math.floor((totalStudents * passedPercent) / 100);
+                            const failed = totalStudents - passed;
+                            return {
+                                question: `In a school of ${totalStudents} students, ${passedPercent}% passed the exam. How many students failed?`,
+                                answer: `Passed = ${passedPercent}% of ${totalStudents} = ${passed} students\nFailed = ${totalStudents} - ${passed} = ${failed} students`
+                            };
+                        }
+                    ];
+                    return problems[questionNum % problems.length]();
+                }
+            }
+            
+            // PERIMETER AND AREA
+            if (topic.includes('Perimeter') || topic.includes('Area')) {
+                const length = random(5, 20);
+                const width = random(3, 15);
+                if (questionNum % 2 === 0) {
+                    return {
+                        question: `A rectangle has length ${length} cm and width ${width} cm. Find its perimeter.`,
+                        answer: `Perimeter = 2(l + w) = 2(${length} + ${width}) = 2(${length + width}) = ${2 * (length + width)} cm`
+                    };
+                } else {
+                    return {
+                        question: `A rectangle has length ${length} cm and width ${width} cm. Find its area.`,
+                        answer: `Area = length × width = ${length} × ${width} = ${length * width} cm²`
+                    };
+                }
+            }
+            
+            // DEFAULT - BASIC NUMBERS
+            const a = random(1, range);
+            const b = random(1, range);
+            return {
+                question: `Calculate: ${a} + ${b}`,
+                answer: `${a} + ${b} = ${a + b}`
+            };
+        };
+
+        const generateProblems = (classNum, topic, difficulty) => {
+            const problems = [];
+            for (let i = 1; i <= 10; i++) {
+                const problem = generateProblem(classNum, topic, difficulty, i);
+                problems.push({
+                    number: i,
+                    question: problem.question,
+                    answer: problem.answer,
+                    marks: i % 2 === 0 ? 3 : 2
+                });
+            }
+            return problems;
+        };
+
+        function App() {
+            const [selectedClass, setSelectedClass] = useState(5);
+            const [selectedTopic, setSelectedTopic] = useState('');
+            const [difficulty, setDifficulty] = useState('medium');
+            const [worksheet, setWorksheet] = useState(null);
+            const [loading, setLoading] = useState(false);
+            const [showAnswers, setShowAnswers] = useState(false);
+            const [error, setError] = useState(null);
+            const [score, setScore] = useState(0);
+            const [showConfetti, setShowConfetti] = useState(false);
+            const [userAnswers, setUserAnswers] = useState({});
+            const [checkedAnswers, setCheckedAnswers] = useState({});
+
+            useEffect(() => {
+                if (worksheet) {
+                    setUserAnswers({});
+                    setCheckedAnswers({});
+                    setShowAnswers(false);
+                }
+            }, [worksheet]);
+
+            const handleAnswerChange = (questionNumber, value) => {
+                setUserAnswers(prev => ({ ...prev, [questionNumber]: value }));
+            };
+
+            const checkAnswer = (questionNumber, marks) => {
+                if (checkedAnswers[questionNumber]) return;
+                setCheckedAnswers(prev => ({ ...prev, [questionNumber]: true }));
+                setScore(prev => prev + marks);
+                setShowConfetti(true);
+                setTimeout(() => setShowConfetti(false), 2000);
+            };
+
+            const generateWorksheet = () => {
+                if (!selectedTopic) {
+                    setError('🎯 Please select a topic first!');
+                    return;
+                }
+
+                setLoading(true);
+                setError(null);
+
+                setTimeout(() => {
+                    try {
+                        const problems = generateProblems(selectedClass, selectedTopic, difficulty);
+                        const totalMarks = problems.reduce((sum, p) => sum + p.marks, 0);
+                        
+                        setWorksheet({
+                            title: `Class ${selectedClass} - ${selectedTopic}`,
+                            instructions: 'Solve all problems showing your work.',
+                            problems: problems,
+                            totalMarks: totalMarks,
+                            timeAllocation: '30 minutes'
+                        });
+                    } catch (err) {
+                        setError('😕 Oops! Something went wrong. Please try again!');
+                    } finally {
+                        setLoading(false);
+                    }
+                }, 800);
+            };
+
+            const downloadWorksheet = () => {
+                if (!worksheet) return;
+                try {
+                    const { jsPDF } = window.jspdf;
+                    const doc = new jsPDF();
+                    
+                    let yPos = 20;
+                    const pageHeight = doc.internal.pageSize.height;
+                    const margin = 20;
+                    const lineHeight = 7;
+                    
+                    // Title
+                    doc.setFontSize(18);
+                    doc.setFont(undefined, 'bold');
+                    doc.text(worksheet.title, margin, yPos);
+                    yPos += 10;
+                    
+                    // Instructions
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'normal');
+                    doc.text(`Instructions: ${worksheet.instructions}`, margin, yPos);
+                    yPos += 10;
+                    
+                    // Line separator
+                    doc.setLineWidth(0.5);
+                    doc.line(margin, yPos, 190, yPos);
+                    yPos += 10;
+                    
+                    // Questions
+                    worksheet.problems.forEach((problem, index) => {
+                        // Check if we need a new page
+                        if (yPos > pageHeight - 60) {
+                            doc.addPage();
+                            yPos = 20;
+                        }
+                        
+                        // Question number
+                        doc.setFontSize(12);
+                        doc.setFont(undefined, 'bold');
+                        doc.text(`Q${problem.number}.`, margin, yPos);
+                        
+                        // Question text - handle long questions
+                        doc.setFont(undefined, 'normal');
+                        const questionLines = doc.splitTextToSize(problem.question, 160);
+                        doc.text(questionLines, margin + 15, yPos);
+                        yPos += questionLines.length * lineHeight;
+                        
+                        // Answer space
+                        yPos += 5;
+                        doc.setFontSize(10);
+                        doc.text('Answer: ________________________________', margin + 15, yPos);
+                        yPos += 15;
+                        
+                        // Extra space between questions
+                        yPos += 5;
+                    });
+                    
+                    // Add answer key if shown
+                    if (showAnswers) {
+                        doc.addPage();
+                        yPos = 20;
+                        
+                        doc.setFontSize(16);
+                        doc.setFont(undefined, 'bold');
+                        doc.text('ANSWER KEY', margin, yPos);
+                        yPos += 10;
+                        
+                        doc.setLineWidth(0.5);
+                        doc.line(margin, yPos, 190, yPos);
+                        yPos += 10;
+                        
+                        worksheet.problems.forEach((problem) => {
+                            if (yPos > pageHeight - 40) {
+                                doc.addPage();
+                                yPos = 20;
+                            }
+                            
+                            doc.setFontSize(11);
+                            doc.setFont(undefined, 'bold');
+                            doc.text(`Q${problem.number}.`, margin, yPos);
+                            
+                            doc.setFont(undefined, 'normal');
+                            const answerLines = doc.splitTextToSize(problem.answer, 160);
+                            doc.text(answerLines, margin + 15, yPos);
+                            yPos += answerLines.length * lineHeight + 8;
+                        });
+                    }
+                    
+                    // Save the PDF
+                    const fileName = `CBSE_Class${selectedClass}_${selectedTopic.replace(/\s+/g, '_')}_Worksheet.pdf`;
+                    doc.save(fileName);
+                    
+                } catch (error) {
+                    console.error('PDF generation error:', error);
+                    alert('PDF download failed. Please try again!');
+                }
+            };
+
+            return (
+                <div style={{position: 'relative', minHeight: '100vh'}}>
+                    {/* Background elements */}
+                    {mathSymbols.map((symbol, i) => (
+                        <div
+                            key={i}
+                            className="float-symbol"
+                            style={{
+                                left: `${(i * 5.5) % 95}%`,
+                                top: `${(i * 7) % 95}%`,
+                                animationDelay: `${i * 0.5}s`
+                            }}
+                        >
+                            {symbol}
+                        </div>
+                    ))}
+                    
+                    <div className="bg-circle" style={{top: '40px', left: '40px', width: '128px', height: '128px', background: '#fbbf24'}}></div>
+                    <div className="bg-circle" style={{bottom: '80px', right: '80px', width: '160px', height: '160px', background: '#ec4899', animationDelay: '1s'}}></div>
+                    <div className="bg-circle" style={{top: '50%', right: '40px', width: '96px', height: '96px', background: '#3b82f6', animationDelay: '2s'}}></div>
+
+                    {/* Confetti */}
+                    {showConfetti && (
+                        <div style={{position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 9999}}>
+                            {[...Array(50)].map((_, i) => (
+                                <div
+                                    key={i}
+                                    className="confetti"
+                                    style={{
+                                        left: `${Math.random() * 100}%`,
+                                        top: '-10px',
+                                        background: ['#FF6B6B', '#4ECDC4', '#FFE66D', '#A8E6CF', '#FF8B94'][Math.floor(Math.random() * 5)],
+                                        animationDelay: `${Math.random() * 0.5}s`
+                                    }}
+                                />
+                            ))}
+                        </div>
+                    )}
+
+                    <div className="container">
+                        {/* Header */}
+                        <div className="card header-card" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: '16px'}}>
+                            <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
+                                <div className="icon-bounce">📚</div>
+                                <div>
+                                    <h1 className="title">🎓 Math Fun Zone! 🚀</h1>
+                                    <p className="subtitle">Practice & Become a Math Superstar! ⭐</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Controls */}
+                        <div className="card">
+                            <div className="grid-3">
+                                <div className="form-group">
+                                    <label className="form-label">
+                                        <span>📚</span> Select Class
+                                    </label>
+                                    <select className="form-select" value={selectedClass} onChange={(e) => {
+                                        setSelectedClass(Number(e.target.value));
+                                        setSelectedTopic('');
+                                        setWorksheet(null);
+                                    }}>
+                                        {[1,2,3,4,5,6,7,8].map(c => <option key={c} value={c}>Class {c}</option>)}
+                                    </select>
+                                </div>
+
+                                <div className="form-group">
+                                    <label className="form-label">
+                                        <span>🎯</span> Select Topic
+                                    </label>
+                                    <select className="form-select" value={selectedTopic} onChange={(e) => {
+                                        setSelectedTopic(e.target.value);
+                                        setWorksheet(null);
+                                    }}>
+                                        <option value="">Choose a topic...</option>
+                                        {CBSE_TOPICS[selectedClass].map(t => <option key={t} value={t}>{t}</option>)}
+                                    </select>
+                                </div>
+
+                                <div className="form-group">
+                                    <label className="form-label">
+                                        <span>⚡</span> Difficulty Level
+                                    </label>
+                                    <select className="form-select" value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
+                                        <option value="easy">😊 Easy Peasy</option>
+                                        <option value="medium">🤔 Medium Challenge</option>
+                                        <option value="hard">🔥 Super Hard</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button className={`btn ${loading || !selectedTopic ? 'btn-disabled' : 'btn-primary'}`} onClick={generateWorksheet} disabled={loading || !selectedTopic}>
+                                {loading ? (
+                                    <>
+                                        <span className="spinner">⏳</span>
+                                        Creating Magic... ✨
+                                    </>
+                                ) : (
+                                    <>
+                                        <span>✨</span>
+                                        Generate New Worksheet! 🎉
+                                    </>
+                                )}
+                            </button>
+
+                            {error && (
+                                <div className="alert alert-error">
+                                    <span>⚠️</span>
+                                    <p style={{fontWeight: 500}}>{error}</p>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Worksheet */}
+                        {worksheet && (
+                            <div className="card">
+                                <div className="worksheet-header">
+                                    <h2 className="worksheet-title">{worksheet.title} 🎊</h2>
+                                    <div>
+                                        <span className="info-badge badge-yellow">📝 {worksheet.instructions}</span>
+                                    </div>
+                                </div>
+
+                                <div className="button-group">
+                                    <button className="btn btn-success" onClick={() => setShowAnswers(!showAnswers)}>
+                                        <span>{showAnswers ? '🙈' : '👀'}</span>
+                                        {showAnswers ? 'Hide Answers' : 'Show Answers'}
+                                    </button>
+                                    <button className="btn btn-warning" onClick={downloadWorksheet}>
+                                        <span>📄</span>
+                                        Download PDF
+                                    </button>
+                                </div>
+
+                                <div>
+                                    {worksheet.problems.map((problem) => (
+                                        <div key={problem.number} className="question-card">
+                                            <div className="question-header">
+                                                <div className="question-number">
+                                                    <span className="number-badge">{problem.number}</span>
+                                                    Question {problem.number}
+                                                </div>
+                                            </div>
+                                            <p className="question-text">{problem.question}</p>
+
+                                            <div className="form-group">
+                                                <label className="form-label">✍️ Your Answer:</label>
+                                                <textarea
+                                                    className="form-textarea"
+                                                    value={userAnswers[problem.number] || ''}
+                                                    onChange={(e) => handleAnswerChange(problem.number, e.target.value)}
+                                                    placeholder="Write your answer here..."
+                                                    rows="3"
+                                                />
+                                            </div>
+
+                                            {showAnswers && (
+                                                <div className="answer-box">
+                                                    <div className="answer-label">
+                                                        <span>⚡</span>
+                                                        Correct Answer:
+                                                    </div>
+                                                    <p className="answer-text">{problem.answer}</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Info */}
+                        {!worksheet && !loading && (
+                            <div className="card">
+                                <h3 style={{fontSize: '20px', fontWeight: 'bold', marginBottom: '16px', color: '#059669'}}>
+                                    🎮 How to Use This Amazing App:
+                                </h3>
+                                <ol className="info-list">
+                                    <li>🎯 Select your class level (1-8)</li>
+                                    <li>📚 Choose a fun topic from CBSE curriculum</li>
+                                    <li>⚡ Pick your difficulty level</li>
+                                    <li>✨ Click the magical "Generate" button!</li>
+                                    <li>✍️ Write your answers in the text boxes</li>
+                                    <li>👀 Toggle "Show Answers" to see solutions</li>
+                                    <li>📄 Download as PDF to print and practice offline</li>
+                                </ol>
+                                <div className="tip-box">
+                                    <p className="tip-text">
+                                        💡 <strong>Super Tip:</strong> Every worksheet is brand new with random problems! 
+                                        Keep generating new worksheets to become a Math Champion! 🏆 
+                                        Download PDFs to practice anytime, anywhere! 🌟
+                                    </p>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
