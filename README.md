@@ -5,3 +5,5 @@ Key Features:
 Comprehensive Coverage: Worksheets for Classes 1 through 8 for Mathematics subject only.
 Adaptive Difficulty: Content is tagged by difficulty (Easy, Medium, Hard) to help students progress at their own pace.
 NCERT Aligned: Topics are mapped to the latest CBSE/NCERT curriculum.
+
+*Content inspired by NCERT curriculum guidelines for Classes 1–8
