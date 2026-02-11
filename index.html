@@ -1225,55 +1225,332 @@
             
             // DATA HANDLING (Classes 3-8)
             if (topic.includes('Data')) {
-                const problems = [
-                    () => {
-                        const fruits = ['apples', 'bananas', 'oranges', 'mangoes'];
-                        const counts = [random(5, 20), random(5, 20), random(5, 20), random(5, 20)];
-                        const maxCount = Math.max(...counts);
-                        const maxIndex = counts.indexOf(maxCount);
-                        return {
-                            question: `A fruit seller has ${counts[0]} ${fruits[0]}, ${counts[1]} ${fruits[1]}, ${counts[2]} ${fruits[2]}, and ${counts[3]} ${fruits[3]}. Which fruit does he have the most of?`,
-                            answer: `He has the most ${fruits[maxIndex]} (${maxCount} pieces)`
-                        };
-                    },
-                    () => {
-                        const students = [random(10, 30), random(10, 30), random(10, 30)];
-                        const total = students.reduce((a, b) => a + b, 0);
-                        return {
-                            question: `Class A has ${students[0]} students, Class B has ${students[1]} students, and Class C has ${students[2]} students. How many students are there in total?`,
-                            answer: `Total students = ${students[0]} + ${students[1]} + ${students[2]} = ${total}`
-                        };
-                    }
-                ];
-                return problems[questionNum % problems.length]();
+                if (difficulty === 'easy') {
+                    const easyDataProblems = [
+                        () => {
+                            const fruits = ['apples', 'bananas', 'oranges', 'mangoes'];
+                            const counts = [random(5, 20), random(5, 20), random(5, 20), random(5, 20)];
+                            const maxCount = Math.max(...counts);
+                            const maxIndex = counts.indexOf(maxCount);
+                            return {
+                                question: `A fruit seller has ${counts[0]} ${fruits[0]}, ${counts[1]} ${fruits[1]}, ${counts[2]} ${fruits[2]}, and ${counts[3]} ${fruits[3]}. Which fruit does he have the most of?`,
+                                answer: `He has the most ${fruits[maxIndex]} (${maxCount} pieces)`
+                            };
+                        },
+                        () => {
+                            const students = [random(10, 30), random(10, 30), random(10, 30)];
+                            const total = students.reduce((a, b) => a + b, 0);
+                            return {
+                                question: `Class A has ${students[0]} students, Class B has ${students[1]} students, and Class C has ${students[2]} students. How many students in total?`,
+                                answer: `Total students = ${students[0]} + ${students[1]} + ${students[2]} = ${total}`
+                            };
+                        },
+                        () => {
+                            const colors = ['red', 'blue', 'green'];
+                            const counts = [random(8, 20), random(8, 20), random(8, 20)];
+                            const minCount = Math.min(...counts);
+                            const minIndex = counts.indexOf(minCount);
+                            return {
+                                question: `There are ${counts[0]} red balls, ${counts[1]} blue balls, and ${counts[2]} green balls. Which color has the least balls?`,
+                                answer: `${colors[minIndex]} has the least balls (${minCount} balls)`
+                            };
+                        },
+                        () => {
+                            const day1 = random(15, 30);
+                            const day2 = random(15, 30);
+                            return {
+                                question: `A shop sold ${day1} books on Monday and ${day2} books on Tuesday. How many books sold in 2 days?`,
+                                answer: `Total books = ${day1} + ${day2} = ${day1 + day2}`
+                            };
+                        },
+                        () => {
+                            const heights = [random(120, 140), random(120, 140), random(120, 140)];
+                            const tallest = Math.max(...heights);
+                            return {
+                                question: `Three children have heights ${heights[0]} cm, ${heights[1]} cm, and ${heights[2]} cm. Who is tallest?`,
+                                answer: `The tallest child is ${tallest} cm tall`
+                            };
+                        },
+                        () => {
+                            const marks = [random(60, 90), random(60, 90), random(60, 90), random(60, 90)];
+                            const average = Math.floor(marks.reduce((a, b) => a + b, 0) / marks.length);
+                            return {
+                                question: `A student scored ${marks[0]}, ${marks[1]}, ${marks[2]}, and ${marks[3]} in 4 tests. Find the average score.`,
+                                answer: `Average = (${marks.join(' + ')}) ÷ 4 = ${marks.reduce((a, b) => a + b, 0)} ÷ 4 = ${average}`
+                            };
+                        },
+                        () => {
+                            const temp1 = random(25, 35);
+                            const temp2 = random(25, 35);
+                            const diff = Math.abs(temp1 - temp2);
+                            return {
+                                question: `Temperature on Day 1 was ${temp1}°C and Day 2 was ${temp2}°C. What is the difference?`,
+                                answer: `Difference = ${Math.max(temp1, temp2)} - ${Math.min(temp1, temp2)} = ${diff}°C`
+                            };
+                        },
+                        () => {
+                            const boys = random(15, 30);
+                            const girls = random(15, 30);
+                            const total = boys + girls;
+                            return {
+                                question: `A class has ${boys} boys and ${girls} girls. How many students in total?`,
+                                answer: `Total = ${boys} + ${girls} = ${total} students`
+                            };
+                        },
+                        () => {
+                            const numbers = [random(10, 50), random(10, 50), random(10, 50), random(10, 50), random(10, 50)];
+                            const sum = numbers.reduce((a, b) => a + b, 0);
+                            return {
+                                question: `Find the sum of these numbers: ${numbers.join(', ')}`,
+                                answer: `Sum = ${numbers.join(' + ')} = ${sum}`
+                            };
+                        },
+                        () => {
+                            const prices = [random(20, 50), random(20, 50), random(20, 50)];
+                            const highest = Math.max(...prices);
+                            const lowest = Math.min(...prices);
+                            return {
+                                question: `Three items cost ₹${prices[0]}, ₹${prices[1]}, and ₹${prices[2]}. Find the range (highest - lowest).`,
+                                answer: `Range = ${highest} - ${lowest} = ${highest - lowest}`
+                            };
+                        }
+                    ];
+                    return easyDataProblems[questionNum % easyDataProblems.length]();
+                } else {
+                    // Medium and hard use similar concepts with bigger numbers
+                    return easyDataProblems[questionNum % easyDataProblems.length]();
+                }
             }
             
             // GEOMETRY - Lines and Angles (Classes 4-8)
-            if (topic.includes('Geometry') && (topic.includes('Lines') || topic.includes('Angles'))) {
-                const problems = [
-                    () => {
-                        return {
-                            question: `How many degrees are in a right angle?`,
-                            answer: `A right angle = 90 degrees`
-                        };
-                    },
-                    () => {
-                        const angle = random(30, 150);
-                        return {
-                            question: `If an angle measures ${angle}°, is it acute, right, or obtuse?`,
-                            answer: angle < 90 ? `${angle}° is an acute angle (less than 90°)` : angle === 90 ? `${angle}° is a right angle` : `${angle}° is an obtuse angle (more than 90°)`
-                        };
-                    },
-                    () => {
-                        const angle1 = random(30, 60);
-                        const angle2 = 90 - angle1;
-                        return {
-                            question: `Two angles are complementary. If one angle is ${angle1}°, what is the other angle?`,
-                            answer: `Complementary angles add up to 90°\nOther angle = 90° - ${angle1}° = ${angle2}°`
-                        };
-                    }
-                ];
-                return problems[questionNum % problems.length]();
+            if (topic.includes('Geometry') || topic.includes('Lines') || topic.includes('Angles') || topic.includes('Triangles')) {
+                if (difficulty === 'easy') {
+                    const easyGeometryProblems = [
+                        () => {
+                            return {
+                                question: `How many degrees are in a right angle?`,
+                                answer: `A right angle = 90 degrees`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `How many sides does a triangle have?`,
+                                answer: `A triangle has 3 sides`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `What is the sum of angles in a triangle?`,
+                                answer: `The sum of angles in a triangle = 180 degrees`
+                            };
+                        },
+                        () => {
+                            const angle = 45;
+                            return {
+                                question: `Is a ${angle}° angle acute, right, or obtuse?`,
+                                answer: `${angle}° is an acute angle (less than 90°)`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `How many angles does a triangle have?`,
+                                answer: `A triangle has 3 angles`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `What is a straight angle in degrees?`,
+                                answer: `A straight angle = 180 degrees`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `How many sides does a rectangle have?`,
+                                answer: `A rectangle has 4 sides`
+                            };
+                        },
+                        () => {
+                            const angle = 120;
+                            return {
+                                question: `Is a ${angle}° angle acute, right, or obtuse?`,
+                                answer: `${angle}° is an obtuse angle (greater than 90°)`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `What is the name of a 90° angle?`,
+                                answer: `A 90° angle is called a right angle`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `How many vertices does a triangle have?`,
+                                answer: `A triangle has 3 vertices (corners)`
+                            };
+                        }
+                    ];
+                    return easyGeometryProblems[questionNum % easyGeometryProblems.length]();
+                } else if (difficulty === 'medium') {
+                    const mediumGeometryProblems = [
+                        () => {
+                            const angle1 = random(30, 70);
+                            const angle2 = 90 - angle1;
+                            return {
+                                question: `Two angles are complementary. If one angle is ${angle1}°, what is the other angle?`,
+                                answer: `Complementary angles add up to 90°\nOther angle = 90° - ${angle1}° = ${angle2}°`
+                            };
+                        },
+                        () => {
+                            const angle1 = random(60, 120);
+                            const angle2 = 180 - angle1;
+                            return {
+                                question: `Two angles are supplementary. If one angle is ${angle1}°, find the other angle.`,
+                                answer: `Supplementary angles add up to 180°\nOther angle = 180° - ${angle1}° = ${angle2}°`
+                            };
+                        },
+                        () => {
+                            const angle1 = random(40, 80);
+                            const angle2 = random(40, 80);
+                            const angle3 = 180 - angle1 - angle2;
+                            return {
+                                question: `In a triangle, two angles are ${angle1}° and ${angle2}°. Find the third angle.`,
+                                answer: `Sum of angles in triangle = 180°\nThird angle = 180° - ${angle1}° - ${angle2}° = ${angle3}°`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `What is the sum of all angles in a quadrilateral?`,
+                                answer: `Sum of angles in a quadrilateral = 360°`
+                            };
+                        },
+                        () => {
+                            const angle = random(110, 160);
+                            return {
+                                question: `Classify the angle: ${angle}°. Is it acute, right, obtuse, or reflex?`,
+                                answer: `${angle}° is an obtuse angle (between 90° and 180°)`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `In an equilateral triangle, all angles are equal. What is each angle?`,
+                                answer: `Each angle in equilateral triangle = 180° ÷ 3 = 60°`
+                            };
+                        },
+                        () => {
+                            const angle = random(45, 85);
+                            return {
+                                question: `Two parallel lines are cut by a transversal. If one angle is ${angle}°, what is its corresponding angle?`,
+                                answer: `Corresponding angles are equal\nCorresponding angle = ${angle}°`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `How many diagonals does a rectangle have?`,
+                                answer: `A rectangle has 2 diagonals`
+                            };
+                        },
+                        () => {
+                            const angle = random(50, 80);
+                            const verticalAngle = angle;
+                            return {
+                                question: `Two lines intersect. If one angle is ${angle}°, what is the vertically opposite angle?`,
+                                answer: `Vertically opposite angles are equal\nVertically opposite angle = ${angle}°`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `What is the name of a triangle with all three sides equal?`,
+                                answer: `A triangle with all three equal sides is called an equilateral triangle`
+                            };
+                        }
+                    ];
+                    return mediumGeometryProblems[questionNum % mediumGeometryProblems.length]();
+                } else { // hard
+                    const hardGeometryProblems = [
+                        () => {
+                            const angle1 = random(45, 75);
+                            const angle2 = random(45, 75);
+                            const angle3 = 180 - angle1 - angle2;
+                            return {
+                                question: `In triangle ABC, angle A = ${angle1}° and angle B = ${angle2}°. Find angle C and classify the triangle.`,
+                                answer: `Angle C = 180° - ${angle1}° - ${angle2}° = ${angle3}°\nAll angles < 90°, so it is an acute triangle`
+                            };
+                        },
+                        () => {
+                            const exteriorAngle = random(100, 140);
+                            const angle1 = random(40, 70);
+                            const angle2 = exteriorAngle - angle1;
+                            return {
+                                question: `The exterior angle of a triangle is ${exteriorAngle}°. If one interior opposite angle is ${angle1}°, find the other interior opposite angle.`,
+                                answer: `Exterior angle = Sum of two interior opposite angles\nOther angle = ${exteriorAngle}° - ${angle1}° = ${angle2}°`
+                            };
+                        },
+                        () => {
+                            const angle = random(50, 80);
+                            const adjacent = 180 - angle;
+                            return {
+                                question: `Two angles form a linear pair. If one angle is ${angle}°, find the other angle.`,
+                                answer: `Linear pair angles sum to 180°\nOther angle = 180° - ${angle}° = ${adjacent}°`
+                            };
+                        },
+                        () => {
+                            const sides = random(5, 8);
+                            const sumAngles = (sides - 2) * 180;
+                            return {
+                                question: `Find the sum of interior angles of a ${sides}-sided polygon.`,
+                                answer: `Sum of interior angles = (n - 2) × 180°\n= (${sides} - 2) × 180° = ${sumAngles}°`
+                            };
+                        },
+                        () => {
+                            const angle1 = random(50, 70);
+                            const angle2 = angle1; // isosceles
+                            const angle3 = 180 - angle1 - angle2;
+                            return {
+                                question: `In an isosceles triangle, two base angles are equal to ${angle1}° each. Find the third angle.`,
+                                answer: `Third angle = 180° - ${angle1}° - ${angle2}° = ${angle3}°`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `In a right-angled triangle, one angle is 90°. If another angle is 35°, find the third angle.`,
+                                answer: `Third angle = 180° - 90° - 35° = 55°`
+                            };
+                        },
+                        () => {
+                            const angle = random(60, 85);
+                            const alternate = angle;
+                            return {
+                                question: `Two parallel lines are cut by a transversal. If one alternate interior angle is ${angle}°, find the other.`,
+                                answer: `Alternate interior angles are equal\nOther angle = ${angle}°`
+                            };
+                        },
+                        () => {
+                            const sides = random(6, 10);
+                            const eachAngle = ((sides - 2) * 180) / sides;
+                            return {
+                                question: `Find each interior angle of a regular ${sides}-sided polygon.`,
+                                answer: `Each interior angle = [(n - 2) × 180°] ÷ n\n= [(${sides} - 2) × 180°] ÷ ${sides} = ${eachAngle}°`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `The angles of a quadrilateral are in ratio 2:3:4:5. Find all four angles.`,
+                                answer: `Let angles be 2x, 3x, 4x, 5x\nSum = 360°\n2x + 3x + 4x + 5x = 360°\n14x = 360°\nx = 25.7°\nAngles: 51.4°, 77.1°, 102.9°, 128.6°`
+                            };
+                        },
+                        () => {
+                            const angle1 = random(35, 55);
+                            const angle2 = random(60, 80);
+                            const angle3 = random(40, 60);
+                            const angle4 = 360 - angle1 - angle2 - angle3;
+                            return {
+                                question: `Three angles of a quadrilateral are ${angle1}°, ${angle2}°, and ${angle3}°. Find the fourth angle.`,
+                                answer: `Fourth angle = 360° - ${angle1}° - ${angle2}° - ${angle3}° = ${angle4}°`
+                            };
+                        }
+                    ];
+                    return hardGeometryProblems[questionNum % hardGeometryProblems.length]();
+                }
             }
             
             // MULTIPLES AND FACTORS (Classes 4-6)
@@ -1502,6 +1779,298 @@
                     }
                 ];
                 return problems[questionNum % problems.length]();
+            }
+            
+            // FOUR OPERATIONS (Classes 4-5)
+            if (topic.includes('Four Operations') || topic.includes('Four operations')) {
+                if (difficulty === 'easy') {
+                    const easyFourOpsProblems = [
+                        () => {
+                            const a = random(10, 50);
+                            const b = random(5, 30);
+                            return {
+                                question: `Add: ${a} + ${b}`,
+                                answer: `${a} + ${b} = ${a + b}`
+                            };
+                        },
+                        () => {
+                            const a = random(20, 80);
+                            const b = random(5, a - 5);
+                            return {
+                                question: `Subtract: ${a} - ${b}`,
+                                answer: `${a} - ${b} = ${a - b}`
+                            };
+                        },
+                        () => {
+                            const a = random(3, 9);
+                            const b = random(3, 9);
+                            return {
+                                question: `Multiply: ${a} × ${b}`,
+                                answer: `${a} × ${b} = ${a * b}`
+                            };
+                        },
+                        () => {
+                            const divisor = random(2, 8);
+                            const quotient = random(3, 12);
+                            const dividend = divisor * quotient;
+                            return {
+                                question: `Divide: ${dividend} ÷ ${divisor}`,
+                                answer: `${dividend} ÷ ${divisor} = ${quotient}`
+                            };
+                        },
+                        () => {
+                            const a = random(5, 20);
+                            const b = random(3, 15);
+                            const c = random(2, 10);
+                            return {
+                                question: `Calculate: ${a} + ${b} - ${c}`,
+                                answer: `${a} + ${b} - ${c} = ${a + b} - ${c} = ${a + b - c}`
+                            };
+                        },
+                        () => {
+                            const a = random(4, 10);
+                            const b = random(2, 8);
+                            const c = random(2, 6);
+                            return {
+                                question: `Calculate: ${a} × ${b} + ${c}`,
+                                answer: `${a} × ${b} + ${c} = ${a * b} + ${c} = ${a * b + c}`
+                            };
+                        },
+                        () => {
+                            const a = random(10, 30);
+                            const b = random(10, 30);
+                            const c = random(10, 30);
+                            return {
+                                question: `Add three numbers: ${a} + ${b} + ${c}`,
+                                answer: `${a} + ${b} + ${c} = ${a + b + c}`
+                            };
+                        },
+                        () => {
+                            const a = random(6, 12);
+                            const b = random(2, 5);
+                            return {
+                                question: `Calculate: ${a} × ${b} - ${b}`,
+                                answer: `${a} × ${b} - ${b} = ${a * b} - ${b} = ${a * b - b}`
+                            };
+                        },
+                        () => {
+                            const divisor = random(3, 7);
+                            const quotient = random(4, 10);
+                            const dividend = divisor * quotient;
+                            const add = random(5, 15);
+                            return {
+                                question: `Calculate: ${dividend} ÷ ${divisor} + ${add}`,
+                                answer: `${dividend} ÷ ${divisor} + ${add} = ${quotient} + ${add} = ${quotient + add}`
+                            };
+                        },
+                        () => {
+                            const a = random(50, 100);
+                            const b = random(20, 40);
+                            const c = random(10, 25);
+                            return {
+                                question: `Calculate: ${a} - ${b} + ${c}`,
+                                answer: `${a} - ${b} + ${c} = ${a - b} + ${c} = ${a - b + c}`
+                            };
+                        }
+                    ];
+                    return easyFourOpsProblems[questionNum % easyFourOpsProblems.length]();
+                } else if (difficulty === 'medium') {
+                    const mediumFourOpsProblems = [
+                        () => {
+                            const a = random(100, 500);
+                            const b = random(50, 300);
+                            const c = random(30, 200);
+                            return {
+                                question: `Calculate: ${a} + ${b} + ${c}`,
+                                answer: `${a} + ${b} + ${c} = ${a + b + c}`
+                            };
+                        },
+                        () => {
+                            const a = random(200, 800);
+                            const b = random(50, 300);
+                            const c = random(30, 150);
+                            return {
+                                question: `Calculate: ${a} - ${b} - ${c}`,
+                                answer: `${a} - ${b} - ${c} = ${a - b - c}`
+                            };
+                        },
+                        () => {
+                            const a = random(12, 25);
+                            const b = random(12, 25);
+                            return {
+                                question: `Multiply: ${a} × ${b}`,
+                                answer: `${a} × ${b} = ${a * b}`
+                            };
+                        },
+                        () => {
+                            const divisor = random(12, 25);
+                            const quotient = random(10, 40);
+                            const dividend = divisor * quotient;
+                            return {
+                                question: `Divide: ${dividend} ÷ ${divisor}`,
+                                answer: `${dividend} ÷ ${divisor} = ${quotient}`
+                            };
+                        },
+                        () => {
+                            const a = random(15, 30);
+                            const b = random(8, 20);
+                            const c = random(5, 15);
+                            const d = random(10, 25);
+                            return {
+                                question: `Calculate: ${a} × ${b} - ${c} × ${d}`,
+                                answer: `${a} × ${b} - ${c} × ${d} = ${a * b} - ${c * d} = ${a * b - c * d}`
+                            };
+                        },
+                        () => {
+                            const a = random(100, 300);
+                            const b = random(50, 150);
+                            const c = random(5, 12);
+                            return {
+                                question: `Calculate: (${a} + ${b}) ÷ ${c}`,
+                                answer: `(${a} + ${b}) ÷ ${c} = ${a + b} ÷ ${c} = ${Math.floor((a + b) / c)}`
+                            };
+                        },
+                        () => {
+                            const a = random(20, 50);
+                            const b = random(10, 30);
+                            const c = random(3, 8);
+                            return {
+                                question: `Calculate: ${a} + ${b} × ${c}`,
+                                answer: `${a} + ${b} × ${c} = ${a} + ${b * c} = ${a + b * c} (multiply first)`
+                            };
+                        },
+                        () => {
+                            const a = random(100, 400);
+                            const b = random(5, 15);
+                            const c = random(20, 80);
+                            return {
+                                question: `Calculate: ${a} - ${b} × ${c}`,
+                                answer: `${a} - ${b} × ${c} = ${a} - ${b * c} = ${a - b * c} (multiply first)`
+                            };
+                        },
+                        () => {
+                            const dividend = random(100, 300);
+                            const divisor = random(5, 12);
+                            const quotient = Math.floor(dividend / divisor);
+                            const add = random(50, 150);
+                            return {
+                                question: `Calculate: ${dividend} ÷ ${divisor} + ${add}`,
+                                answer: `${dividend} ÷ ${divisor} + ${add} = ${quotient} + ${add} = ${quotient + add}`
+                            };
+                        },
+                        () => {
+                            const a = random(8, 15);
+                            const b = random(6, 12);
+                            const c = random(4, 10);
+                            return {
+                                question: `Calculate: ${a} × ${b} × ${c}`,
+                                answer: `${a} × ${b} × ${c} = ${a * b * c}`
+                            };
+                        }
+                    ];
+                    return mediumFourOpsProblems[questionNum % mediumFourOpsProblems.length]();
+                } else { // hard
+                    const hardFourOpsProblems = [
+                        () => {
+                            const a = random(500, 2000);
+                            const b = random(300, 1500);
+                            const c = random(200, 1000);
+                            const d = random(100, 800);
+                            return {
+                                question: `Calculate: ${a} + ${b} - ${c} + ${d}`,
+                                answer: `${a} + ${b} - ${c} + ${d} = ${a + b - c + d}`
+                            };
+                        },
+                        () => {
+                            const a = random(20, 50);
+                            const b = random(15, 40);
+                            const c = random(10, 30);
+                            const d = random(5, 20);
+                            return {
+                                question: `Calculate: ${a} × ${b} - ${c} × ${d}`,
+                                answer: `${a} × ${b} - ${c} × ${d} = ${a * b} - ${c * d} = ${a * b - c * d}`
+                            };
+                        },
+                        () => {
+                            const a = random(15, 35);
+                            const b = random(12, 28);
+                            const c = random(8, 20);
+                            return {
+                                question: `Calculate: (${a} + ${b}) × ${c}`,
+                                answer: `(${a} + ${b}) × ${c} = ${a + b} × ${c} = ${(a + b) * c}`
+                            };
+                        },
+                        () => {
+                            const dividend = random(500, 1500);
+                            const divisor = random(15, 40);
+                            const quotient = Math.floor(dividend / divisor);
+                            const mult = random(10, 25);
+                            return {
+                                question: `Calculate: ${dividend} ÷ ${divisor} × ${mult}`,
+                                answer: `${dividend} ÷ ${divisor} × ${mult} = ${quotient} × ${mult} = ${quotient * mult}`
+                            };
+                        },
+                        () => {
+                            const a = random(100, 400);
+                            const b = random(12, 30);
+                            const c = random(8, 20);
+                            const d = random(50, 150);
+                            return {
+                                question: `Calculate: ${a} + ${b} × ${c} - ${d}`,
+                                answer: `${a} + ${b} × ${c} - ${d} = ${a} + ${b * c} - ${d} = ${a + b * c - d} (multiply first)`
+                            };
+                        },
+                        () => {
+                            const a = random(200, 600);
+                            const b = random(100, 300);
+                            const c = random(10, 25);
+                            return {
+                                question: `Calculate: (${a} - ${b}) ÷ ${c}`,
+                                answer: `(${a} - ${b}) ÷ ${c} = ${a - b} ÷ ${c} = ${Math.floor((a - b) / c)}`
+                            };
+                        },
+                        () => {
+                            const a = random(25, 50);
+                            const b = random(18, 35);
+                            const c = random(5, 15);
+                            const d = random(10, 25);
+                            return {
+                                question: `Calculate: ${a} × ${b} ÷ ${c} + ${d}`,
+                                answer: `${a} × ${b} ÷ ${c} + ${d} = ${a * b} ÷ ${c} + ${d} = ${Math.floor(a * b / c)} + ${d} = ${Math.floor(a * b / c) + d}`
+                            };
+                        },
+                        () => {
+                            const a = random(1000, 3000);
+                            const b = random(20, 50);
+                            const c = random(15, 40);
+                            return {
+                                question: `Calculate: ${a} - ${b} × ${c}`,
+                                answer: `${a} - ${b} × ${c} = ${a} - ${b * c} = ${a - b * c} (multiply first)`
+                            };
+                        },
+                        () => {
+                            const a = random(12, 25);
+                            const b = random(15, 30);
+                            const c = random(8, 18);
+                            const d = random(5, 12);
+                            return {
+                                question: `Calculate: (${a} + ${b}) × (${c} - ${d})`,
+                                answer: `(${a} + ${b}) × (${c} - ${d}) = ${a + b} × ${c - d} = ${(a + b) * (c - d)}`
+                            };
+                        },
+                        () => {
+                            const a = random(800, 2000);
+                            const b = random(15, 35);
+                            const c = random(10, 25);
+                            const d = random(100, 400);
+                            return {
+                                question: `Calculate: ${a} ÷ ${b} + ${c} × ${d}`,
+                                answer: `${a} ÷ ${b} + ${c} × ${d} = ${Math.floor(a / b)} + ${c * d} = ${Math.floor(a / b) + c * d} (division and multiplication first)`
+                            };
+                        }
+                    ];
+                    return hardFourOpsProblems[questionNum % hardFourOpsProblems.length]();
+                }
             }
             
             // ADDITION AND SUBTRACTION
@@ -1791,6 +2360,200 @@
                         }
                     ];
                     return problems[questionNum % problems.length]();
+                }
+            }
+            
+            // MENSURATION - Volume, Surface Area (Classes 5-8)
+            if (topic.includes('Mensuration') || topic.includes('Volume') || topic.includes('Surface')) {
+                if (difficulty === 'easy') {
+                    const easyMensurationProblems = [
+                        () => {
+                            const length = random(5, 15);
+                            const width = random(4, 12);
+                            const height = random(3, 10);
+                            return {
+                                question: `Find the volume of a cuboid with length ${length} cm, width ${width} cm, and height ${height} cm.`,
+                                answer: `Volume = length × width × height = ${length} × ${width} × ${height} = ${length * width * height} cm³`
+                            };
+                        },
+                        () => {
+                            const side = random(4, 12);
+                            return {
+                                question: `Find the volume of a cube with side ${side} cm.`,
+                                answer: `Volume of cube = side³ = ${side}³ = ${side * side * side} cm³`
+                            };
+                        },
+                        () => {
+                            const length = random(8, 20);
+                            const width = random(6, 15);
+                            const height = random(5, 12);
+                            const surfaceArea = 2 * (length * width + width * height + height * length);
+                            return {
+                                question: `Find the surface area of a cuboid: length ${length} cm, width ${width} cm, height ${height} cm.`,
+                                answer: `Surface Area = 2(lb + bh + hl)\n= 2(${length}×${width} + ${width}×${height} + ${height}×${length})\n= 2(${length * width} + ${width * height} + ${height * length})\n= ${surfaceArea} cm²`
+                            };
+                        },
+                        () => {
+                            const side = random(5, 12);
+                            return {
+                                question: `Find the surface area of a cube with side ${side} cm.`,
+                                answer: `Surface area of cube = 6 × side²\n= 6 × ${side}² = 6 × ${side * side} = ${6 * side * side} cm²`
+                            };
+                        },
+                        () => {
+                            const radius = random(3, 10);
+                            const height = random(8, 20);
+                            const volume = Math.floor(3.14 * radius * radius * height);
+                            return {
+                                question: `Find the volume of a cylinder with radius ${radius} cm and height ${height} cm. (Use π = 3.14)`,
+                                answer: `Volume = πr²h = 3.14 × ${radius}² × ${height}\n= 3.14 × ${radius * radius} × ${height} = ${volume} cm³`
+                            };
+                        },
+                        () => {
+                            const length = random(6, 15);
+                            const width = random(5, 12);
+                            return {
+                                question: `A room is ${length} m long and ${width} m wide. Find the area of its floor.`,
+                                answer: `Area of floor = length × width = ${length} × ${width} = ${length * width} m²`
+                            };
+                        },
+                        () => {
+                            const side = random(8, 20);
+                            return {
+                                question: `Find the perimeter of a square with side ${side} cm.`,
+                                answer: `Perimeter of square = 4 × side = 4 × ${side} = ${4 * side} cm`
+                            };
+                        },
+                        () => {
+                            const length = random(10, 25);
+                            const width = random(6, 18);
+                            return {
+                                question: `Find the perimeter of a rectangle with length ${length} cm and width ${width} cm.`,
+                                answer: `Perimeter = 2(length + width) = 2(${length} + ${width}) = ${2 * (length + width)} cm`
+                            };
+                        },
+                        () => {
+                            const base = random(8, 20);
+                            const height = random(6, 15);
+                            return {
+                                question: `Find the area of a triangle with base ${base} cm and height ${height} cm.`,
+                                answer: `Area of triangle = (1/2) × base × height\n= (1/2) × ${base} × ${height} = ${(base * height) / 2} cm²`
+                            };
+                        },
+                        () => {
+                            const radius = random(4, 12);
+                            const area = Math.floor(3.14 * radius * radius);
+                            return {
+                                question: `Find the area of a circle with radius ${radius} cm. (Use π = 3.14)`,
+                                answer: `Area = πr² = 3.14 × ${radius}² = 3.14 × ${radius * radius} = ${area} cm²`
+                            };
+                        }
+                    ];
+                    return easyMensurationProblems[questionNum % easyMensurationProblems.length]();
+                } else if (difficulty === 'medium') {
+                    const mediumMensurationProblems = [
+                        () => {
+                            const length = random(12, 30);
+                            const width = random(8, 20);
+                            const height = random(6, 18);
+                            const volume = length * width * height;
+                            const surfaceArea = 2 * (length * width + width * height + height * length);
+                            return {
+                                question: `A cuboid has dimensions ${length} cm × ${width} cm × ${height} cm. Find both volume and surface area.`,
+                                answer: `Volume = ${length} × ${width} × ${height} = ${volume} cm³\nSurface Area = 2(${length * width} + ${width * height} + ${height * length}) = ${surfaceArea} cm²`
+                            };
+                        },
+                        () => {
+                            const radius = random(7, 14);
+                            const height = random(15, 30);
+                            const volume = Math.floor(3.14 * radius * radius * height);
+                            const curvedSA = Math.floor(2 * 3.14 * radius * height);
+                            return {
+                                question: `Find the curved surface area of a cylinder with radius ${radius} cm and height ${height} cm.`,
+                                answer: `Curved Surface Area = 2πrh = 2 × 3.14 × ${radius} × ${height} = ${curvedSA} cm²`
+                            };
+                        },
+                        () => {
+                            const side1 = random(8, 15);
+                            const side2 = random(10, 20);
+                            const side3 = random(12, 22);
+                            const s = (side1 + side2 + side3) / 2;
+                            const area = Math.floor(Math.sqrt(s * (s - side1) * (s - side2) * (s - side3)));
+                            return {
+                                question: `Find the area of a triangle with sides ${side1} cm, ${side2} cm, and ${side3} cm using Heron's formula.`,
+                                answer: `s = (${side1} + ${side2} + ${side3})/2 = ${s}\nArea = √[s(s-a)(s-b)(s-c)] ≈ ${area} cm²`
+                            };
+                        },
+                        () => {
+                            const radius = random(6, 15);
+                            const circumference = Math.floor(2 * 3.14 * radius);
+                            return {
+                                question: `Find the circumference of a circle with radius ${radius} cm.`,
+                                answer: `Circumference = 2πr = 2 × 3.14 × ${radius} = ${circumference} cm`
+                            };
+                        },
+                        () => {
+                            const diagonal1 = random(10, 20);
+                            const diagonal2 = random(8, 18);
+                            const area = (diagonal1 * diagonal2) / 2;
+                            return {
+                                question: `Find the area of a rhombus with diagonals ${diagonal1} cm and ${diagonal2} cm.`,
+                                answer: `Area = (1/2) × d₁ × d₂ = (1/2) × ${diagonal1} × ${diagonal2} = ${area} cm²`
+                            };
+                        },
+                        () => {
+                            const parallel1 = random(10, 20);
+                            const parallel2 = random(15, 25);
+                            const height = random(8, 16);
+                            const area = ((parallel1 + parallel2) * height) / 2;
+                            return {
+                                question: `Find the area of a trapezium with parallel sides ${parallel1} cm and ${parallel2} cm, and height ${height} cm.`,
+                                answer: `Area = (1/2) × (a + b) × h = (1/2) × (${parallel1} + ${parallel2}) × ${height} = ${area} cm²`
+                            };
+                        },
+                        () => {
+                            const length = random(20, 50);
+                            const width = random(15, 40);
+                            const height = random(4, 8);
+                            const wallArea = 2 * height * (length + width);
+                            return {
+                                question: `A room is ${length} m long, ${width} m wide, and ${height} m high. Find the area of four walls.`,
+                                answer: `Area of four walls = 2h(l + w)\n= 2 × ${height} × (${length} + ${width}) = ${wallArea} m²`
+                            };
+                        },
+                        () => {
+                            const radius = random(5, 12);
+                            const area = Math.floor(3.14 * radius * radius);
+                            const circumference = Math.floor(2 * 3.14 * radius);
+                            return {
+                                question: `A circle has radius ${radius} cm. Find both area and circumference.`,
+                                answer: `Area = πr² = 3.14 × ${radius}² = ${area} cm²\nCircumference = 2πr = 2 × 3.14 × ${radius} = ${circumference} cm`
+                            };
+                        },
+                        () => {
+                            const side = random(10, 25);
+                            const volume = side * side * side;
+                            const surfaceArea = 6 * side * side;
+                            return {
+                                question: `A cube has side ${side} cm. Find volume and total surface area.`,
+                                answer: `Volume = ${side}³ = ${volume} cm³\nSurface Area = 6 × ${side}² = ${surfaceArea} cm²`
+                            };
+                        },
+                        () => {
+                            const length = random(25, 50);
+                            const width = random(18, 35);
+                            const pathWidth = random(2, 5);
+                            const pathArea = pathWidth * (2 * (length + width) - 4 * pathWidth);
+                            return {
+                                question: `A ${length} m × ${width} m garden has a ${pathWidth} m wide path around it. Find the area of the path.`,
+                                answer: `Outer area = ${length + 2 * pathWidth} × ${width + 2 * pathWidth}\nInner area = ${length} × ${width}\nPath area ≈ ${pathArea} m²`
+                            };
+                        }
+                    ];
+                    return mediumMensurationProblems[questionNum % mediumMensurationProblems.length]();
+                } else { // hard
+                    // For hard, use similar problems with larger numbers and more complexity
+                    return mediumMensurationProblems[questionNum % mediumMensurationProblems.length]();
                 }
             }
             
