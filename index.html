@@ -2557,21 +2557,710 @@
                 }
             }
             
-            // PERIMETER AND AREA
+            // PERIMETER AND AREA (All Classes)
             if (topic.includes('Perimeter') || topic.includes('Area')) {
-                const length = random(5, 20);
-                const width = random(3, 15);
-                if (questionNum % 2 === 0) {
-                    return {
-                        question: `A rectangle has length ${length} cm and width ${width} cm. Find its perimeter.`,
-                        answer: `Perimeter = 2(l + w) = 2(${length} + ${width}) = 2(${length + width}) = ${2 * (length + width)} cm`
-                    };
+                if (difficulty === 'easy') {
+                    const easyAreaProblems = [
+                        () => {
+                            const length = random(5, 15);
+                            const width = random(3, 10);
+                            return {
+                                question: `A rectangle has length ${length} cm and width ${width} cm. Find its perimeter.`,
+                                answer: `Perimeter = 2(l + w) = 2(${length} + ${width}) = 2(${length + width}) = ${2 * (length + width)} cm`
+                            };
+                        },
+                        () => {
+                            const length = random(5, 15);
+                            const width = random(3, 10);
+                            return {
+                                question: `A rectangle has length ${length} cm and width ${width} cm. Find its area.`,
+                                answer: `Area = length × width = ${length} × ${width} = ${length * width} cm²`
+                            };
+                        },
+                        () => {
+                            const side = random(5, 15);
+                            return {
+                                question: `Find the perimeter of a square with side ${side} cm.`,
+                                answer: `Perimeter = 4 × side = 4 × ${side} = ${4 * side} cm`
+                            };
+                        },
+                        () => {
+                            const side = random(4, 12);
+                            return {
+                                question: `Find the area of a square with side ${side} cm.`,
+                                answer: `Area = side × side = ${side} × ${side} = ${side * side} cm²`
+                            };
+                        },
+                        () => {
+                            const base = random(6, 15);
+                            const height = random(4, 12);
+                            return {
+                                question: `Find the area of a triangle with base ${base} cm and height ${height} cm.`,
+                                answer: `Area = (1/2) × base × height = (1/2) × ${base} × ${height} = ${(base * height) / 2} cm²`
+                            };
+                        },
+                        () => {
+                            const radius = random(4, 10);
+                            const area = Math.floor(3.14 * radius * radius);
+                            return {
+                                question: `Find the area of a circle with radius ${radius} cm. (Use π = 3.14)`,
+                                answer: `Area = πr² = 3.14 × ${radius}² = 3.14 × ${radius * radius} = ${area} cm²`
+                            };
+                        },
+                        () => {
+                            const radius = random(5, 12);
+                            const circumference = Math.floor(2 * 3.14 * radius);
+                            return {
+                                question: `Find the circumference of a circle with radius ${radius} cm. (Use π = 3.14)`,
+                                answer: `Circumference = 2πr = 2 × 3.14 × ${radius} = ${circumference} cm`
+                            };
+                        },
+                        () => {
+                            const side1 = random(5, 10);
+                            const side2 = random(6, 12);
+                            const side3 = random(7, 13);
+                            return {
+                                question: `Find the perimeter of a triangle with sides ${side1} cm, ${side2} cm, and ${side3} cm.`,
+                                answer: `Perimeter = ${side1} + ${side2} + ${side3} = ${side1 + side2 + side3} cm`
+                            };
+                        },
+                        () => {
+                            const base = random(8, 16);
+                            const height = random(5, 12);
+                            return {
+                                question: `Find the area of a parallelogram with base ${base} cm and height ${height} cm.`,
+                                answer: `Area = base × height = ${base} × ${height} = ${base * height} cm²`
+                            };
+                        },
+                        () => {
+                            const length = random(10, 20);
+                            const width = random(6, 15);
+                            const perimeter = 2 * (length + width);
+                            const area = length * width;
+                            return {
+                                question: `A rectangle is ${length} m long and ${width} m wide. Find both perimeter and area.`,
+                                answer: `Perimeter = 2(${length} + ${width}) = ${perimeter} m\nArea = ${length} × ${width} = ${area} m²`
+                            };
+                        }
+                    ];
+                    return easyAreaProblems[questionNum % easyAreaProblems.length]();
+                } else if (difficulty === 'medium') {
+                    const mediumAreaProblems = [
+                        () => {
+                            const side = random(8, 20);
+                            const perimeter = 4 * side;
+                            const area = side * side;
+                            return {
+                                question: `A square has side ${side} cm. Find both its perimeter and area.`,
+                                answer: `Perimeter = 4 × ${side} = ${perimeter} cm\nArea = ${side}² = ${area} cm²`
+                            };
+                        },
+                        () => {
+                            const side1 = random(8, 15);
+                            const side2 = random(10, 18);
+                            const side3 = random(12, 20);
+                            const s = (side1 + side2 + side3) / 2;
+                            const area = Math.floor(Math.sqrt(s * (s - side1) * (s - side2) * (s - side3)));
+                            return {
+                                question: `Find the area of a triangle with sides ${side1} cm, ${side2} cm, and ${side3} cm using Heron's formula.`,
+                                answer: `s = (${side1} + ${side2} + ${side3})/2 = ${s} cm\nArea = √[s(s-a)(s-b)(s-c)] ≈ ${area} cm²`
+                            };
+                        },
+                        () => {
+                            const diagonal1 = random(10, 20);
+                            const diagonal2 = random(8, 18);
+                            const area = (diagonal1 * diagonal2) / 2;
+                            return {
+                                question: `Find the area of a rhombus with diagonals ${diagonal1} cm and ${diagonal2} cm.`,
+                                answer: `Area = (1/2) × d₁ × d₂ = (1/2) × ${diagonal1} × ${diagonal2} = ${area} cm²`
+                            };
+                        },
+                        () => {
+                            const parallel1 = random(10, 20);
+                            const parallel2 = random(15, 25);
+                            const height = random(8, 16);
+                            const area = ((parallel1 + parallel2) * height) / 2;
+                            return {
+                                question: `Find the area of a trapezium with parallel sides ${parallel1} cm and ${parallel2} cm, and height ${height} cm.`,
+                                answer: `Area = (1/2) × (a + b) × h = (1/2) × (${parallel1} + ${parallel2}) × ${height} = ${area} cm²`
+                            };
+                        },
+                        () => {
+                            const radius = random(6, 14);
+                            const area = Math.floor(3.14 * radius * radius);
+                            const circumference = Math.floor(2 * 3.14 * radius);
+                            return {
+                                question: `A circle has radius ${radius} cm. Find both area and circumference.`,
+                                answer: `Area = πr² = 3.14 × ${radius}² = ${area} cm²\nCircumference = 2πr = 2 × 3.14 × ${radius} = ${circumference} cm`
+                            };
+                        },
+                        () => {
+                            const length = random(20, 40);
+                            const width = random(15, 30);
+                            const height = random(3, 6);
+                            const wallArea = 2 * height * (length + width);
+                            return {
+                                question: `A room is ${length} m long, ${width} m wide, and ${height} m high. Find the area of its four walls.`,
+                                answer: `Area of four walls = 2h(l + w) = 2 × ${height} × (${length} + ${width}) = ${wallArea} m²`
+                            };
+                        },
+                        () => {
+                            const diameter = random(10, 20);
+                            const radius = diameter / 2;
+                            const area = Math.floor(3.14 * radius * radius);
+                            return {
+                                question: `Find the area of a circle with diameter ${diameter} cm.`,
+                                answer: `Radius = ${diameter}/2 = ${radius} cm\nArea = πr² = 3.14 × ${radius}² = ${area} cm²`
+                            };
+                        },
+                        () => {
+                            const side = random(12, 25);
+                            const pathWidth = random(2, 5);
+                            const outerSide = side + 2 * pathWidth;
+                            const pathArea = outerSide * outerSide - side * side;
+                            return {
+                                question: `A square garden of side ${side} m has a path ${pathWidth} m wide around it. Find the area of the path.`,
+                                answer: `Outer square side = ${side} + 2(${pathWidth}) = ${outerSide} m\nPath area = ${outerSide}² - ${side}² = ${outerSide * outerSide} - ${side * side} = ${pathArea} m²`
+                            };
+                        },
+                        () => {
+                            const length = random(25, 50);
+                            const width = random(18, 35);
+                            const cost = random(10, 30);
+                            const area = length * width;
+                            const totalCost = area * cost;
+                            return {
+                                question: `Find the cost of tiling a floor ${length} m × ${width} m at ₹${cost} per m².`,
+                                answer: `Area = ${length} × ${width} = ${area} m²\nCost = ${area} × ₹${cost} = ₹${totalCost}`
+                            };
+                        },
+                        () => {
+                            const base1 = random(12, 20);
+                            const base2 = random(8, 15);
+                            const height = random(10, 18);
+                            const area1 = (base1 * height) / 2;
+                            const area2 = (base2 * height) / 2;
+                            const ratio = area1 / area2;
+                            return {
+                                question: `Two triangles have the same height ${height} cm but bases ${base1} cm and ${base2} cm. Find the ratio of their areas.`,
+                                answer: `Area₁ = (1/2) × ${base1} × ${height} = ${area1} cm²\nArea₂ = (1/2) × ${base2} × ${height} = ${area2} cm²\nRatio = ${base1}:${base2}`
+                            };
+                        }
+                    ];
+                    return mediumAreaProblems[questionNum % mediumAreaProblems.length]();
+                } else { // hard
+                    const hardAreaProblems = [
+                        () => {
+                            const length = random(30, 60);
+                            const width = random(20, 45);
+                            const carpetWidth = random(2, 4);
+                            const area = length * width;
+                            const carpetLength = area / carpetWidth;
+                            return {
+                                question: `A hall ${length} m × ${width} m is to be carpeted with carpet ${carpetWidth} m wide. What length of carpet is needed?`,
+                                answer: `Area of hall = ${length} × ${width} = ${area} m²\nCarpet length = ${area} ÷ ${carpetWidth} = ${carpetLength} m`
+                            };
+                        },
+                        () => {
+                            const outerLength = random(30, 50);
+                            const outerWidth = random(20, 40);
+                            const pathWidth = random(2, 5);
+                            const innerLength = outerLength - 2 * pathWidth;
+                            const innerWidth = outerWidth - 2 * pathWidth;
+                            const pathArea = outerLength * outerWidth - innerLength * innerWidth;
+                            return {
+                                question: `A rectangular garden ${outerLength} m × ${outerWidth} m has a path ${pathWidth} m wide running inside along the boundary. Find the area of the path.`,
+                                answer: `Inner dimensions = ${innerLength} m × ${innerWidth} m\nPath area = ${outerLength * outerWidth} - ${innerLength * innerWidth} = ${pathArea} m²`
+                            };
+                        },
+                        () => {
+                            const radius = random(10, 20);
+                            const angle = random(60, 120);
+                            const sectorArea = Math.floor((angle / 360) * 3.14 * radius * radius);
+                            return {
+                                question: `Find the area of a sector of a circle with radius ${radius} cm and central angle ${angle}°.`,
+                                answer: `Area of sector = (θ/360) × πr² = (${angle}/360) × 3.14 × ${radius}² ≈ ${sectorArea} cm²`
+                            };
+                        },
+                        () => {
+                            const side1 = random(15, 25);
+                            const side2 = random(18, 28);
+                            const side3 = random(20, 30);
+                            const s = (side1 + side2 + side3) / 2;
+                            const area = Math.floor(Math.sqrt(s * (s - side1) * (s - side2) * (s - side3)));
+                            const perimeter = side1 + side2 + side3;
+                            return {
+                                question: `Find both perimeter and area of a triangle with sides ${side1} cm, ${side2} cm, and ${side3} cm.`,
+                                answer: `Perimeter = ${side1} + ${side2} + ${side3} = ${perimeter} cm\ns = ${perimeter}/2 = ${s}\nArea = √[${s}(${s}-${side1})(${s}-${side2})(${s}-${side3})] ≈ ${area} cm²`
+                            };
+                        },
+                        () => {
+                            const outerRadius = random(12, 20);
+                            const innerRadius = random(6, outerRadius - 4);
+                            const ringArea = Math.floor(3.14 * (outerRadius * outerRadius - innerRadius * innerRadius));
+                            return {
+                                question: `Find the area of a ring (annulus) with outer radius ${outerRadius} cm and inner radius ${innerRadius} cm.`,
+                                answer: `Area = π(R² - r²) = 3.14(${outerRadius}² - ${innerRadius}²)\n= 3.14(${outerRadius * outerRadius} - ${innerRadius * innerRadius}) = ${ringArea} cm²`
+                            };
+                        },
+                        () => {
+                            const radius = random(14, 28);
+                            const side = radius;
+                            const circleArea = Math.floor(3.14 * radius * radius);
+                            const squareArea = side * side;
+                            const shadedArea = squareArea - circleArea;
+                            return {
+                                question: `A circle of radius ${radius} cm is inscribed in a square. Find the area of the shaded region outside the circle.`,
+                                answer: `Square side = 2r = ${2 * radius} cm\nSquare area = ${2 * radius}² = ${squareArea} cm²\nCircle area = πr² ≈ ${circleArea} cm²\nShaded area = ${squareArea} - ${circleArea} = ${shadedArea} cm²`
+                            };
+                        },
+                        () => {
+                            const length = random(40, 80);
+                            const width = random(30, 60);
+                            const tileSide = random(20, 40);
+                            const floorArea = length * width;
+                            const tileArea = tileSide * tileSide;
+                            const tiles = Math.ceil(floorArea / tileArea);
+                            return {
+                                question: `How many square tiles of side ${tileSide} cm are needed to cover a floor ${length} cm × ${width} cm?`,
+                                answer: `Floor area = ${length} × ${width} = ${floorArea} cm²\nTile area = ${tileSide}² = ${tileArea} cm²\nTiles needed = ${floorArea} ÷ ${tileArea} ≈ ${tiles} tiles`
+                            };
+                        },
+                        () => {
+                            const base = random(20, 40);
+                            const height = random(15, 30);
+                            const triangleArea = (base * height) / 2;
+                            const newHeight = random(20, 35);
+                            const newBase = (2 * triangleArea) / newHeight;
+                            return {
+                                question: `A triangle has base ${base} cm and height ${height} cm. If the height is changed to ${newHeight} cm, what should be the base to keep the same area?`,
+                                answer: `Original area = (1/2) × ${base} × ${height} = ${triangleArea} cm²\nNew base = (2 × ${triangleArea}) ÷ ${newHeight} = ${newBase} cm`
+                            };
+                        },
+                        () => {
+                            const parallel1 = random(20, 35);
+                            const parallel2 = random(25, 40);
+                            const height = random(15, 25);
+                            const area = ((parallel1 + parallel2) * height) / 2;
+                            const perimeter = parallel1 + parallel2 + 2 * Math.sqrt(height * height + Math.pow((parallel2 - parallel1) / 2, 2));
+                            return {
+                                question: `Find the area of a trapezium with parallel sides ${parallel1} cm and ${parallel2} cm, and height ${height} cm.`,
+                                answer: `Area = (1/2) × (${parallel1} + ${parallel2}) × ${height}\n= (1/2) × ${parallel1 + parallel2} × ${height} = ${area} cm²`
+                            };
+                        },
+                        () => {
+                            const side = random(20, 40);
+                            const diagonal = Math.floor(side * 1.414);
+                            return {
+                                question: `Find the diagonal of a square with side ${side} cm. (√2 ≈ 1.414)`,
+                                answer: `Diagonal = side × √2 = ${side} × 1.414 ≈ ${diagonal} cm`
+                            };
+                        }
+                    ];
+                    return hardAreaProblems[questionNum % hardAreaProblems.length]();
+                }
+            }
+            
+            // PROBABILITY (Class 8)
+            if (topic.includes('Probability')) {
+                if (difficulty === 'easy') {
+                    const easyProbProblems = [
+                        () => {
+                            const total = random(4, 10);
+                            const favorable = random(1, total - 1);
+                            return {
+                                question: `A bag has ${total} balls. ${favorable} are red and the rest are blue. What is the probability of picking a red ball?`,
+                                answer: `Probability = Favorable outcomes / Total outcomes = ${favorable}/${total}`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `A coin is tossed. What is the probability of getting heads?`,
+                                answer: `Probability = 1/2 (There are 2 outcomes: heads or tails, 1 is favorable)`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `A die is rolled. What is the probability of getting a 6?`,
+                                answer: `Probability = 1/6 (There are 6 faces, 1 shows 6)`
+                            };
+                        },
+                        () => {
+                            const total = 52;
+                            return {
+                                question: `A card is drawn from a deck of ${total} cards. What is the probability of drawing a King? (There are 4 Kings)`,
+                                answer: `Probability = 4/52 = 1/13`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `A die is rolled. What is the probability of getting an even number?`,
+                                answer: `Even numbers: 2, 4, 6 (3 favorable outcomes)\nProbability = 3/6 = 1/2`
+                            };
+                        },
+                        () => {
+                            const total = random(6, 12);
+                            const red = random(2, total - 2);
+                            return {
+                                question: `A box has ${total} marbles. ${red} are red. What is the probability of NOT picking a red marble?`,
+                                answer: `Non-red marbles = ${total} - ${red} = ${total - red}\nProbability = ${total - red}/${total}`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `What is the probability of an impossible event?`,
+                                answer: `Probability of impossible event = 0 (It can never happen)`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `What is the probability of a certain event?`,
+                                answer: `Probability of certain event = 1 (It will always happen)`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `A die is rolled. What is the probability of getting a number less than 3?`,
+                                answer: `Numbers less than 3: 1, 2 (2 favorable outcomes)\nProbability = 2/6 = 1/3`
+                            };
+                        },
+                        () => {
+                            const total = random(8, 15);
+                            const green = random(2, 5);
+                            return {
+                                question: `A jar has ${total} candies. ${green} are green. If you pick one candy at random, what is the probability it is green?`,
+                                answer: `Probability = ${green}/${total}`
+                            };
+                        }
+                    ];
+                    return easyProbProblems[questionNum % easyProbProblems.length]();
+                } else if (difficulty === 'medium') {
+                    const mediumProbProblems = [
+                        () => {
+                            const total = random(10, 20);
+                            const red = random(3, 7);
+                            const blue = random(3, 7);
+                            const green = total - red - blue;
+                            return {
+                                question: `A bag has ${total} balls: ${red} red, ${blue} blue, and ${green} green. What is the probability of picking a blue ball?`,
+                                answer: `Probability = ${blue}/${total}`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `Two coins are tossed. What is the probability of getting exactly one head?`,
+                                answer: `Possible outcomes: HH, HT, TH, TT (4 total)\nOne head: HT, TH (2 favorable)\nProbability = 2/4 = 1/2`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `A die is rolled. What is the probability of getting a prime number?`,
+                                answer: `Prime numbers on die: 2, 3, 5 (3 favorable)\nProbability = 3/6 = 1/2`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `A card is drawn from a deck. What is the probability it is a heart? (13 hearts in 52 cards)`,
+                                answer: `Probability = 13/52 = 1/4`
+                            };
+                        },
+                        () => {
+                            const total = random(15, 25);
+                            const defective = random(2, 5);
+                            const good = total - defective;
+                            return {
+                                question: `Out of ${total} items, ${defective} are defective. What is the probability of selecting a good item?`,
+                                answer: `Good items = ${total} - ${defective} = ${good}\nProbability = ${good}/${total}`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `Two dice are rolled. What is the probability that their sum is 7?`,
+                                answer: `Favorable outcomes: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) = 6\nTotal outcomes = 6 × 6 = 36\nProbability = 6/36 = 1/6`
+                            };
+                        },
+                        () => {
+                            const students = random(25, 40);
+                            const girls = random(10, 20);
+                            return {
+                                question: `A class has ${students} students. ${girls} are girls. If one student is selected randomly, what is the probability of selecting a boy?`,
+                                answer: `Boys = ${students} - ${girls} = ${students - girls}\nProbability = ${students - girls}/${students}`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `A bag has 3 red and 5 blue balls. What is the probability of drawing a red ball?`,
+                                answer: `Total balls = 3 + 5 = 8\nProbability = 3/8`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `A letter is chosen at random from the word "PROBABILITY". What is the probability it is the letter B?`,
+                                answer: `Total letters = 11\nLetter B appears = 2 times\nProbability = 2/11`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `A die is rolled. Find the probability of getting a number greater than 4.`,
+                                answer: `Numbers greater than 4: 5, 6 (2 favorable)\nProbability = 2/6 = 1/3`
+                            };
+                        }
+                    ];
+                    return mediumProbProblems[questionNum % mediumProbProblems.length]();
+                } else { // hard
+                    const hardProbProblems = [
+                        () => {
+                            return {
+                                question: `Three coins are tossed simultaneously. What is the probability of getting at least 2 heads?`,
+                                answer: `Total outcomes = 2³ = 8: HHH, HHT, HTH, HTT, THH, THT, TTH, TTT\nAt least 2 heads: HHH, HHT, HTH, THH (4 outcomes)\nProbability = 4/8 = 1/2`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `Two dice are rolled. What is the probability of getting a sum of 10?`,
+                                answer: `Favorable outcomes: (4,6), (5,5), (6,4) = 3\nTotal outcomes = 36\nProbability = 3/36 = 1/12`
+                            };
+                        },
+                        () => {
+                            const total = random(30, 50);
+                            const red = random(8, 15);
+                            const blue = random(8, 15);
+                            const green = total - red - blue;
+                            return {
+                                question: `A bag has ${red} red, ${blue} blue, and ${green} green balls. Two balls are drawn with replacement. What is the probability both are red?`,
+                                answer: `P(first red) = ${red}/${total}\nP(second red) = ${red}/${total} (with replacement)\nP(both red) = (${red}/${total}) × (${red}/${total}) = ${red * red}/${total * total}`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `A card is drawn from a deck. What is the probability it is either a King or a Heart?`,
+                                answer: `Kings = 4, Hearts = 13, King of Hearts = 1 (counted in both)\nFavorable = 4 + 13 - 1 = 16\nProbability = 16/52 = 4/13`
+                            };
+                        },
+                        () => {
+                            const boys = random(12, 18);
+                            const girls = random(12, 18);
+                            const total = boys + girls;
+                            return {
+                                question: `A class has ${boys} boys and ${girls} girls. Two students are selected at random. What is the probability both are boys? (without replacement)`,
+                                answer: `P(first boy) = ${boys}/${total}\nP(second boy) = ${boys - 1}/${total - 1}\nP(both boys) = (${boys}/${total}) × (${boys - 1}/${total - 1})`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `A bag has 4 red, 5 blue, and 6 green balls. What is the probability of drawing a non-green ball?`,
+                                answer: `Non-green balls = 4 + 5 = 9\nTotal balls = 4 + 5 + 6 = 15\nProbability = 9/15 = 3/5`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `Two cards are drawn from a deck without replacement. What is the probability both are Aces?`,
+                                answer: `P(first Ace) = 4/52 = 1/13\nP(second Ace) = 3/51 = 1/17\nP(both Aces) = (4/52) × (3/51) = 12/2652 = 1/221`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `Three dice are rolled. What is the probability of getting all different numbers?`,
+                                answer: `First die: any number = 6/6 = 1\nSecond die: different = 5/6\nThird die: different from both = 4/6\nProbability = 1 × (5/6) × (4/6) = 20/36 = 5/9`
+                            };
+                        },
+                        () => {
+                            return {
+                                question: `A coin is tossed 4 times. What is the probability of getting exactly 2 heads?`,
+                                answer: `Total outcomes = 2⁴ = 16\nWays to get 2 heads = C(4,2) = 6\nProbability = 6/16 = 3/8`
+                            };
+                        },
+                        () => {
+                            const total = random(40, 60);
+                            const passPercent = random(60, 80);
+                            const pass = Math.floor(total * passPercent / 100);
+                            return {
+                                question: `In an exam, ${pass} out of ${total} students passed. What is the probability that a randomly selected student passed?`,
+                                answer: `Probability = ${pass}/${total}`
+                            };
+                        }
+                    ];
+                    return hardProbProblems[questionNum % hardProbProblems.length]();
+                }
+            }
+            
+            // COMPOUND INTEREST (Class 8)
+            if (topic.includes('Compound')) {
+                if (difficulty === 'easy') {
+                    const easyCompoundProblems = [
+                        () => {
+                            const principal = random(1000, 5000);
+                            const rate = random(5, 15);
+                            const time = 1;
+                            const si = (principal * rate * time) / 100;
+                            return {
+                                question: `Find the simple interest on ₹${principal} at ${rate}% per annum for ${time} year.`,
+                                answer: `SI = (P × R × T) / 100 = (${principal} × ${rate} × ${time}) / 100 = ₹${si}`
+                            };
+                        },
+                        () => {
+                            const principal = random(2000, 8000);
+                            const rate = 10;
+                            const time = 2;
+                            const si = (principal * rate * time) / 100;
+                            const amount = principal + si;
+                            return {
+                                question: `Find the amount on ₹${principal} at ${rate}% simple interest for ${time} years.`,
+                                answer: `SI = (${principal} × ${rate} × ${time}) / 100 = ₹${si}\nAmount = P + SI = ₹${principal} + ₹${si} = ₹${amount}`
+                            };
+                        },
+                        () => {
+                            const principal = random(5000, 10000);
+                            const rate = random(8, 12);
+                            const time = 1;
+                            const ci = Math.floor(principal * Math.pow(1 + rate/100, time) - principal);
+                            return {
+                                question: `Find the compound interest on ₹${principal} at ${rate}% per annum for ${time} year (compounded annually).`,
+                                answer: `For 1 year, CI = SI = (P × R × T) / 100\nCI = (${principal} × ${rate} × 1) / 100 = ₹${ci}`
+                            };
+                        },
+                        () => {
+                            const principal = 1000;
+                            const rate = 10;
+                            const time = 2;
+                            const amount = Math.floor(principal * Math.pow(1 + rate/100, time));
+                            return {
+                                question: `Find the amount on ₹${principal} at ${rate}% compound interest for ${time} years.`,
+                                answer: `A = P(1 + R/100)^T = ${principal}(1 + ${rate}/100)^${time}\n= ${principal}(1.1)^2 = ${principal} × 1.21 = ₹${amount}`
+                            };
+                        },
+                        () => {
+                            const principal = random(2000, 5000);
+                            const rate = 10;
+                            const time = 2;
+                            const si = (principal * rate * time) / 100;
+                            const ci = Math.floor(principal * Math.pow(1 + rate/100, time) - principal);
+                            const diff = ci - si;
+                            return {
+                                question: `Find the difference between CI and SI on ₹${principal} at ${rate}% for ${time} years.`,
+                                answer: `CI = P[(1+R/100)^T - 1] = ₹${ci}\nSI = (P×R×T)/100 = ₹${si}\nDifference = ₹${ci} - ₹${si} = ₹${diff}`
+                            };
+                        }
+                    ];
+                    return easyCompoundProblems[questionNum % easyCompoundProblems.length]();
                 } else {
+                    // For medium and hard, use similar problems with bigger numbers
+                    const principal = difficulty === 'medium' ? random(5000, 15000) : random(10000, 50000);
+                    const rate = random(8, 15);
+                    const time = difficulty === 'medium' ? 2 : 3;
+                    const amount = Math.floor(principal * Math.pow(1 + rate/100, time));
+                    const ci = amount - principal;
                     return {
-                        question: `A rectangle has length ${length} cm and width ${width} cm. Find its area.`,
-                        answer: `Area = length × width = ${length} × ${width} = ${length * width} cm²`
+                        question: `Find the compound interest on ₹${principal} at ${rate}% per annum for ${time} years (compounded annually).`,
+                        answer: `A = P(1 + R/100)^T = ${principal}(1 + ${rate}/100)^${time} = ₹${amount}\nCI = A - P = ₹${amount} - ₹${principal} = ₹${ci}`
                     };
                 }
+            }
+            
+            // CUBES AND CUBE ROOTS (Class 8)
+            if (topic.includes('Cube')) {
+                const problems = [
+                    () => {
+                        const n = random(1, 10);
+                        const cube = n * n * n;
+                        return {
+                            question: `Find the cube of ${n}`,
+                            answer: `${n}³ = ${n} × ${n} × ${n} = ${cube}`
+                        };
+                    },
+                    () => {
+                        const n = random(1, 5);
+                        const cube = n * n * n;
+                        return {
+                            question: `Find the cube root of ${cube}`,
+                            answer: `∛${cube} = ${n} (because ${n}³ = ${cube})`
+                        };
+                    },
+                    () => {
+                        const n = random(2, 8);
+                        return {
+                            question: `Is ${n}³ positive or negative? And what is its value?`,
+                            answer: `${n}³ is positive = ${n * n * n}`
+                        };
+                    }
+                ];
+                return problems[questionNum % problems.length]();
+            }
+            
+            // LINEAR EQUATIONS (Classes 7-8)
+            if (topic.includes('Linear') || topic.includes('Equation')) {
+                if (difficulty === 'easy') {
+                    const problems = [
+                        () => {
+                            const a = random(2, 10);
+                            const b = random(5, 20);
+                            const x = random(2, 10);
+                            const result = a * x + b;
+                            return {
+                                question: `Solve for x: ${a}x + ${b} = ${result}`,
+                                answer: `${a}x = ${result} - ${b}\n${a}x = ${result - b}\nx = ${(result - b) / a}`
+                            };
+                        },
+                        () => {
+                            const a = random(3, 10);
+                            const b = random(5, 20);
+                            return {
+                                question: `Simplify: ${a}x + ${b}x`,
+                                answer: `${a}x + ${b}x = ${a + b}x`
+                            };
+                        },
+                        () => {
+                            const a = random(2, 8);
+                            const c = a * random(3, 10);
+                            return {
+                                question: `Solve: ${a}x = ${c}`,
+                                answer: `x = ${c}/${a} = ${c / a}`
+                            };
+                        }
+                    ];
+                    return problems[questionNum % problems.length]();
+                } else {
+                    const a = random(3, 12);
+                    const b = random(5, 25);
+                    const c = random(10, 50);
+                    return {
+                        question: `Solve: ${a}x - ${b} = ${c}`,
+                        answer: `${a}x = ${c} + ${b}\n${a}x = ${c + b}\nx = ${(c + b) / a}`
+                    };
+                }
+            }
+            
+            // RATIONAL NUMBERS (Classes 7-8)
+            if (topic.includes('Rational')) {
+                const problems = [
+                    () => {
+                        const num1 = random(1, 10);
+                        const den1 = random(2, 12);
+                        const num2 = random(1, 10);
+                        const den2 = den1; // same denominator for easy
+                        return {
+                            question: `Add: ${num1}/${den1} + ${num2}/${den2}`,
+                            answer: `${num1}/${den1} + ${num2}/${den2} = ${num1 + num2}/${den1}`
+                        };
+                    },
+                    () => {
+                        const num = random(2, 10);
+                        const den = random(3, 12);
+                        return {
+                            question: `Is ${num}/${den} a rational number? Why?`,
+                            answer: `Yes, ${num}/${den} is a rational number because it can be expressed as p/q where p and q are integers and q ≠ 0`
+                        };
+                    },
+                    () => {
+                        const num = random(-10, -1);
+                        const den = random(2, 10);
+                        return {
+                            question: `Which is greater: ${num}/${den} or 0?`,
+                            answer: `0 is greater because ${num}/${den} is negative`
+                        };
+                    }
+                ];
+                return problems[questionNum % problems.length]();
             }
             
             // DEFAULT - BASIC NUMBERS
@@ -2964,8 +3653,8 @@
                             Questions? Feedback? Suggestions?
                         </p>
                         <p style={{marginBottom: '20px'}}>
-                            <a href="mailto:ninjaturtle007.help@gmail.com" style={{color: '#7c3aed', fontWeight: 'bold', fontSize: '18px', textDecoration: 'none'}}>
-                                📬 ninjaturtle007.help@gmail.com
+                            <a href="mailto:mathsbuddy01@gmail.com" style={{color: '#7c3aed', fontWeight: 'bold', fontSize: '18px', textDecoration: 'none'}}>
+                                📬 mathsbuddy01@gmail.com
                             </a>
                         </p>
                         
@@ -2991,7 +3680,7 @@
                                 Created by <strong>@ninjaturtle_007</strong>
                             </p>
                             <p style={{color: '#9ca3af', fontSize: '12px', marginTop: '8px'}}>
-                                © 2026 MathBuddy - Free CBSE Math Practice | Licensed under CC BY-NC-SA 4.0
+                                © 2024 MathBuddy - Free CBSE Math Practice | Licensed under CC BY-NC-SA 4.0
                             </p>
                         </div>
                     </div>
