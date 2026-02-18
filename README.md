@@ -52,7 +52,7 @@ git clone [https://github.com/ninjaturtle-007/MyMathsBuddy.git](https://github.c
 
 # Open the file
 cd MyMathsBuddy
-# Simply open math-app-final.html in your browser
+# Simply open index.html in your browser
 # No installation needed!
 ```
 
