@@ -36,7 +36,7 @@ MathBuddy is a **FREE** web-based tool that generates unlimited CBSE-aligned mat
 
 ### **Option 1: Use Online (Easiest)**
 
-Simply visit: **[mathsbuddy.netlify.app](https://mathsbuddy.netlify.app)**
+Simply visit: **[mymathsbuddy.netlify.app](https://mymathsbuddy.netlify.app)**
 
 1. Select your class (1-8)
 2. Choose a topic
@@ -129,7 +129,7 @@ This tool is for **supplementary practice only**. It is NOT:
 - Free for **personal, non-commercial use**
 - Educational institutions/coaching centers must contact for permission
 - Commercial use requires written consent
-- Contact: mathsbuddy01@gmail.com
+- Contact: ninjaturlt007.help@gmail.com
 
 ---
 
@@ -170,7 +170,7 @@ For complete legal terms, liability limitations, and usage conditions, please re
 
 ### **Questions? Feedback? Suggestions?**
 
-📧 **Email:** mathsbuddy01@gmail.com  
+📧 **Email:** ninjaturtle007.help@gmail.com  
 👤 **Creator:** [@ninjaturtle_007](https://github.com/ninjaturtle-007)  
 🐛 **Report Issues:** [GitHub Issues](https://github.com/ninjaturtle-007/MyMathsBuddy/issues)
 
@@ -282,7 +282,7 @@ This license explicitly prevents commercial exploitation while keeping the tool 
 - Selling generated worksheets
 - Bulk commercial use
 
-📧 Contact: mathsbuddy01@gmail.com for institutional use
+📧 Contact: ninjaturtle007.help@gmail.com for institutional use
 
 ---
 
@@ -340,10 +340,10 @@ A: No! No sign-up required.
 A: After initial load, yes! (though some features may be limited)
 
 ### **Q: Can I use this for my coaching center?**
-A: For commercial use, please email mathsbuddy01@gmail.com
+A: For commercial use, please email ninjaturtle007.help@gmail.com
 
 ### **Q: I found a wrong answer. What should I do?**
-A: Please report it! Email mathsbuddy01@gmail.com with details.
+A: Please report it! Email ninjaturtle007.help@gmail.com with details.
 
 ### **Q: Can I suggest new topics?**
 A: Absolutely! Open an issue or email me.
@@ -381,14 +381,14 @@ If MathBuddy helped your family:
 
 ## 📢 **Spread the Word**
 
-Know a parent struggling with exam prep? Share MathBuddy!
+Know a parent struggling with exam prep? Share MyMathBuddy!
 
 **WhatsApp Message Template:**
 ```
 Hey! Found this free CBSE math worksheet generator - 
 no more midnight worksheet hunts! 😅
 
-mathsbuddy.netlify.app
+mymathsbuddy.netlify.app
 
 Classes 1-8, all topics, instant generation.
 Made by a mom, for moms! ❤️
@@ -435,7 +435,7 @@ P.S. - If you spot bugs or have ideas, hit me up! I'm learning as I go. 😊
 
 ---
 
-**© 2024 [@ninjaturtle_007](https://github.com/ninjaturtle-007) | MIT Licensed | Made with ❤️ for the parent community**
+**© 2026 [@ninjaturtle_007](https://github.com/ninjaturtle-007) | MIT Licensed | Made with ❤️ for the parent community**
 
 ---
 
