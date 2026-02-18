@@ -1,0 +1,200 @@
+TERMS OF USE - MATHBUDDY
+Last Updated: February 2024
+
+By accessing or using MathBuddy (the "Service"), you agree to be bound by these Terms of Use. If you do not agree to these terms, please do not use the Service.
+
+1. ACCEPTANCE OF TERMS
+
+By using MathBuddy, you acknowledge that you have read, understood, and agree to be bound by these Terms of Use and any future modifications.
+
+2. DESCRIPTION OF SERVICE
+
+MathBuddy is a free educational tool that generates CBSE-aligned mathematics practice worksheets for classes 1-8. The Service is provided "AS IS" for personal, non-commercial use.
+
+3. EDUCATIONAL PURPOSE ONLY
+
+3.1 The Service is designed for supplementary educational practice only.
+3.2 It is NOT a substitute for professional teaching, tutoring, or formal education.
+3.3 It is NOT endorsed by CBSE or any educational board.
+3.4 Users should always consult their school teachers and follow official curriculum guidelines.
+
+4. NO PROFESSIONAL CREDENTIALS
+
+4.1 The Service is created by a parent developer (@ninjaturtle_007).
+4.2 The creator is NOT a certified teacher, tutor, or education professional.
+4.3 The Service does not constitute professional educational advice.
+4.4 Users should seek qualified educators for academic guidance.
+
+5. NO WARRANTY
+
+5.1 The Service is provided "AS IS" without warranties of any kind.
+5.2 We do not warrant that:
+    - The content is error-free or accurate
+    - The Service will be uninterrupted or secure
+    - Results obtained will be reliable
+    - Any errors will be corrected
+
+5.3 While we strive for accuracy, mathematical errors may occur.
+5.4 Users are responsible for verifying answers and content accuracy.
+
+6. LIMITATION OF LIABILITY
+
+6.1 The creator shall not be liable for:
+    - Any academic outcomes or results
+    - Incorrect answers or mathematical errors
+    - Any damages arising from use or inability to use the Service
+    - Lost data or lost educational opportunities
+    - Any indirect, incidental, or consequential damages
+
+6.2 Users assume all risks associated with using the Service.
+6.3 Maximum liability shall not exceed the amount paid for the Service (which is zero).
+
+7. USER RESPONSIBILITIES
+
+7.1 Parents/guardians are responsible for supervising their children's use.
+7.2 Users must verify all answers and content independently.
+7.3 Users should not rely solely on this tool for exam preparation.
+7.4 Users must comply with their school's academic integrity policies.
+
+8. PRIVACY AND DATA
+
+8.1 The Service does NOT collect personal information.
+8.2 No user data is stored, transmitted, or shared.
+8.3 All operations run locally in your browser.
+8.4 We do not track, store, or analyze user behavior.
+8.5 No cookies or tracking technologies are used.
+
+9. INTELLECTUAL PROPERTY
+
+9.1 The Service is copyright © 2024 @ninjaturtle_007.
+9.2 The Service is licensed under the MIT License (see LICENSE file).
+9.3 Generated worksheets may be used for personal educational purposes.
+9.4 Generated content may NOT be:
+    - Sold or commercialized without permission
+    - Redistributed for profit
+    - Claimed as original work by others
+
+10. PERMITTED USE
+
+10.1 The Service may be used for:
+     - Personal home practice
+     - Supplementary learning
+     - Exam preparation
+     - Educational support
+
+10.2 Free use is permitted for:
+     - Parents and students
+     - Individual educators for their students
+     - Non-profit educational purposes
+
+11. PROHIBITED USE
+
+11.1 Users may NOT:
+     - Use for commercial purposes without written permission
+     - Sell or charge for generated worksheets
+     - Claim creation or ownership of the tool
+     - Modify and redistribute without attribution
+     - Use to replace formal education
+     - Use for academic dishonesty or cheating
+     - Reverse engineer the code (except as permitted by MIT License)
+
+12. COMMERCIAL USE
+
+12.1 Educational institutions or businesses wishing to use the Service commercially must contact: mathsbuddy01@gmail.com
+12.2 Coaching centers, tuition centers, or paid educational services require explicit permission.
+12.3 Attribution to @ninjaturtle_007 is required for any public use.
+
+13. THIRD-PARTY LIBRARIES
+
+13.1 This Service uses open-source libraries including:
+     - React (MIT License)
+     - React-DOM (MIT License)
+     - Babel (MIT License)
+     - jsPDF (MIT License)
+
+13.2 All third-party licenses are respected and attributed.
+
+14. CHANGES TO SERVICE
+
+14.1 We reserve the right to:
+     - Modify or discontinue the Service at any time
+     - Change content, features, or functionality
+     - Update these Terms without prior notice
+
+14.2 Continued use after changes constitutes acceptance of new terms.
+
+15. DISCLAIMER OF ENDORSEMENT
+
+15.1 The Service is NOT endorsed by:
+     - CBSE (Central Board of Secondary Education)
+     - Any educational board or institution
+     - Any government entity
+     - Any teaching organization
+
+15.2 References to "CBSE" indicate curriculum alignment only.
+
+16. PARENTAL SUPERVISION
+
+16.1 The Service is designed for use under parental/guardian supervision.
+16.2 Parents are responsible for ensuring age-appropriate use.
+16.3 Parents should verify content suitability for their children.
+
+17. ACCURACY AND ERRORS
+
+17.1 We strive for accuracy but cannot guarantee error-free content.
+17.2 Mathematical errors may occur in generated questions or answers.
+17.3 Users must independently verify all answers.
+17.4 Report errors to: mathsbuddy01@gmail.com
+
+18. TERMINATION
+
+18.1 We may terminate or suspend access at our sole discretion.
+18.2 Users may stop using the Service at any time.
+18.3 Upon termination, all disclaimers and limitations remain in effect.
+
+19. SEVERABILITY
+
+If any provision of these Terms is found invalid, the remaining provisions shall remain in full force and effect.
+
+20. ENTIRE AGREEMENT
+
+These Terms constitute the entire agreement between users and the Service creator regarding use of the Service.
+
+21. GOVERNING LAW
+
+21.1 These Terms shall be governed by the laws of India.
+21.2 Any disputes shall be subject to the jurisdiction of courts in [Your City/State].
+
+22. CONTACT INFORMATION
+
+For questions, concerns, or permissions:
+Email: mathsbuddy01@gmail.com
+Creator: @ninjaturtle_007
+
+23. ACKNOWLEDGMENT
+
+By using MathBuddy, you acknowledge that:
+- You have read and understood these Terms
+- You agree to all conditions stated herein
+- You understand the limitations and disclaimers
+- You will use the Service responsibly and ethically
+- You will not hold the creator liable for any outcomes
+
+---
+
+SUMMARY FOR USERS:
+
+✅ Free for personal educational use
+✅ Practice tool only, not professional teaching
+✅ No data collected, privacy-safe
+✅ Use responsibly under parental supervision
+✅ Verify answers independently
+✅ Follow your school's curriculum
+
+⚠️ Not for commercial use without permission
+⚠️ Not a substitute for teachers/school
+⚠️ No warranty or guarantees provided
+⚠️ Creator not liable for outcomes
+
+Thank you for using MathBuddy responsibly!
+Created with ❤️ by @ninjaturtle_007
