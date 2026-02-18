@@ -48,7 +48,7 @@ Simply visit: **[mymathsbuddy.netlify.app](https://mymathsbuddy.netlify.app)**
 
 ```bash
 # Clone the repository
-git clone https://github.com/ninjaturtle-007/MyMathsBuddy.git
+git clone [https://github.com/ninjaturtle-007/MyMathsBuddy.git](https://github.com/NinjaTurtle-007/MyMathsBuddy.git)
 
 # Open the file
 cd MyMathsBuddy
