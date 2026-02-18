@@ -340,10 +340,10 @@ A: No! No sign-up required.
 A: After initial load, yes! (though some features may be limited)
 
 ### **Q: Can I use this for my coaching center?**
-A: For commercial use, please email ninjaturtle007.help@gmail.com
+A: For commercial use, please email ninjaturtle007.sup@gmail.com
 
 ### **Q: I found a wrong answer. What should I do?**
-A: Please report it! Email ninjaturtle007.help@gmail.com with details.
+A: Please report it! Email ninjaturtle007.sup@gmail.com with details.
 
 ### **Q: Can I suggest new topics?**
 A: Absolutely! Open an issue or email me.
