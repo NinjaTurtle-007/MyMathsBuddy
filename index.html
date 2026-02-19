@@ -2241,26 +2241,395 @@
                 }
             }
             
-            // FRACTIONS
+            // FRACTIONS (Classes 3-7) - COMPREHENSIVE
             if (topic.includes('Fraction')) {
-                const num1 = random(1, 10);
-                const num2 = random(1, 10);
-                const den = random(2, 12);
-                const problems = [
-                    () => ({
-                        question: `Add: ${num1}/${den} + ${num2}/${den}`,
-                        answer: `${num1}/${den} + ${num2}/${den} = ${num1 + num2}/${den}`
-                    }),
-                    () => {
-                        const larger = Math.max(num1, num2);
-                        const smaller = Math.min(num1, num2);
-                        return {
-                            question: `Subtract: ${larger}/${den} - ${smaller}/${den}`,
-                            answer: `${larger}/${den} - ${smaller}/${den} = ${larger - smaller}/${den}`
-                        };
-                    }
-                ];
-                return problems[questionNum % problems.length]();
+                // Helper function to find GCD
+                const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+                
+                // Helper function to simplify fraction
+                const simplify = (num, den) => {
+                    const g = gcd(Math.abs(num), Math.abs(den));
+                    return { num: num / g, den: den / g };
+                };
+                
+                if (difficulty === 'easy') {
+                    // EASY: Only LIKE fractions (same denominator)
+                    const easyProblems = [
+                        () => {
+                            const num1 = random(1, 8);
+                            const num2 = random(1, 8);
+                            const den = random(2, 10);
+                            const sum = num1 + num2;
+                            const simplified = simplify(sum, den);
+                            return {
+                                question: `Add: ${num1}/${den} + ${num2}/${den}`,
+                                answer: `${num1}/${den} + ${num2}/${den} = ${sum}/${den}${simplified.den !== den ? ` = ${simplified.num}/${simplified.den}` : ''}`
+                            };
+                        },
+                        () => {
+                            const num1 = random(5, 12);
+                            const num2 = random(1, num1 - 1);
+                            const den = random(2, 10);
+                            const diff = num1 - num2;
+                            const simplified = simplify(diff, den);
+                            return {
+                                question: `Subtract: ${num1}/${den} - ${num2}/${den}`,
+                                answer: `${num1}/${den} - ${num2}/${den} = ${diff}/${den}${simplified.den !== den ? ` = ${simplified.num}/${simplified.den}` : ''}`
+                            };
+                        },
+                        () => {
+                            const num1 = random(1, 5);
+                            const num2 = random(1, 5);
+                            const num3 = random(1, 5);
+                            const den = random(3, 8);
+                            const sum = num1 + num2 + num3;
+                            return {
+                                question: `Add: ${num1}/${den} + ${num2}/${den} + ${num3}/${den}`,
+                                answer: `${num1}/${den} + ${num2}/${den} + ${num3}/${den} = ${sum}/${den}`
+                            };
+                        },
+                        () => {
+                            const num = random(2, 10);
+                            const den = random(3, 12);
+                            const simplified = simplify(num, den);
+                            return {
+                                question: `Simplify: ${num}/${den}`,
+                                answer: `Divide both by ${gcd(num, den)}: ${num}/${den} = ${simplified.num}/${simplified.den}`
+                            };
+                        },
+                        () => {
+                            const num1 = random(1, 6);
+                            const den = random(4, 10);
+                            const num2 = random(1, 6);
+                            const result = num1 + num2;
+                            return {
+                                question: `${num1}/${den} + ${num2}/${den} = ?`,
+                                answer: `Add numerators: ${num1} + ${num2} = ${result}\nAnswer: ${result}/${den}`
+                            };
+                        },
+                        () => {
+                            const num1 = random(8, 15);
+                            const num2 = random(2, 7);
+                            const den = random(5, 12);
+                            return {
+                                question: `Subtract: ${num1}/${den} - ${num2}/${den}`,
+                                answer: `${num1}/${den} - ${num2}/${den} = ${num1 - num2}/${den}`
+                            };
+                        },
+                        () => {
+                            const whole = random(1, 5);
+                            const num = random(1, 7);
+                            const den = random(2, 10);
+                            return {
+                                question: `Convert mixed number to improper fraction: ${whole} ${num}/${den}`,
+                                answer: `${whole} ${num}/${den} = (${whole} × ${den} + ${num})/${den} = ${whole * den + num}/${den}`
+                            };
+                        },
+                        () => {
+                            const num1 = random(2, 8);
+                            const num2 = random(2, 8);
+                            const den = 10;
+                            return {
+                                question: `Add: ${num1}/${den} + ${num2}/${den}`,
+                                answer: `${num1}/${den} + ${num2}/${den} = ${num1 + num2}/${den} = ${(num1 + num2) / 10}`
+                            };
+                        },
+                        () => {
+                            const num = random(3, 9);
+                            const den = random(6, 15);
+                            return {
+                                question: `Which is greater: ${num}/${den} or ${num + 2}/${den}?`,
+                                answer: `${num + 2}/${den} is greater (larger numerator, same denominator)`
+                            };
+                        },
+                        () => {
+                            const num1 = random(1, 4);
+                            const num2 = random(1, 4);
+                            const den = random(5, 9);
+                            const total = num1 + num2;
+                            const simplified = simplify(total, den);
+                            return {
+                                question: `Rani ate ${num1}/${den} of a pizza and Ravi ate ${num2}/${den}. How much pizza did they eat together?`,
+                                answer: `Total = ${num1}/${den} + ${num2}/${den} = ${total}/${den}${simplified.den !== den ? ` = ${simplified.num}/${simplified.den}` : ''}`
+                            };
+                        }
+                    ];
+                    return easyProblems[questionNum % easyProblems.length]();
+                    
+                } else if (difficulty === 'medium') {
+                    // MEDIUM: Mix of LIKE and UNLIKE fractions
+                    const mediumProblems = [
+                        () => {
+                            // Unlike fractions with related denominators (one is multiple of other)
+                            const den1 = random(2, 6);
+                            const den2 = den1 * 2; // 4, 6, 8, 10, 12
+                            const num1 = random(1, den1 - 1);
+                            const num2 = random(1, den2 - 1);
+                            const lcm = den2;
+                            const newNum1 = num1 * 2;
+                            const sum = newNum1 + num2;
+                            const simplified = simplify(sum, lcm);
+                            return {
+                                question: `Add: ${num1}/${den1} + ${num2}/${den2}`,
+                                answer: `LCM of ${den1} and ${den2} = ${lcm}\n${num1}/${den1} = ${newNum1}/${lcm}\n${newNum1}/${lcm} + ${num2}/${den2} = ${sum}/${lcm}${simplified.den !== lcm ? ` = ${simplified.num}/${simplified.den}` : ''}`
+                            };
+                        },
+                        () => {
+                            // Unlike fractions - simple LCM
+                            const den1 = random(3, 6);
+                            const den2 = random(4, 8);
+                            if (den1 === den2) { den2 = den1 + 2; }
+                            const num1 = random(1, den1 - 1);
+                            const num2 = random(1, den2 - 1);
+                            const lcm = (den1 * den2) / gcd(den1, den2);
+                            const newNum1 = num1 * (lcm / den1);
+                            const newNum2 = num2 * (lcm / den2);
+                            const sum = newNum1 + newNum2;
+                            return {
+                                question: `Add: ${num1}/${den1} + ${num2}/${den2}`,
+                                answer: `LCM = ${lcm}\n${num1}/${den1} = ${newNum1}/${lcm}, ${num2}/${den2} = ${newNum2}/${lcm}\nSum = ${sum}/${lcm}`
+                            };
+                        },
+                        () => {
+                            // Subtraction with unlike denominators
+                            const den1 = random(3, 7);
+                            const den2 = den1 * 2;
+                            const num1 = random(3, den1 - 1);
+                            const num2 = random(1, den2 - 1);
+                            const lcm = den2;
+                            const newNum1 = num1 * 2;
+                            const diff = newNum1 - num2;
+                            return {
+                                question: `Subtract: ${num1}/${den1} - ${num2}/${den2}`,
+                                answer: `LCM = ${lcm}\n${num1}/${den1} = ${newNum1}/${lcm}\n${newNum1}/${lcm} - ${num2}/${den2} = ${diff}/${lcm}`
+                            };
+                        },
+                        () => {
+                            // Compare unlike fractions
+                            const den1 = random(3, 8);
+                            const den2 = random(4, 9);
+                            if (den1 === den2) { den2 = den1 + 1; }
+                            const num1 = random(2, den1 - 1);
+                            const num2 = random(2, den2 - 1);
+                            const lcm = (den1 * den2) / gcd(den1, den2);
+                            const newNum1 = num1 * (lcm / den1);
+                            const newNum2 = num2 * (lcm / den2);
+                            const greater = newNum1 > newNum2 ? `${num1}/${den1}` : `${num2}/${den2}`;
+                            return {
+                                question: `Which is greater: ${num1}/${den1} or ${num2}/${den2}?`,
+                                answer: `Convert to same denominator (${lcm}):\n${num1}/${den1} = ${newNum1}/${lcm}\n${num2}/${den2} = ${newNum2}/${lcm}\n${greater} is greater`
+                            };
+                        },
+                        () => {
+                            // Like fractions but needs simplification
+                            const den = random(8, 20);
+                            const num1 = random(3, den - 2);
+                            const num2 = random(3, den - num1);
+                            const sum = num1 + num2;
+                            const simplified = simplify(sum, den);
+                            return {
+                                question: `Add and simplify: ${num1}/${den} + ${num2}/${den}`,
+                                answer: `${num1}/${den} + ${num2}/${den} = ${sum}/${den} = ${simplified.num}/${simplified.den}`
+                            };
+                        },
+                        () => {
+                            // Three fractions with same denominator
+                            const den = random(6, 12);
+                            const num1 = random(1, 4);
+                            const num2 = random(1, 4);
+                            const num3 = random(1, 4);
+                            const sum = num1 + num2 + num3;
+                            const simplified = simplify(sum, den);
+                            return {
+                                question: `Add: ${num1}/${den} + ${num2}/${den} + ${num3}/${den}`,
+                                answer: `Sum = ${sum}/${den}${simplified.den !== den ? ` = ${simplified.num}/${simplified.den}` : ''}`
+                            };
+                        },
+                        () => {
+                            // Convert improper to mixed
+                            const den = random(3, 8);
+                            const num = random(den + 1, den * 3);
+                            const whole = Math.floor(num / den);
+                            const remainder = num % den;
+                            return {
+                                question: `Convert to mixed number: ${num}/${den}`,
+                                answer: `${num} ÷ ${den} = ${whole} remainder ${remainder}\nMixed number = ${whole} ${remainder}/${den}`
+                            };
+                        },
+                        () => {
+                            // Word problem - like fractions
+                            const den = random(5, 10);
+                            const num1 = random(2, den - 2);
+                            const num2 = random(1, den - num1);
+                            const total = num1 + num2;
+                            return {
+                                question: `Ram walked ${num1}/${den} km and then ${num2}/${den} km. What is the total distance?`,
+                                answer: `Total = ${num1}/${den} + ${num2}/${den} = ${total}/${den} km`
+                            };
+                        },
+                        () => {
+                            // Unlike fractions - denominators 2 and 3
+                            const num1 = 1;
+                            const den1 = 2;
+                            const num2 = 1;
+                            const den2 = 3;
+                            const lcm = 6;
+                            return {
+                                question: `Add: 1/2 + 1/3`,
+                                answer: `LCM = 6\n1/2 = 3/6\n1/3 = 2/6\nSum = 5/6`
+                            };
+                        },
+                        () => {
+                            // Subtraction word problem - unlike fractions
+                            const den1 = 2;
+                            const den2 = 4;
+                            const num1 = 1;
+                            const num2 = 1;
+                            return {
+                                question: `A bottle had 1/2 liter water. If 1/4 liter was drunk, how much is left?`,
+                                answer: `1/2 - 1/4 = 2/4 - 1/4 = 1/4 liter`
+                            };
+                        }
+                    ];
+                    return mediumProblems[questionNum % mediumProblems.length]();
+                    
+                } else { // hard
+                    // HARD: Mostly UNLIKE fractions with larger numbers
+                    const hardProblems = [
+                        () => {
+                            // Unlike fractions with no common factors
+                            const den1 = random(5, 12);
+                            const den2 = random(7, 15);
+                            while (gcd(den1, den2) > 1) { den2 = random(7, 15); }
+                            const num1 = random(2, den1 - 1);
+                            const num2 = random(2, den2 - 1);
+                            const lcm = (den1 * den2) / gcd(den1, den2);
+                            const newNum1 = num1 * (lcm / den1);
+                            const newNum2 = num2 * (lcm / den2);
+                            const sum = newNum1 + newNum2;
+                            const simplified = simplify(sum, lcm);
+                            return {
+                                question: `Add: ${num1}/${den1} + ${num2}/${den2}`,
+                                answer: `LCM of ${den1} and ${den2} = ${lcm}\n${num1}/${den1} = ${newNum1}/${lcm}\n${num2}/${den2} = ${newNum2}/${lcm}\nSum = ${sum}/${lcm}${simplified.den !== lcm ? ` = ${simplified.num}/${simplified.den}` : ''}`
+                            };
+                        },
+                        () => {
+                            // Three unlike fractions
+                            const den1 = random(3, 6);
+                            const den2 = random(4, 8);
+                            const den3 = random(5, 10);
+                            const num1 = random(1, den1 - 1);
+                            const num2 = random(1, den2 - 1);
+                            const num3 = random(1, den3 - 1);
+                            const lcm12 = (den1 * den2) / gcd(den1, den2);
+                            const lcm = (lcm12 * den3) / gcd(lcm12, den3);
+                            return {
+                                question: `Add: ${num1}/${den1} + ${num2}/${den2} + ${num3}/${den3}`,
+                                answer: `LCM of ${den1}, ${den2}, ${den3} = ${lcm}\nConvert all to denominator ${lcm} and add numerators`
+                            };
+                        },
+                        () => {
+                            // Subtraction with unlike denominators - larger numbers
+                            const den1 = random(8, 15);
+                            const den2 = random(6, 12);
+                            const num1 = random(5, den1 - 1);
+                            const num2 = random(2, den2 - 1);
+                            const lcm = (den1 * den2) / gcd(den1, den2);
+                            const newNum1 = num1 * (lcm / den1);
+                            const newNum2 = num2 * (lcm / den2);
+                            const diff = newNum1 - newNum2;
+                            return {
+                                question: `Subtract: ${num1}/${den1} - ${num2}/${den2}`,
+                                answer: `LCM = ${lcm}\n${num1}/${den1} = ${newNum1}/${lcm}\n${num2}/${den2} = ${newNum2}/${lcm}\nDifference = ${diff}/${lcm}`
+                            };
+                        },
+                        () => {
+                            // Mixed number addition
+                            const whole1 = random(1, 4);
+                            const whole2 = random(1, 4);
+                            const den1 = random(3, 8);
+                            const den2 = random(4, 9);
+                            const num1 = random(1, den1 - 1);
+                            const num2 = random(1, den2 - 1);
+                            return {
+                                question: `Add: ${whole1} ${num1}/${den1} + ${whole2} ${num2}/${den2}`,
+                                answer: `Step 1: Add whole numbers: ${whole1} + ${whole2} = ${whole1 + whole2}\nStep 2: Add fractions: ${num1}/${den1} + ${num2}/${den2} (find LCM)\nStep 3: Combine whole and fraction parts`
+                            };
+                        },
+                        () => {
+                            // Complex simplification
+                            const den = random(12, 24);
+                            const num1 = random(6, den - 3);
+                            const num2 = random(3, den - num1);
+                            const sum = num1 + num2;
+                            const simplified = simplify(sum, den);
+                            return {
+                                question: `Add and simplify completely: ${num1}/${den} + ${num2}/${den}`,
+                                answer: `${num1}/${den} + ${num2}/${den} = ${sum}/${den}\nGCD of ${sum} and ${den} = ${gcd(sum, den)}\nSimplified = ${simplified.num}/${simplified.den}`
+                            };
+                        },
+                        () => {
+                            // Word problem - complex unlike fractions
+                            const den1 = 5;
+                            const den2 = 8;
+                            const num1 = 3;
+                            const num2 = 5;
+                            const lcm = 40;
+                            return {
+                                question: `A tank has 3/5 water and 5/8 of another liquid. If mixed, what fraction of the total is the mixture? (Assuming tank can hold both)`,
+                                answer: `Total = 3/5 + 5/8\nLCM = 40\n3/5 = 24/40\n5/8 = 25/40\nTotal = 49/40 = 1 9/40 (more than full tank!)`
+                            };
+                        },
+                        () => {
+                            // Ascending order of unlike fractions
+                            const f1 = { n: 2, d: 5 };
+                            const f2 = { n: 3, d: 7 };
+                            const f3 = { n: 4, d: 9 };
+                            return {
+                                question: `Arrange in ascending order: 2/5, 3/7, 4/9`,
+                                answer: `LCM of 5, 7, 9 = 315\n2/5 = 126/315\n3/7 = 135/315\n4/9 = 140/315\nAscending: 2/5 < 3/7 < 4/9`
+                            };
+                        },
+                        () => {
+                            // Fraction of a fraction
+                            const whole = random(40, 100);
+                            const num1 = random(1, 4);
+                            const den1 = random(3, 6);
+                            const num2 = random(1, 3);
+                            const den2 = random(2, 5);
+                            const result = Math.floor((whole * num1 * num2) / (den1 * den2));
+                            return {
+                                question: `Find ${num1}/${den1} of ${num2}/${den2} of ${whole}`,
+                                answer: `First find ${num2}/${den2} of ${whole} = ${Math.floor(whole * num2 / den2)}\nThen find ${num1}/${den1} of that = approximately ${result}`
+                            };
+                        },
+                        () => {
+                            // Mixed to improper with operations
+                            const whole = random(2, 5);
+                            const num = random(2, 7);
+                            const den = random(4, 10);
+                            const improper = whole * den + num;
+                            const num2 = random(1, den - 1);
+                            return {
+                                question: `Convert ${whole} ${num}/${den} to improper fraction and add ${num2}/${den}`,
+                                answer: `${whole} ${num}/${den} = ${improper}/${den}\n${improper}/${den} + ${num2}/${den} = ${improper + num2}/${den}`
+                            };
+                        },
+                        () => {
+                            // Complex word problem
+                            const total = random(60, 120);
+                            const num1 = random(1, 4);
+                            const den1 = random(3, 8);
+                            const spent = Math.floor(total * num1 / den1);
+                            const left = total - spent;
+                            return {
+                                question: `Ravi had ₹${total}. He spent ${num1}/${den1} of it. How much money is left?`,
+                                answer: `Amount spent = ${num1}/${den1} × ${total} = ₹${spent}\nMoney left = ${total} - ${spent} = ₹${left}`
+                            };
+                        }
+                    ];
+                    return hardProblems[questionNum % hardProblems.length]();
+                }
             }
             
             // DECIMALS
@@ -3653,8 +4022,8 @@
                             Questions? Feedback? Suggestions?
                         </p>
                         <p style={{marginBottom: '20px'}}>
-                            <a href="mailto:ninjaturtle007.sup@gmail.com" style={{color: '#7c3aed', fontWeight: 'bold', fontSize: '18px', textDecoration: 'none'}}>
-                                📬 ninjaturtle007.sup@gmail.com
+                            <a href="mailto:mathsbuddy01@gmail.com" style={{color: '#7c3aed', fontWeight: 'bold', fontSize: '18px', textDecoration: 'none'}}>
+                                📬 mathsbuddy01@gmail.com
                             </a>
                         </p>
                         
@@ -3680,7 +4049,7 @@
                                 Created by <strong>@ninjaturtle_007</strong>
                             </p>
                             <p style={{color: '#9ca3af', fontSize: '12px', marginTop: '8px'}}>
-                                © 2026 MathBuddy - Free CBSE Math Practice | Licensed under CC BY-NC-SA 4.0
+                                © 2024 MathBuddy - Free CBSE Math Practice | Licensed under CC BY-NC-SA 4.0
                             </p>
                         </div>
                     </div>
