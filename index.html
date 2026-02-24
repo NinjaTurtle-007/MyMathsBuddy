@@ -3158,15 +3158,7 @@ window.addEventListener('error', function(e) {
                                 answer: `Perimeter = ${side1} + ${side2} + ${side3} = ${perimeter} cm\ns = ${perimeter}/2 = ${s}\nArea = √[${s}(${s}-${side1})(${s}-${side2})(${s}-${side3})] ≈ ${area} cm²`
                             };
                         },
-                        () => {
-                            const outerRadius = random(12, 20);
-                            const innerRadius = random(6, outerRadius - 4);
-                            const ringArea = Math.floor(3.14 * (outerRadius * outerRadius - innerRadius * innerRadius));
-                            return {
-                                question: `Find the area of a ring (annulus) with outer radius ${outerRadius} cm and inner radius ${innerRadius} cm.`,
-                                answer: `Area = π(R² - r²) = 3.14(${outerRadius}² - ${innerRadius}²)\n= 3.14(${outerRadius * outerRadius} - ${innerRadius * innerRadius}) = ${ringArea} cm²`
-                            };
-                        },
+                       
                         () => {
                             const radius = random(14, 28);
                             const side = radius;
