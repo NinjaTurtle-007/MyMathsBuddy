@@ -36,7 +36,7 @@ MathBuddy is a **FREE** web-based tool that generates unlimited CBSE-aligned mat
 
 ### **Option 1: Use Online (Easiest)**
 
-Simply visit: **[mymathsbuddy.netlify.app](https://mymathsbuddy.netlify.app)**
+Simply visit: **[mymathsbuddy.pages.dev](https://mymathsbuddy.pages.dev)**
 
 1. Select your class (1-8)
 2. Choose a topic
