@@ -2886,25 +2886,6 @@ window.addEventListener('error', function(e) {
                             };
                         },
                         () => {
-                            const diagonal1 = random(10, 20);
-                            const diagonal2 = random(8, 18);
-                            const area = (diagonal1 * diagonal2) / 2;
-                            return {
-                                question: `Find the area of a rhombus with diagonals ${diagonal1} cm and ${diagonal2} cm.`,
-                                answer: `Area = (1/2) × d₁ × d₂ = (1/2) × ${diagonal1} × ${diagonal2} = ${area} cm²`
-                            };
-                        },
-                        () => {
-                            const parallel1 = random(10, 20);
-                            const parallel2 = random(15, 25);
-                            const height = random(8, 16);
-                            const area = ((parallel1 + parallel2) * height) / 2;
-                            return {
-                                question: `Find the area of a trapezium with parallel sides ${parallel1} cm and ${parallel2} cm, and height ${height} cm.`,
-                                answer: `Area = (1/2) × (a + b) × h = (1/2) × (${parallel1} + ${parallel2}) × ${height} = ${area} cm²`
-                            };
-                        },
-                        () => {
                             const length = random(20, 50);
                             const width = random(15, 40);
                             const height = random(4, 8);
@@ -3069,16 +3050,6 @@ window.addEventListener('error', function(e) {
                             };
                         },
                         () => {
-                            const parallel1 = random(10, 20);
-                            const parallel2 = random(15, 25);
-                            const height = random(8, 16);
-                            const area = ((parallel1 + parallel2) * height) / 2;
-                            return {
-                                question: `Find the area of a trapezium with parallel sides ${parallel1} cm and ${parallel2} cm, and height ${height} cm.`,
-                                answer: `Area = (1/2) × (a + b) × h = (1/2) × (${parallel1} + ${parallel2}) × ${height} = ${area} cm²`
-                            };
-                        },
-                        () => {
                             const radius = random(6, 14);
                             const area = Math.floor(3.14 * radius * radius);
                             const circumference = Math.floor(2 * 3.14 * radius);
@@ -3231,15 +3202,13 @@ window.addEventListener('error', function(e) {
                             };
                         },
                         () => {
-                            const parallel1 = random(20, 35);
-                            const parallel2 = random(25, 40);
-                            const height = random(15, 25);
-                            const area = ((parallel1 + parallel2) * height) / 2;
-                            const perimeter = parallel1 + parallel2 + 2 * Math.sqrt(height * height + Math.pow((parallel2 - parallel1) / 2, 2));
-                            return {
-                                question: `Find the area of a trapezium with parallel sides ${parallel1} cm and ${parallel2} cm, and height ${height} cm.`,
-                                answer: `Area = (1/2) × (${parallel1} + ${parallel2}) × ${height}\n= (1/2) × ${parallel1 + parallel2} × ${height} = ${area} cm²`
-                            };
+                            const outerSide = random(30, 50);
+                                const innerSide = random(20, outerSide - 5);
+                                const frameArea = outerSide * outerSide - innerSide * innerSide;
+                                return {
+                                    question: `A square photo frame has outer side ${outerSide} cm and inner side ${innerSide} cm. Find the area of the frame material.`,
+                                    answer: `Outer area = ${outerSide}² = ${outerSide * outerSide} cm²\nInner area = ${innerSide}² = ${innerSide * innerSide} cm²\nFrame area = ${outerSide * outerSide} - ${innerSide * innerSide} = ${frameArea} cm²`
+                                };
                         },
                         () => {
                             const side = random(20, 40);
