@@ -451,6 +451,13 @@
     </style>
 </head>
 <body>
+    <script>                              ← ADD THIS
+    window.onerror = function(msg, url, line, col, error) {
+        console.error('Error: ' + msg + '\nLine: ' + line);
+        return false;
+    };
+    </script>  
+    
     <div id="root"></div>
 
     <!-- React and ReactDOM -->
@@ -4096,10 +4103,4 @@ alt="Web Analytics Made Easy - Statcounter"
 referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 <!-- End of Statcounter Code -->
 </body>
-    <script>
-window.onerror = function(msg, url, line, col, error) {
-    console.error('Error: ' + msg + '\nLine: ' + line);
-    return false;
-};
-</script>
 </html>
