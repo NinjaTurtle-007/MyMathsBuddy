@@ -451,43 +451,25 @@
     </style>
 </head>
 <body>
-    <script>                              ← ADD THIS
-    window.onerror = function(msg, url, line, col, error) {
-        console.error('Error: ' + msg + '\nLine: ' + line);
-        return false;
-    };
-    </script>  
-    
     <div id="root"></div>
 
     <!-- React and ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone@7.24.0/babel.min.js"></script>
-<script>
-// Force Babel to process immediately
-window.addEventListener('DOMContentLoaded', function() {
-    if (window.Babel) {
-        Babel.registerPreset('react-app', {
-            presets: [
-                [Babel.availablePresets['react']],
-                [Babel.availablePresets['env']]
-            ]
-        });
-    }
-});
-</script>
-    <script>    
-window.addEventListener('error', function(e) {
-    console.error('Error:', e.message);
-    return false;
-});
-</script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     
     <!-- jsPDF for PDF generation -->
-    !--<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Babel - stable version with proper initialization -->
+    <script src="https://unpkg.com/@babel/standalone@7.23.9/babel.min.js" crossorigin></script>
+    <script>
+        // Ensure Babel processes the script correctly
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('MathBuddy loading...');
+        });
+    </script>
 
-    <script type="text/babel" data-type="module" data-presets="react,env">
+    <script type="text/babel">
         const { useState, useEffect } = React;
 
         // CBSE Topics
@@ -1340,9 +1322,98 @@ window.addEventListener('error', function(e) {
                         }
                     ];
                     return easyDataProblems[questionNum % easyDataProblems.length]();
+                } else if (difficulty === 'medium') {
+                    // MEDIUM Data Handling with proper questions
+                    const mediumDataProblems = [
+                        () => {
+                            const scores = [random(50, 95), random(50, 95), random(50, 95), random(50, 95), random(50, 95)];
+                            const average = Math.floor(scores.reduce((a, b) => a + b, 0) / scores.length);
+                            return {
+                                question: `A cricket player scored ${scores.join(', ')} runs in 5 matches. Find the average score.`,
+                                answer: `Average = (${scores.join(' + ')}) ÷ 5 = ${scores.reduce((a, b) => a + b, 0)} ÷ 5 = ${average} runs`
+                            };
+                        },
+                        () => {
+                            const data = [random(10, 50), random(10, 50), random(10, 50), random(10, 50), random(10, 50)];
+                            const sorted = [...data].sort((a, b) => a - b);
+                            const median = sorted[2];
+                            return {
+                                question: `Find the median of: ${data.join(', ')}`,
+                                answer: `Arrange in order: ${sorted.join(', ')}\nMedian (middle value) = ${median}`
+                            };
+                        },
+                        () => {
+                            const temps = [random(20, 35), random(20, 35), random(20, 35), random(20, 35), random(20, 35), random(20, 35), random(20, 35)];
+                            const max = Math.max(...temps);
+                            const min = Math.min(...temps);
+                            const range = max - min;
+                            return {
+                                question: `Temperature (°C) for a week: ${temps.join(', ')}. Find the range.`,
+                                answer: `Maximum = ${max}°C, Minimum = ${min}°C\nRange = ${max} - ${min} = ${range}°C`
+                            };
+                        },
+                        () => {
+                            const sales = [random(100, 500), random(100, 500), random(100, 500), random(100, 500)];
+                            const total = sales.reduce((a, b) => a + b, 0);
+                            const average = Math.floor(total / sales.length);
+                            return {
+                                question: `A shop's sales (₹) for 4 weeks: ${sales.join(', ')}. Find total and average sales.`,
+                                answer: `Total = ${sales.join(' + ')} = ₹${total}\nAverage = ${total} ÷ 4 = ₹${average}`
+                            };
+                        },
+                        () => {
+                            const values = [random(5, 20), random(5, 20), random(5, 20), random(5, 20), random(5, 20)];
+                            const mode = values[0]; // Simplified for this level
+                            return {
+                                question: `In the data ${values.join(', ')}, if ${mode} appears most frequently, what is the mode?`,
+                                answer: `Mode = ${mode} (the value that appears most frequently in the data)`
+                            };
+                        }
+                    ];
+                    return mediumDataProblems[questionNum % mediumDataProblems.length]();
                 } else {
-                    // Medium and hard use similar concepts with bigger numbers
-                    return easyDataProblems[questionNum % easyDataProblems.length]();
+                    // HARD Data Handling with advanced concepts
+                    const hardDataProblems = [
+                        () => {
+                            const marks = [random(60, 100), random(60, 100), random(60, 100), random(60, 100), random(60, 100), random(60, 100)];
+                            const sorted = [...marks].sort((a, b) => a - b);
+                            const median = Math.floor((sorted[2] + sorted[3]) / 2);
+                            const average = Math.floor(marks.reduce((a, b) => a + b, 0) / marks.length);
+                            return {
+                                question: `Marks in 6 subjects: ${marks.join(', ')}. Find both median and mean.`,
+                                answer: `Arranged: ${sorted.join(', ')}\nMedian = (${sorted[2]} + ${sorted[3]}) ÷ 2 = ${median}\nMean = ${marks.reduce((a, b) => a + b, 0)} ÷ 6 = ${average}`
+                            };
+                        },
+                        () => {
+                            const data = [random(10, 30), random(10, 30), random(10, 30), random(10, 30), random(10, 30), random(10, 30), random(10, 30)];
+                            const mean = Math.floor(data.reduce((a, b) => a + b, 0) / data.length);
+                            const range = Math.max(...data) - Math.min(...data);
+                            return {
+                                question: `Data: ${data.join(', ')}. Find mean and range.`,
+                                answer: `Mean = ${data.reduce((a, b) => a + b, 0)} ÷ ${data.length} = ${mean}\nRange = ${Math.max(...data)} - ${Math.min(...data)} = ${range}`
+                            };
+                        },
+                        () => {
+                            const heights = [random(140, 170), random(140, 170), random(140, 170), random(140, 170), random(140, 170)];
+                            const average = Math.floor(heights.reduce((a, b) => a + b, 0) / heights.length);
+                            const aboveAvg = heights.filter(h => h > average).length;
+                            return {
+                                question: `Heights (cm): ${heights.join(', ')}. How many students are above average height?`,
+                                answer: `Average = ${heights.reduce((a, b) => a + b, 0)} ÷ 5 = ${average} cm\nAbove average: ${aboveAvg} students`
+                            };
+                        },
+                        () => {
+                            const rainfall = [random(50, 200), random(50, 200), random(50, 200), random(50, 200)];
+                            const total = rainfall.reduce((a, b) => a + b, 0);
+                            const average = Math.floor(total / rainfall.length);
+                            const maxMonth = rainfall.indexOf(Math.max(...rainfall)) + 1;
+                            return {
+                                question: `Rainfall (mm) for 4 months: ${rainfall.join(', ')}. Find total, average, and which month had maximum rainfall.`,
+                                answer: `Total = ${total} mm\nAverage = ${total} ÷ 4 = ${average} mm\nMaximum in Month ${maxMonth} = ${Math.max(...rainfall)} mm`
+                            };
+                        }
+                    ];
+                    return hardDataProblems[questionNum % hardDataProblems.length]();
                 }
             }
             
@@ -2886,6 +2957,25 @@ window.addEventListener('error', function(e) {
                             };
                         },
                         () => {
+                            const diagonal1 = random(10, 20);
+                            const diagonal2 = random(8, 18);
+                            const area = (diagonal1 * diagonal2) / 2;
+                            return {
+                                question: `Find the area of a rhombus with diagonals ${diagonal1} cm and ${diagonal2} cm.`,
+                                answer: `Area = (1/2) × d₁ × d₂ = (1/2) × ${diagonal1} × ${diagonal2} = ${area} cm²`
+                            };
+                        },
+                        () => {
+                            const parallel1 = random(10, 20);
+                            const parallel2 = random(15, 25);
+                            const height = random(8, 16);
+                            const area = ((parallel1 + parallel2) * height) / 2;
+                            return {
+                                question: `Find the area of a trapezium with parallel sides ${parallel1} cm and ${parallel2} cm, and height ${height} cm.`,
+                                answer: `Area = (1/2) × (a + b) × h = (1/2) × (${parallel1} + ${parallel2}) × ${height} = ${area} cm²`
+                            };
+                        },
+                        () => {
                             const length = random(20, 50);
                             const width = random(15, 40);
                             const height = random(4, 8);
@@ -3050,6 +3140,16 @@ window.addEventListener('error', function(e) {
                             };
                         },
                         () => {
+                            const parallel1 = random(10, 20);
+                            const parallel2 = random(15, 25);
+                            const height = random(8, 16);
+                            const area = ((parallel1 + parallel2) * height) / 2;
+                            return {
+                                question: `Find the area of a trapezium with parallel sides ${parallel1} cm and ${parallel2} cm, and height ${height} cm.`,
+                                answer: `Area = (1/2) × (a + b) × h = (1/2) × (${parallel1} + ${parallel2}) × ${height} = ${area} cm²`
+                            };
+                        },
+                        () => {
                             const radius = random(6, 14);
                             const area = Math.floor(3.14 * radius * radius);
                             const circumference = Math.floor(2 * 3.14 * radius);
@@ -3113,105 +3213,245 @@ window.addEventListener('error', function(e) {
                     ];
                     return mediumAreaProblems[questionNum % mediumAreaProblems.length]();
                 } else { // hard
-                    const hardAreaProblems = [
-                        () => {
-                            const length = random(30, 60);
-                            const width = random(20, 45);
-                            const carpetWidth = random(2, 4);
-                            const area = length * width;
-                            const carpetLength = area / carpetWidth;
-                            return {
-                                question: `A hall ${length} m × ${width} m is to be carpeted with carpet ${carpetWidth} m wide. What length of carpet is needed?`,
-                                answer: `Area of hall = ${length} × ${width} = ${area} m²\nCarpet length = ${area} ÷ ${carpetWidth} = ${carpetLength} m`
-                            };
-                        },
-                        () => {
-                            const outerLength = random(30, 50);
-                            const outerWidth = random(20, 40);
-                            const pathWidth = random(2, 5);
-                            const innerLength = outerLength - 2 * pathWidth;
-                            const innerWidth = outerWidth - 2 * pathWidth;
-                            const pathArea = outerLength * outerWidth - innerLength * innerWidth;
-                            return {
-                                question: `A rectangular garden ${outerLength} m × ${outerWidth} m has a path ${pathWidth} m wide running inside along the boundary. Find the area of the path.`,
-                                answer: `Inner dimensions = ${innerLength} m × ${innerWidth} m\nPath area = ${outerLength * outerWidth} - ${innerLength * innerWidth} = ${pathArea} m²`
-                            };
-                        },
-                        () => {
-                            const radius = random(10, 20);
-                            const angle = random(60, 120);
-                            const sectorArea = Math.floor((angle / 360) * 3.14 * radius * radius);
-                            return {
-                                question: `Find the area of a sector of a circle with radius ${radius} cm and central angle ${angle}°.`,
-                                answer: `Area of sector = (θ/360) × πr² = (${angle}/360) × 3.14 × ${radius}² ≈ ${sectorArea} cm²`
-                            };
-                        },
-                        () => {
-                            const side1 = random(15, 25);
-                            const side2 = random(18, 28);
-                            const side3 = random(20, 30);
-                            const s = (side1 + side2 + side3) / 2;
-                            const area = Math.floor(Math.sqrt(s * (s - side1) * (s - side2) * (s - side3)));
-                            const perimeter = side1 + side2 + side3;
-                            return {
-                                question: `Find both perimeter and area of a triangle with sides ${side1} cm, ${side2} cm, and ${side3} cm.`,
-                                answer: `Perimeter = ${side1} + ${side2} + ${side3} = ${perimeter} cm\ns = ${perimeter}/2 = ${s}\nArea = √[${s}(${s}-${side1})(${s}-${side2})(${s}-${side3})] ≈ ${area} cm²`
-                            };
-                        },
-                       
-                        () => {
-                            const radius = random(14, 28);
-                            const side = radius;
-                            const circleArea = Math.floor(3.14 * radius * radius);
-                            const squareArea = side * side;
-                            const shadedArea = squareArea - circleArea;
-                            return {
-                                question: `A circle of radius ${radius} cm is inscribed in a square. Find the area of the shaded region outside the circle.`,
-                                answer: `Square side = 2r = ${2 * radius} cm\nSquare area = ${2 * radius}² = ${squareArea} cm²\nCircle area = πr² ≈ ${circleArea} cm²\nShaded area = ${squareArea} - ${circleArea} = ${shadedArea} cm²`
-                            };
-                        },
-                        () => {
-                            const length = random(40, 80);
-                            const width = random(30, 60);
-                            const tileSide = random(20, 40);
-                            const floorArea = length * width;
-                            const tileArea = tileSide * tileSide;
-                            const tiles = Math.ceil(floorArea / tileArea);
-                            return {
-                                question: `How many square tiles of side ${tileSide} cm are needed to cover a floor ${length} cm × ${width} cm?`,
-                                answer: `Floor area = ${length} × ${width} = ${floorArea} cm²\nTile area = ${tileSide}² = ${tileArea} cm²\nTiles needed = ${floorArea} ÷ ${tileArea} ≈ ${tiles} tiles`
-                            };
-                        },
-                        () => {
-                            const base = random(20, 40);
-                            const height = random(15, 30);
-                            const triangleArea = (base * height) / 2;
-                            const newHeight = random(20, 35);
-                            const newBase = (2 * triangleArea) / newHeight;
-                            return {
-                                question: `A triangle has base ${base} cm and height ${height} cm. If the height is changed to ${newHeight} cm, what should be the base to keep the same area?`,
-                                answer: `Original area = (1/2) × ${base} × ${height} = ${triangleArea} cm²\nNew base = (2 × ${triangleArea}) ÷ ${newHeight} = ${newBase} cm`
-                            };
-                        },
-                        () => {
-                            const outerSide = random(30, 50);
+                    // CLASS-SPECIFIC HARD QUESTIONS
+                    // Class 6: Only rectangle, square, triangle, circle (NO trapezium, rhombus)
+                    // Class 7-8: All shapes including trapezium, rhombus
+                    
+                    if (classNum === 6) {
+                        // CLASS 6 HARD - Age-appropriate shapes only
+                        const class6HardProblems = [
+                            () => {
+                                const length = random(30, 60);
+                                const width = random(20, 45);
+                                const carpetWidth = random(2, 4);
+                                const area = length * width;
+                                const carpetLength = area / carpetWidth;
+                                return {
+                                    question: `A hall ${length} m × ${width} m is to be carpeted with carpet ${carpetWidth} m wide. What length of carpet is needed?`,
+                                    answer: `Area of hall = ${length} × ${width} = ${area} m²\nCarpet length = ${area} ÷ ${carpetWidth} = ${carpetLength} m`
+                                };
+                            },
+                            () => {
+                                const outerLength = random(30, 50);
+                                const outerWidth = random(20, 40);
+                                const pathWidth = random(2, 5);
+                                const innerLength = outerLength - 2 * pathWidth;
+                                const innerWidth = outerWidth - 2 * pathWidth;
+                                const pathArea = outerLength * outerWidth - innerLength * innerWidth;
+                                return {
+                                    question: `A rectangular garden ${outerLength} m × ${outerWidth} m has a path ${pathWidth} m wide running inside along the boundary. Find the area of the path.`,
+                                    answer: `Inner dimensions = ${innerLength} m × ${innerWidth} m\nPath area = ${outerLength * outerWidth} - ${innerLength * innerWidth} = ${pathArea} m²`
+                                };
+                            },
+                            () => {
+                                const side1 = random(15, 25);
+                                const side2 = random(18, 28);
+                                const side3 = random(20, 30);
+                                const s = (side1 + side2 + side3) / 2;
+                                const area = Math.floor(Math.sqrt(s * (s - side1) * (s - side2) * (s - side3)));
+                                const perimeter = side1 + side2 + side3;
+                                return {
+                                    question: `Find both perimeter and area of a triangle with sides ${side1} cm, ${side2} cm, and ${side3} cm.`,
+                                    answer: `Perimeter = ${side1} + ${side2} + ${side3} = ${perimeter} cm\ns = ${perimeter}/2 = ${s}\nArea = √[${s}(${s}-${side1})(${s}-${side2})(${s}-${side3})] ≈ ${area} cm²`
+                                };
+                            },
+                            () => {
+                                const radius = random(14, 28);
+                                const diameter = radius * 2;
+                                const circleArea = Math.floor(3.14 * radius * radius);
+                                const squareArea = diameter * diameter;
+                                const shadedArea = squareArea - circleArea;
+                                return {
+                                    question: `A circle of radius ${radius} cm is inscribed in a square. Find the area of the shaded region outside the circle.`,
+                                    answer: `Square side = 2r = ${diameter} cm\nSquare area = ${diameter}² = ${squareArea} cm²\nCircle area = πr² ≈ ${circleArea} cm²\nShaded area = ${squareArea} - ${circleArea} = ${shadedArea} cm²`
+                                };
+                            },
+                            () => {
+                                const length = random(40, 80);
+                                const width = random(30, 60);
+                                const tileSide = random(20, 40);
+                                const floorArea = length * width;
+                                const tileArea = tileSide * tileSide;
+                                const tiles = Math.ceil(floorArea / tileArea);
+                                return {
+                                    question: `How many square tiles of side ${tileSide} cm are needed to cover a floor ${length} cm × ${width} cm?`,
+                                    answer: `Floor area = ${length} × ${width} = ${floorArea} cm²\nTile area = ${tileSide}² = ${tileArea} cm²\nTiles needed = ${floorArea} ÷ ${tileArea} ≈ ${tiles} tiles`
+                                };
+                            },
+                            () => {
+                                const base = random(20, 40);
+                                const height = random(15, 30);
+                                const triangleArea = (base * height) / 2;
+                                const newHeight = random(20, 35);
+                                const newBase = (2 * triangleArea) / newHeight;
+                                return {
+                                    question: `A triangle has base ${base} cm and height ${height} cm. If the height is changed to ${newHeight} cm, what should be the base to keep the same area?`,
+                                    answer: `Original area = (1/2) × ${base} × ${height} = ${triangleArea} cm²\nNew base = (2 × ${triangleArea}) ÷ ${newHeight} = ${newBase} cm`
+                                };
+                            },
+                            () => {
+                                const side = random(20, 40);
+                                const diagonal = Math.floor(side * 1.414);
+                                return {
+                                    question: `Find the diagonal of a square with side ${side} cm. (√2 ≈ 1.414)`,
+                                    answer: `Diagonal = side × √2 = ${side} × 1.414 ≈ ${diagonal} cm`
+                                };
+                            },
+                            () => {
+                                const radius = random(10, 20);
+                                const circumference = Math.floor(2 * 3.14 * radius);
+                                const area = Math.floor(3.14 * radius * radius);
+                                return {
+                                    question: `A circular garden has radius ${radius} m. Find both its circumference and area.`,
+                                    answer: `Circumference = 2πr = 2 × 3.14 × ${radius} = ${circumference} m\nArea = πr² = 3.14 × ${radius}² = ${area} m²`
+                                };
+                            },
+                            () => {
+                                const length = random(50, 100);
+                                const width = random(30, 70);
+                                const borderWidth = random(2, 5);
+                                const innerLength = length - 2 * borderWidth;
+                                const innerWidth = width - 2 * borderWidth;
+                                const borderArea = length * width - innerLength * innerWidth;
+                                return {
+                                    question: `A picture ${length} cm × ${width} cm has a border ${borderWidth} cm wide all around. Find the area of the border.`,
+                                    answer: `Inner picture = ${innerLength} cm × ${innerWidth} cm\nBorder area = ${length * width} - ${innerLength * innerWidth} = ${borderArea} cm²`
+                                };
+                            },
+                            () => {
+                                const outerSide = random(30, 50);
                                 const innerSide = random(20, outerSide - 5);
                                 const frameArea = outerSide * outerSide - innerSide * innerSide;
                                 return {
                                     question: `A square photo frame has outer side ${outerSide} cm and inner side ${innerSide} cm. Find the area of the frame material.`,
                                     answer: `Outer area = ${outerSide}² = ${outerSide * outerSide} cm²\nInner area = ${innerSide}² = ${innerSide * innerSide} cm²\nFrame area = ${outerSide * outerSide} - ${innerSide * innerSide} = ${frameArea} cm²`
                                 };
-                        },
-                        () => {
-                            const side = random(20, 40);
-                            const diagonal = Math.floor(side * 1.414);
-                            return {
-                                question: `Find the diagonal of a square with side ${side} cm. (√2 ≈ 1.414)`,
-                                answer: `Diagonal = side × √2 = ${side} × 1.414 ≈ ${diagonal} cm`
-                            };
-                        }
-                    ];
-                    return hardAreaProblems[questionNum % hardAreaProblems.length]();
+                            },
+                            () => {
+                                const side1 = random(12, 20);
+                                const side2 = random(15, 25);
+                                const side3 = random(18, 28);
+                                const perimeter = side1 + side2 + side3;
+                                const s = perimeter / 2;
+                                const area = Math.floor(Math.sqrt(s * (s - side1) * (s - side2) * (s - side3)));
+                                return {
+                                    question: `A triangular park has sides ${side1} m, ${side2} m, and ${side3} m. Find its area using Heron's formula.`,
+                                    answer: `s = (${side1} + ${side2} + ${side3})/2 = ${s} m\nArea = √[s(s-a)(s-b)(s-c)]\nArea = √[${s} × ${s - side1} × ${s - side2} × ${s - side3}] ≈ ${area} m²`
+                                };
+                            }
+                        ];
+                        return class6HardProblems[questionNum % class6HardProblems.length]();
+                    } else {
+                        // CLASS 7-8 HARD - Can include all shapes
+                        const hardAreaProblems = [
+                            () => {
+                                const length = random(30, 60);
+                                const width = random(20, 45);
+                                const carpetWidth = random(2, 4);
+                                const area = length * width;
+                                const carpetLength = area / carpetWidth;
+                                return {
+                                    question: `A hall ${length} m × ${width} m is to be carpeted with carpet ${carpetWidth} m wide. What length of carpet is needed?`,
+                                    answer: `Area of hall = ${length} × ${width} = ${area} m²\nCarpet length = ${area} ÷ ${carpetWidth} = ${carpetLength} m`
+                                };
+                            },
+                            () => {
+                                const outerLength = random(30, 50);
+                                const outerWidth = random(20, 40);
+                                const pathWidth = random(2, 5);
+                                const innerLength = outerLength - 2 * pathWidth;
+                                const innerWidth = outerWidth - 2 * pathWidth;
+                                const pathArea = outerLength * outerWidth - innerLength * innerWidth;
+                                return {
+                                    question: `A rectangular garden ${outerLength} m × ${outerWidth} m has a path ${pathWidth} m wide running inside along the boundary. Find the area of the path.`,
+                                    answer: `Inner dimensions = ${innerLength} m × ${innerWidth} m\nPath area = ${outerLength * outerWidth} - ${innerLength * innerWidth} = ${pathArea} m²`
+                                };
+                            },
+                            () => {
+                                const radius = random(10, 20);
+                                const angle = random(60, 120);
+                                const sectorArea = Math.floor((angle / 360) * 3.14 * radius * radius);
+                                return {
+                                    question: `Find the area of a sector of a circle with radius ${radius} cm and central angle ${angle}°.`,
+                                    answer: `Area of sector = (θ/360) × πr² = (${angle}/360) × 3.14 × ${radius}² ≈ ${sectorArea} cm²`
+                                };
+                            },
+                            () => {
+                                const side1 = random(15, 25);
+                                const side2 = random(18, 28);
+                                const side3 = random(20, 30);
+                                const s = (side1 + side2 + side3) / 2;
+                                const area = Math.floor(Math.sqrt(s * (s - side1) * (s - side2) * (s - side3)));
+                                const perimeter = side1 + side2 + side3;
+                                return {
+                                    question: `Find both perimeter and area of a triangle with sides ${side1} cm, ${side2} cm, and ${side3} cm.`,
+                                    answer: `Perimeter = ${side1} + ${side2} + ${side3} = ${perimeter} cm\ns = ${perimeter}/2 = ${s}\nArea = √[${s}(${s}-${side1})(${s}-${side2})(${s}-${side3})] ≈ ${area} cm²`
+                                };
+                            },
+                            () => {
+                                const outerRadius = random(12, 20);
+                                const innerRadius = random(6, outerRadius - 4);
+                                const ringArea = Math.floor(3.14 * (outerRadius * outerRadius - innerRadius * innerRadius));
+                                return {
+                                    question: `Find the area of a ring (annulus) with outer radius ${outerRadius} cm and inner radius ${innerRadius} cm.`,
+                                    answer: `Area = π(R² - r²) = 3.14(${outerRadius}² - ${innerRadius}²)\n= 3.14(${outerRadius * outerRadius} - ${innerRadius * innerRadius}) = ${ringArea} cm²`
+                                };
+                            },
+                            () => {
+                                const radius = random(14, 28);
+                                const side = radius;
+                                const circleArea = Math.floor(3.14 * radius * radius);
+                                const squareArea = side * side;
+                                const shadedArea = squareArea - circleArea;
+                                return {
+                                    question: `A circle of radius ${radius} cm is inscribed in a square. Find the area of the shaded region outside the circle.`,
+                                    answer: `Square side = 2r = ${2 * radius} cm\nSquare area = ${2 * radius}² = ${squareArea} cm²\nCircle area = πr² ≈ ${circleArea} cm²\nShaded area = ${squareArea} - ${circleArea} = ${shadedArea} cm²`
+                                };
+                            },
+                            () => {
+                                const length = random(40, 80);
+                                const width = random(30, 60);
+                                const tileSide = random(20, 40);
+                                const floorArea = length * width;
+                                const tileArea = tileSide * tileSide;
+                                const tiles = Math.ceil(floorArea / tileArea);
+                                return {
+                                    question: `How many square tiles of side ${tileSide} cm are needed to cover a floor ${length} cm × ${width} cm?`,
+                                    answer: `Floor area = ${length} × ${width} = ${floorArea} cm²\nTile area = ${tileSide}² = ${tileArea} cm²\nTiles needed = ${floorArea} ÷ ${tileArea} ≈ ${tiles} tiles`
+                                };
+                            },
+                            () => {
+                                const base = random(20, 40);
+                                const height = random(15, 30);
+                                const triangleArea = (base * height) / 2;
+                                const newHeight = random(20, 35);
+                                const newBase = (2 * triangleArea) / newHeight;
+                                return {
+                                    question: `A triangle has base ${base} cm and height ${height} cm. If the height is changed to ${newHeight} cm, what should be the base to keep the same area?`,
+                                    answer: `Original area = (1/2) × ${base} × ${height} = ${triangleArea} cm²\nNew base = (2 × ${triangleArea}) ÷ ${newHeight} = ${newBase} cm`
+                                };
+                            },
+                            () => {
+                                const parallel1 = random(20, 35);
+                                const parallel2 = random(25, 40);
+                                const height = random(15, 25);
+                                const area = ((parallel1 + parallel2) * height) / 2;
+                                return {
+                                    question: `Find the area of a trapezium with parallel sides ${parallel1} cm and ${parallel2} cm, and height ${height} cm.`,
+                                    answer: `Area = (1/2) × (${parallel1} + ${parallel2}) × ${height}\n= (1/2) × ${parallel1 + parallel2} × ${height} = ${area} cm²`
+                                };
+                            },
+                            () => {
+                                const side = random(20, 40);
+                                const diagonal = Math.floor(side * 1.414);
+                                return {
+                                    question: `Find the diagonal of a square with side ${side} cm. (√2 ≈ 1.414)`,
+                                    answer: `Diagonal = side × √2 = ${side} × 1.414 ≈ ${diagonal} cm`
+                                };
+                            }
+                        ];
+                        return hardAreaProblems[questionNum % hardAreaProblems.length]();
+                    }
                 }
             }
             
@@ -4044,24 +4284,5 @@ window.addEventListener('error', function(e) {
 
         ReactDOM.render(<App />, document.getElementById('root'));
     </script>
-<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "626ee1312cc84cb684a88aedc9615ff0"}'></script><!-- End Cloudflare Web Analytics -->
-
-<!-- Default Statcounter code for MathsBuddy
-http://mymathsbuddy.pages.dev -->
-<script type="text/javascript">
-var sc_project=13206163; 
-var sc_invisible=1; 
-var sc_security="22998973"; 
-</script>
-<script type="text/javascript"
-src="https://www.statcounter.com/counter/counter.js"
-async></script>
-<noscript><div class="statcounter"><a title="Web Analytics
-Made Easy - Statcounter" href="https://statcounter.com/"
-target="_blank"><img class="statcounter"
-src="https://c.statcounter.com/13206163/0/22998973/1/"
-alt="Web Analytics Made Easy - Statcounter"
-referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
-<!-- End of Statcounter Code -->
 </body>
 </html>
