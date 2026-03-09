@@ -474,8 +474,8 @@
 
         // CBSE Topics
         const CBSE_TOPICS = {
-            1: ['Numbers 1-100', 'Addition and Subtraction', 'Shapes and Patterns', 'Measurement (Length, Weight)', 'Time', 'Money'],
-            2: ['Numbers up to 1000', 'Addition and Subtraction', 'Multiplication Tables (2-5)', 'Division Basics', 'Shapes and Symmetry', 'Measurement', 'Time and Calendar', 'Money'],
+            1: ['Numbers 1-100', 'Addition and Subtraction', 'Shapes and Patterns', 'Measurement (Length, Weight)', 'Time', 'Money', 'Ascending and Descending Order', 'Skip Counting', 'Expanded Form'],
+            2: ['Numbers up to 1000', 'Addition and Subtraction', 'Multiplication Tables (2-5)', 'Division Basics', 'Shapes and Symmetry', 'Measurement', 'Time and Calendar', 'Money', 'Ascending and Descending Order', 'Skip Counting', 'Expanded Form'],
             3: ['Numbers up to 10000', 'Addition and Subtraction', 'Multiplication (up to 10)', 'Division', 'Fractions', 'Measurement', 'Time', 'Money', 'Data Handling', 'Geometry'],
             4: ['Large Numbers', 'Four Operations', 'Multiples and Factors', 'Fractions', 'Decimals', 'Measurement', 'Geometry (Lines, Angles)', 'Symmetry', 'Perimeter and Area'],
             5: ['Large Numbers and Roman Numerals', 'Four Operations', 'Multiples and Factors', 'Fractions and Decimals', 'Percentage', 'Ratio and Proportion', 'Geometry', 'Perimeter and Area', 'Volume', 'Data Handling'],
@@ -499,6 +499,20 @@
             if (topic.includes('Time') || topic.includes('Calendar')) {
                 if (difficulty === 'easy') {
                     const easyTimeProblems = [
+                        () => {
+                            const hour = random(1, 12);
+                            return {
+                                question: `🕐 ANALOG CLOCK: The hour hand points to ${hour} and the minute hand points to 12. What time is it?`,
+                                answer: `The time is ${hour}:00 (${hour} o'clock)`
+                            };
+                        },
+                        () => {
+                            const hour = random(1, 12);
+                            return {
+                                question: `🕑 ANALOG CLOCK: The hour hand is between ${hour} and ${hour + 1}, and the minute hand points to 6. What time is it?`,
+                                answer: `The time is ${hour}:30 (half past ${hour})\nHour hand: between ${hour} and ${hour + 1}\nMinute hand: at 6 means 30 minutes`
+                            };
+                        },
                         () => {
                             const hour = random(1, 12);
                             return {
@@ -534,7 +548,7 @@
                         () => {
                             const hour = random(1, 12);
                             return {
-                                question: `Where does the hour hand point when it is ${hour}:00?`,
+                                question: `🕐 Where does the hour hand point when it is ${hour}:00 on an analog clock?`,
                                 answer: `The hour hand points at number ${hour}`
                             };
                         },
@@ -572,6 +586,13 @@
                                 question: `How many months are there in one year?`,
                                 answer: `There are 12 months in one year: ${months.join(', ')}`
                             };
+                        },
+                        () => {
+                            const hour = random(1, 12);
+                            return {
+                                question: `🕐 ANALOG CLOCK: When the minute hand points to 3, how many minutes past the hour is it?`,
+                                answer: `When minute hand points to 3, it is 15 minutes past the hour (quarter past)\nMinute hand at 3 = 15 minutes`
+                            };
                         }
                     ];
                     return easyTimeProblems[questionNum % easyTimeProblems.length]();
@@ -580,8 +601,22 @@
                         () => {
                             const hour = random(1, 12);
                             return {
-                                question: `What time is shown when the hour hand is between ${hour} and ${hour + 1}, and minute hand points to 6 (half past)?`,
+                                question: `🕐 ANALOG CLOCK: The hour hand is between ${hour} and ${hour + 1}, and minute hand points to 6 (half past). What time is it?`,
                                 answer: `The time is ${hour}:30 (half past ${hour})`
+                            };
+                        },
+                        () => {
+                            const hour = random(1, 11);
+                            return {
+                                question: `🕑 ANALOG CLOCK: The hour hand is between ${hour} and ${hour + 1}, minute hand points to 3. What time is it?`,
+                                answer: `The time is ${hour}:15 (quarter past ${hour})\nMinute hand at 3 = 15 minutes`
+                            };
+                        },
+                        () => {
+                            const hour = random(1, 11);
+                            return {
+                                question: `🕒 ANALOG CLOCK: The hour hand is between ${hour} and ${hour + 1}, minute hand points to 9. What time is it?`,
+                                answer: `The time is ${hour}:45 (quarter to ${hour + 1})\nMinute hand at 9 = 45 minutes`
                             };
                         },
                         () => {
@@ -658,6 +693,14 @@
                     return mediumTimeProblems[questionNum % mediumTimeProblems.length]();
                 } else { // hard
                     const hardTimeProblems = [
+                        () => {
+                            const hour = random(2, 11);
+                            const minute = [10, 20, 25, 35, 40, 50, 55][random(0, 6)];
+                            return {
+                                question: `🕐 ANALOG CLOCK CHALLENGE: The minute hand points to ${minute / 5} (number on clock). What time is shown if hour hand is between ${hour} and ${hour + 1}?`,
+                                answer: `Time is ${hour}:${minute.toString().padStart(2, '0')}\nMinute hand at ${minute / 5} = ${minute} minutes past the hour`
+                            };
+                        },
                         () => {
                             const hour = random(1, 11);
                             const minute1 = random(10, 30);
@@ -3857,6 +3900,306 @@
                 return problems[questionNum % problems.length]();
             }
             
+            // ASCENDING AND DESCENDING ORDER (Classes 1-2)
+            if (topic.includes('Ascending') || topic.includes('Descending')) {
+                if (difficulty === 'easy') {
+                    const easyOrderProblems = [
+                        () => {
+                            const nums = [random(1, 20), random(1, 20), random(1, 20)].sort(() => Math.random() - 0.5);
+                            const ascending = [...nums].sort((a, b) => a - b);
+                            return {
+                                question: `Arrange in ascending order (smallest to largest): ${nums.join(', ')}`,
+                                answer: `Ascending order: ${ascending.join(', ')}`
+                            };
+                        },
+                        () => {
+                            const nums = [random(1, 20), random(1, 20), random(1, 20)].sort(() => Math.random() - 0.5);
+                            const descending = [...nums].sort((a, b) => b - a);
+                            return {
+                                question: `Arrange in descending order (largest to smallest): ${nums.join(', ')}`,
+                                answer: `Descending order: ${descending.join(', ')}`
+                            };
+                        },
+                        () => {
+                            const nums = [random(1, 30), random(1, 30), random(1, 30), random(1, 30)].sort(() => Math.random() - 0.5);
+                            const ascending = [...nums].sort((a, b) => a - b);
+                            return {
+                                question: `Which is the smallest number in: ${nums.join(', ')}?`,
+                                answer: `Smallest number = ${ascending[0]}`
+                            };
+                        },
+                        () => {
+                            const nums = [random(1, 30), random(1, 30), random(1, 30), random(1, 30)].sort(() => Math.random() - 0.5);
+                            const descending = [...nums].sort((a, b) => b - a);
+                            return {
+                                question: `Which is the largest number in: ${nums.join(', ')}?`,
+                                answer: `Largest number = ${descending[0]}`
+                            };
+                        },
+                        () => {
+                            const nums = [random(10, 50), random(10, 50), random(10, 50)].sort(() => Math.random() - 0.5);
+                            const ascending = [...nums].sort((a, b) => a - b);
+                            return {
+                                question: `Arrange from smallest to biggest: ${nums.join(', ')}`,
+                                answer: `${ascending.join(', ')}`
+                            };
+                        }
+                    ];
+                    return easyOrderProblems[questionNum % easyOrderProblems.length]();
+                } else if (difficulty === 'medium') {
+                    const mediumOrderProblems = [
+                        () => {
+                            const nums = [random(10, 99), random(10, 99), random(10, 99), random(10, 99), random(10, 99)].sort(() => Math.random() - 0.5);
+                            const ascending = [...nums].sort((a, b) => a - b);
+                            return {
+                                question: `Arrange in ascending order: ${nums.join(', ')}`,
+                                answer: `Ascending order: ${ascending.join(', ')}`
+                            };
+                        },
+                        () => {
+                            const nums = [random(10, 99), random(10, 99), random(10, 99), random(10, 99), random(10, 99)].sort(() => Math.random() - 0.5);
+                            const descending = [...nums].sort((a, b) => b - a);
+                            return {
+                                question: `Arrange in descending order: ${nums.join(', ')}`,
+                                answer: `Descending order: ${descending.join(', ')}`
+                            };
+                        },
+                        () => {
+                            const nums = [random(100, 500), random(100, 500), random(100, 500), random(100, 500)].sort(() => Math.random() - 0.5);
+                            const ascending = [...nums].sort((a, b) => a - b);
+                            return {
+                                question: `Find the smallest and largest numbers: ${nums.join(', ')}`,
+                                answer: `Smallest = ${ascending[0]}, Largest = ${ascending[ascending.length - 1]}`
+                            };
+                        }
+                    ];
+                    return mediumOrderProblems[questionNum % mediumOrderProblems.length]();
+                } else { // hard
+                    const hardOrderProblems = [
+                        () => {
+                            const nums = [random(100, 999), random(100, 999), random(100, 999), random(100, 999), random(100, 999), random(100, 999)].sort(() => Math.random() - 0.5);
+                            const ascending = [...nums].sort((a, b) => a - b);
+                            return {
+                                question: `Arrange in ascending order: ${nums.join(', ')}`,
+                                answer: `Ascending order: ${ascending.join(', ')}`
+                            };
+                        },
+                        () => {
+                            const nums = [random(100, 999), random(100, 999), random(100, 999), random(100, 999), random(100, 999), random(100, 999)].sort(() => Math.random() - 0.5);
+                            const descending = [...nums].sort((a, b) => b - a);
+                            return {
+                                question: `Arrange in descending order: ${nums.join(', ')}`,
+                                answer: `Descending order: ${descending.join(', ')}`
+                            };
+                        }
+                    ];
+                    return hardOrderProblems[questionNum % hardOrderProblems.length]();
+                }
+            }
+            
+            // SKIP COUNTING (Classes 1-2)
+            if (topic.includes('Skip')) {
+                if (difficulty === 'easy') {
+                    const easySkipProblems = [
+                        () => {
+                            const skip = [2, 5, 10][random(0, 2)];
+                            const start = skip;
+                            const sequence = [start, start + skip, start + skip * 2, start + skip * 3];
+                            return {
+                                question: `Count by ${skip}s: ${start}, ${start + skip}, ${start + skip * 2}, ___. What comes next?`,
+                                answer: `Next number = ${start + skip * 3} (counting by ${skip}s)`
+                            };
+                        },
+                        () => {
+                            const skip = 2;
+                            const sequence = [2, 4, 6, 8, 10];
+                            return {
+                                question: `Fill in the missing number: 2, 4, ___, 8, 10`,
+                                answer: `Missing number = 6 (skip counting by 2s)`
+                            };
+                        },
+                        () => {
+                            const skip = 5;
+                            const sequence = [5, 10, 15, 20, 25];
+                            return {
+                                question: `Fill in the missing number: 5, 10, 15, ___, 25`,
+                                answer: `Missing number = 20 (skip counting by 5s)`
+                            };
+                        },
+                        () => {
+                            const skip = 10;
+                            const start = 10;
+                            return {
+                                question: `Count by 10s: 10, 20, 30, ___. What comes next?`,
+                                answer: `Next number = 40 (counting by 10s)`
+                            };
+                        },
+                        () => {
+                            const skip = 2;
+                            const start = random(2, 10) * 2;
+                            return {
+                                question: `Continue the pattern by 2s: ${start}, ${start + 2}, ${start + 4}, ___`,
+                                answer: `Next number = ${start + 6}`
+                            };
+                        }
+                    ];
+                    return easySkipProblems[questionNum % easySkipProblems.length]();
+                } else if (difficulty === 'medium') {
+                    const mediumSkipProblems = [
+                        () => {
+                            const skip = [3, 4, 6][random(0, 2)];
+                            const start = skip;
+                            return {
+                                question: `Count by ${skip}s starting from ${start}: ${start}, ${start + skip}, ${start + skip * 2}, ___. What are the next 2 numbers?`,
+                                answer: `Next numbers: ${start + skip * 3}, ${start + skip * 4} (counting by ${skip}s)`
+                            };
+                        },
+                        () => {
+                            const skip = 3;
+                            return {
+                                question: `Fill in the missing numbers: 3, 6, ___, 12, ___`,
+                                answer: `Missing numbers: 9, 15 (skip counting by 3s)`
+                            };
+                        },
+                        () => {
+                            const skip = 4;
+                            return {
+                                question: `Complete the pattern: 4, 8, 12, ___, 20, ___`,
+                                answer: `Missing numbers: 16, 24 (skip counting by 4s)`
+                            };
+                        }
+                    ];
+                    return mediumSkipProblems[questionNum % mediumSkipProblems.length]();
+                } else { // hard
+                    const hardSkipProblems = [
+                        () => {
+                            const skip = [6, 7, 8, 9][random(0, 3)];
+                            const start = skip;
+                            return {
+                                question: `Skip count by ${skip}s: ${start}, ${start + skip}, ${start + skip * 2}, ${start + skip * 3}. What are the next 3 numbers?`,
+                                answer: `Next numbers: ${start + skip * 4}, ${start + skip * 5}, ${start + skip * 6}`
+                            };
+                        },
+                        () => {
+                            const skip = 7;
+                            return {
+                                question: `Complete: 7, 14, ___, 28, ___, 42`,
+                                answer: `Missing numbers: 21, 35 (skip counting by 7s)`
+                            };
+                        }
+                    ];
+                    return hardSkipProblems[questionNum % hardSkipProblems.length]();
+                }
+            }
+            
+            // EXPANDED FORM (Classes 1-2)
+            if (topic.includes('Expanded')) {
+                if (difficulty === 'easy') {
+                    const easyExpandedProblems = [
+                        () => {
+                            const tens = random(1, 9);
+                            const ones = random(0, 9);
+                            const number = tens * 10 + ones;
+                            return {
+                                question: `Write ${number} in expanded form.`,
+                                answer: `${number} = ${tens * 10} + ${ones}\n(${tens} tens + ${ones} ones)`
+                            };
+                        },
+                        () => {
+                            const tens = random(1, 9);
+                            const ones = random(0, 9);
+                            return {
+                                question: `What number is ${tens * 10} + ${ones}?`,
+                                answer: `${tens * 10} + ${ones} = ${tens * 10 + ones}`
+                            };
+                        },
+                        () => {
+                            const tens = random(2, 9);
+                            const ones = random(1, 9);
+                            const number = tens * 10 + ones;
+                            return {
+                                question: `How many tens and ones in ${number}?`,
+                                answer: `${number} has ${tens} tens and ${ones} ones\n(${tens * 10} + ${ones})`
+                            };
+                        },
+                        () => {
+                            const tens = random(1, 5);
+                            const number = tens * 10;
+                            return {
+                                question: `Write ${number} in expanded form.`,
+                                answer: `${number} = ${tens * 10} + 0\n(${tens} tens + 0 ones)`
+                            };
+                        },
+                        () => {
+                            const ones = random(1, 9);
+                            return {
+                                question: `What is the expanded form of ${ones}?`,
+                                answer: `${ones} = 0 + ${ones}\n(0 tens + ${ones} ones)`
+                            };
+                        }
+                    ];
+                    return easyExpandedProblems[questionNum % easyExpandedProblems.length]();
+                } else if (difficulty === 'medium') {
+                    const mediumExpandedProblems = [
+                        () => {
+                            const hundreds = random(1, 9);
+                            const tens = random(0, 9);
+                            const ones = random(0, 9);
+                            const number = hundreds * 100 + tens * 10 + ones;
+                            return {
+                                question: `Write ${number} in expanded form.`,
+                                answer: `${number} = ${hundreds * 100} + ${tens * 10} + ${ones}\n(${hundreds} hundreds + ${tens} tens + ${ones} ones)`
+                            };
+                        },
+                        () => {
+                            const hundreds = random(1, 9);
+                            const tens = random(0, 9);
+                            const ones = random(0, 9);
+                            return {
+                                question: `What number is ${hundreds * 100} + ${tens * 10} + ${ones}?`,
+                                answer: `${hundreds * 100} + ${tens * 10} + ${ones} = ${hundreds * 100 + tens * 10 + ones}`
+                            };
+                        },
+                        () => {
+                            const hundreds = random(1, 9);
+                            const tens = random(1, 9);
+                            const ones = random(1, 9);
+                            const number = hundreds * 100 + tens * 10 + ones;
+                            return {
+                                question: `Break down ${number} into hundreds, tens, and ones.`,
+                                answer: `${number} = ${hundreds} hundreds + ${tens} tens + ${ones} ones\n= ${hundreds * 100} + ${tens * 10} + ${ones}`
+                            };
+                        }
+                    ];
+                    return mediumExpandedProblems[questionNum % mediumExpandedProblems.length]();
+                } else { // hard
+                    const hardExpandedProblems = [
+                        () => {
+                            const thousands = random(1, 9);
+                            const hundreds = random(0, 9);
+                            const tens = random(0, 9);
+                            const ones = random(0, 9);
+                            const number = thousands * 1000 + hundreds * 100 + tens * 10 + ones;
+                            return {
+                                question: `Write ${number} in expanded form.`,
+                                answer: `${number} = ${thousands * 1000} + ${hundreds * 100} + ${tens * 10} + ${ones}`
+                            };
+                        },
+                        () => {
+                            const thousands = random(1, 9);
+                            const hundreds = random(0, 9);
+                            const tens = random(0, 9);
+                            const ones = random(0, 9);
+                            return {
+                                question: `What number is ${thousands * 1000} + ${hundreds * 100} + ${tens * 10} + ${ones}?`,
+                                answer: `${thousands * 1000} + ${hundreds * 100} + ${tens * 10} + ${ones} = ${thousands * 1000 + hundreds * 100 + tens * 10 + ones}`
+                            };
+                        }
+                    ];
+                    return hardExpandedProblems[questionNum % hardExpandedProblems.length]();
+                }
+            }
+            
             // DEFAULT - BASIC NUMBERS
             const a = random(1, range);
             const b = random(1, range);
@@ -4247,8 +4590,8 @@
                             Questions? Feedback? Suggestions?
                         </p>
                         <p style={{marginBottom: '20px'}}>
-                            <a href="mailto:ninjaturtle007.sup@gmail.com" style={{color: '#7c3aed', fontWeight: 'bold', fontSize: '18px', textDecoration: 'none'}}>
-                                📬 ninjaturtle007.sup@gmail.com
+                            <a href="mailto:mathsbuddy01@gmail.com" style={{color: '#7c3aed', fontWeight: 'bold', fontSize: '18px', textDecoration: 'none'}}>
+                                📬 mathsbuddy01@gmail.com
                             </a>
                         </p>
                         
@@ -4274,7 +4617,7 @@
                                 Created by <strong>@ninjaturtle_007</strong>
                             </p>
                             <p style={{color: '#9ca3af', fontSize: '12px', marginTop: '8px'}}>
-                                © 2026 MathBuddy - Free CBSE Math Practice | Licensed under CC BY-NC-SA 4.0
+                                © 2024 MathBuddy - Free CBSE Math Practice | Licensed under CC BY-NC-SA 4.0
                             </p>
                         </div>
                     </div>
