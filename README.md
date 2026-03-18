@@ -170,7 +170,7 @@ For complete legal terms, liability limitations, and usage conditions, please re
 
 ### **Questions? Feedback? Suggestions?**
 
-📧 **Email:** ninjaturtle007.help@gmail.com  
+📧 **Email:** ninjaturtle007.sup@gmail.com  
 👤 **Creator:** [@ninjaturtle_007](https://github.com/ninjaturtle-007)  
 🐛 **Report Issues:** [GitHub Issues](https://github.com/ninjaturtle-007/MyMathsBuddy/issues)
 
